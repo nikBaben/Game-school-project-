@@ -1,6 +1,6 @@
 import pygame, sys
 from gun import Gun
-from imgs import player 
+
 
 
 def movement(screen, player_ship, bullets):

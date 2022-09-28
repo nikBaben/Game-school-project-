@@ -1,5 +1,5 @@
 import pygame
-from imgs import player 
+
 BLACK = (0, 0, 0)
 anim_stand = []
 anim_move = []
