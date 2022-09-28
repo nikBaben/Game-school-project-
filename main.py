@@ -10,7 +10,7 @@ def run():
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("Название игры") #Надо придумать!!!
     #bg_color = (255, 255, 255)
-    bg_color = pygame.image.load("imgs/back1.svg")
+    bg_color = (70, 130, 180)
     
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)

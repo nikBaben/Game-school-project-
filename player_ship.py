@@ -41,7 +41,7 @@ class Player_Ship():
         if self.moveright:
             if self.rect.centerx > 960:
                 self.rect.centerx = 0
-            self.rect.centerx += 3
+            self.rect.centerx += 1
             
             #self.image = pygame.Surface((1000, 1000))   
             #self.image  = pygame.image.load("imgs/bullet.svg")
@@ -52,17 +52,17 @@ class Player_Ship():
         if self.moveleft:
             if self.rect.centerx < 0:
                 self.rect.centerx = 960
-            self.rect.centerx -= 3
+            self.rect.centerx -= 1
         if self.moveup:
             if self.rect.bottom <= 150:
                 self.moveup = False
                 self.rect.bottom = 150
-            self.rect.bottom -= 3
+            self.rect.bottom -= 1
         if self.movedown:
             if self.rect.bottom >= 1050:
                 self.movedown = False
                 self.rect.bottom = 1050
-            self.rect.bottom += 3
+            self.rect.bottom += 1
 
     def output(self):
         now = pygame.time.get_ticks() 
