@@ -21,7 +21,7 @@ def movement(screen, player_ship, bullets):
                 player_ship.movedown = True
 
             '''стрельба'''
-            if event.key == pygame.K_f:
+            if event.key == pygame.K_SPACE:
                 player_ship.sht = True # Добавил поле sht для проверки стреляет корабль или нет 
                 new_bullet = Gun(screen, player_ship)
                 bullets.add(new_bullet)
@@ -40,7 +40,7 @@ def movement(screen, player_ship, bullets):
                 player_ship.moveup = False
             if event.key == pygame.K_s:
                 player_ship.movedown = False
-            if event.key == pygame.K_f:
+            if event.key == pygame.K_SPACE:
                 player_ship.sht = False # убераем занчение True с shoot, если корабль не стреляет
 
 
