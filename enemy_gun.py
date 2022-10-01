@@ -1,6 +1,6 @@
 import pygame
 from enemy_ship import Enemy
-
+from enemy_ship import spawn
 
 
 '''ПОКА НЕ РАБОТАЕТ!!!!!'''

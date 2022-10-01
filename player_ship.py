@@ -46,6 +46,7 @@ class Player_Ship():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
+        self.hitbox = ((self.rect.centerx) -60 ,(self.rect.bottom)-150,120,150) # Параметры хит бокса, можно протестить в функции output 
 
     def move(self):
         if self.moveright:
@@ -78,6 +79,7 @@ class Player_Ship():
 
 
     def output(self):
+    
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now
@@ -101,3 +103,5 @@ class Player_Ship():
             
                 
         self.screen.blit(self.image, self.rect)
+        self.hitbox  = ((self.rect.centerx) - 35,(self.rect.bottom) - 130,70,130) # Отрисовываю хит бокс для теста
+        pygame.draw.rect(self.screen, (0,0,0), self.hitbox,1 )
