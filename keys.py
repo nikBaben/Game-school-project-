@@ -2,7 +2,6 @@ import pygame, sys
 from gun import Gun
 
 
-
 def movement(screen, player_ship, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -36,14 +35,13 @@ def movement(screen, player_ship, bullets):
                 player_ship.movedown = False
 
 
-def update_screen(bg_color,screen, player_ship, bullets):
-
+def update_screen(bg_color, screen, player_ship, bullets):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     screen.fill(bg_color)
-  #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
+    #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
+    player_ship.output()
     for bullet in bullets.sprites():
         bullet.output_bullet()
-    player_ship.output()
     pygame.display.flip()
 
 

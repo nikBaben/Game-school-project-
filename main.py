@@ -8,16 +8,15 @@ from pygame.sprite import Group
 def run():
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
-    pygame.display.set_caption("Название игры") #Надо придумать!!!
-    #bg_color = (255, 255, 255)
-    bg_color = (70, 130, 180)
-    
+    pygame.display.set_caption("Название игры")  # Надо придумать!!!
+    # bg_color = (255, 255, 255)
+    bg_color = (50, 141, 160)
+
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
 
     while True:
-   
         gun.output_bullet()
         bullets.update()
         keys.movement(screen, player_ship, bullets)
