@@ -35,10 +35,12 @@ def movement(screen, player_ship, bullets):
                 player_ship.movedown = False
 
 
-def update_screen(bg_color, screen, player_ship, bullets):
+def update_screen(bg_color, screen, player_ship, bullets, island, can):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     screen.fill(bg_color)
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
+    island.output()
+    can.output()
     player_ship.output()
     for bullet in bullets.sprites():
         bullet.output_bullet()
