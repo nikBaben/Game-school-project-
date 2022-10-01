@@ -6,6 +6,7 @@ from pygame.sprite import Group
 from island import Island
 from can import Can
 from enemy_ship import Enemy
+from enemy_gun import Enemy_gun
 
 
 def run():
@@ -16,6 +17,7 @@ def run():
     bg_color = (50, 141, 160)
 
     enemy = Enemy(screen)
+    enemy_gun = Enemy_gun(screen, enemy)
     can = Can(screen)
     island = Island(screen)
     player_ship = Player_Ship(screen)
@@ -23,6 +25,7 @@ def run():
     bullets = Group()
 
     while True:
+        enemy_gun.update()
         enemy.moving_enemy()
         can.moving_can()
         island.moving()
@@ -30,7 +33,7 @@ def run():
         bullets.update()
         keys.movement(screen, player_ship, bullets)
         player_ship.move()
-        keys.update_screen(bg_color, screen, player_ship, bullets, island, can, enemy)
+        keys.update_screen(bg_color, screen, player_ship, bullets, island, can, enemy, enemy_gun)
 
 
 run()

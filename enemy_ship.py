@@ -22,6 +22,7 @@ class Enemy():
         self.rect.bottom = self.screen_rect.bottom - 1200
         self.y = float(self.rect.y)
 
+
     def moving_enemy(self):
         self.y += self.speed
         self.rect.y = self.y
