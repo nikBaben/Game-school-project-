@@ -13,8 +13,7 @@ def run():
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("Название игры")  # Надо придумать!!!
-    # bg_color = (255, 255, 255)
-    bg_color = (50, 141, 160)
+    bg_color = (83, 193, 215)
 
     enemy = Enemy(screen)
     enemy_gun = Enemy_gun(screen, enemy)
