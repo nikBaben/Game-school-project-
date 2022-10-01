@@ -7,6 +7,10 @@ for i in range(-430, 431):
     spawn.append(i)
 
 
+def spawn_x():
+    return choice(spawn)
+
+
 class Island():
     def __init__(self, screen):
         self.screen = screen
@@ -17,7 +21,6 @@ class Island():
         self.rect.centerx = self.screen_rect.centerx - choice(spawn)
         self.rect.bottom = self.screen_rect.bottom - 1050
         self.y = float(self.rect.y)
-        self.x = float(self.rect.x)
 
     def moving(self):
         self.y += self.speed
@@ -25,6 +28,7 @@ class Island():
 
         if self.y == 1150:
             self.y = -100
+            self.rect.centerx = self.screen_rect.centerx - spawn_x()
 
     def output(self):
         self.screen.blit(self.image, self.rect)
