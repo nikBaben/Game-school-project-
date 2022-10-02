@@ -25,7 +25,7 @@ def run():
     bullets = Group()
 
     while True:
-        enemy_gun.update()
+        enemy_gun.update(enemy)
         enemy.moving_enemy()
         can.moving_can()
         island.moving()
