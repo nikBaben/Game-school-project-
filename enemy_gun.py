@@ -1,6 +1,6 @@
 import pygame
 from enemy_ship import Enemy
-
+from enemy_ship import spawn
 
 class Enemy_gun(pygame.sprite.Sprite):
     def __init__(self, screen, enemy_ship):
