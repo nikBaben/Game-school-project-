@@ -34,12 +34,15 @@ def run():
 
 
     while True: 
+        """Коллизия для вражеского корабля"""
+        #Если не  понравится, переделаешь, ну или найдешь другой способ
+
         for gun in bullets: 
                if enemy.rect.collidepoint(gun.rect.center):
                     enemy.image =  pygame.image.load("work_images/island.png")
-                    enemy.y = -300
+                    enemy.y = -600
                     enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
-
+        """"""
 
         enemy_gun.update(enemy)
         enemy.moving_enemy()
