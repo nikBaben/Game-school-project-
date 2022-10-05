@@ -8,6 +8,10 @@ from can import Can
 from enemy_ship import Enemy
 from enemy_gun import Enemy_gun
 from enemy_ship import spawn_x
+# from dead_enemy import Dead_enemy
+
+
+
 
 
 def run():
@@ -18,32 +22,26 @@ def run():
 
     enemy = Enemy(screen)
 
-
-
-  
-    
-    
- 
     enemy_gun = Enemy_gun(screen, enemy)
+    # dead_enemy = Dead_enemy(screen, enemy)
     can = Can(screen)
     island = Island(screen)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
-  
 
-
-    while True: 
+    while True:
         """Коллизия для вражеского корабля"""
-        #Если не  понравится, переделаешь, ну или найдешь другой способ
+        # Если не  понравится, переделаешь, ну или найдешь другой способ
 
-        for gun in bullets: 
-               if enemy.rect.collidepoint(gun.rect.center):
-                    enemy.image =  pygame.image.load("work_images/island.png")
-                    enemy.y = -600
-                    enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
+        for gun in bullets:
+            if enemy.rect.collidepoint(gun.rect.center):
+                enemy.image = pygame.image.load("work_images/island.png")
+                enemy.y = -600
+                enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
         """"""
 
+        # dead_enemy.output()
         enemy_gun.update(enemy)
         enemy.moving_enemy()
         can.moving_can()

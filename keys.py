@@ -2,9 +2,6 @@ import pygame, sys
 from gun import Gun
 
 
-
-
-
 def movement(screen, player_ship, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -22,12 +19,12 @@ def movement(screen, player_ship, bullets):
 
             '''стрельба'''
             if event.key == pygame.K_SPACE:
-                player_ship.sht = True # Добавил поле sht для проверки стреляет корабль или нет 
+                player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
                 new_bullet = Gun(screen, player_ship)
                 bullets.add(new_bullet)
-               
-                
-         
+
+
+
 
 
         elif event.type == pygame.KEYUP:
@@ -41,28 +38,29 @@ def movement(screen, player_ship, bullets):
             if event.key == pygame.K_s:
                 player_ship.movedown = False
             if event.key == pygame.K_SPACE:
-                player_ship.sht = False # убераем занчение True с shoot, если корабль не стреляет
+                player_ship.sht = False  # убераем занчение True с shoot, если корабль не стреляет
 
 
 def update_screen(bg_color, screen, player_ship, bullets, island, can, enemy, enemy_gun):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     screen.fill(bg_color)
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
+    # dead.output()
     enemy_gun.output_enemy_bullet()
     enemy.output()
     island.output()
     can.output()
     player_ship.output()
     ####
-   
+
     ###
     for bullet in bullets.sprites():
         bullet.output_bullet()
     pygame.display.flip()
-   
+
+
 def update_bullet(bullets):
     bullets.update()
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
-
