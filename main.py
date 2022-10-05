@@ -19,22 +19,15 @@ def run():
     enemy = Enemy(screen)
     inim.append(enemy)
 
-
-
-  
-    
-    
- 
     enemy_gun = Enemy_gun(screen, enemy)
+    # dead_enemy = Dead_enemy(screen, enemy)a
     can = Can(screen)
     island = Island(screen)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
-  
 
-
-    while True: 
+    while True:
         """Коллизия для вражеского корабля"""
         #Если не  понравится, переделаешь, ну или найдешь другой способ
         for gun in bullets: 
@@ -58,6 +51,7 @@ def run():
                  #   enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
        
 
+        # dead_enemy.output()
         enemy_gun.update(enemy)
         enemy.moving_enemy()
         can.moving_can()
