@@ -2,40 +2,25 @@ import pygame
 from keys import movement
 import keys 
 from gun import Gun
-
+from styles import anim_fire, anim_ship
 
 
 pic = pygame.image.load("imgs/ship_frame1.svg")
 bullet = pygame.image.load("imgs/bullet.svg")
 
 BLACK = (0, 0, 0)
-anim_fire = []
-anim_ship = []
+
 
 '''АНИМАЦИЯ КОРАБЛЯ'''
 
 
-for j in range(1,13):
-    filename = "imgs/fire_player_ship{}.svg".format(j)
-    img = pygame.image.load(filename)
-  
-    anim_fire.append(img)
-
-for i in range(1,15):
-    file =  "imgs/ship_frame{}.svg".format(i)
-    im = pygame.image.load(file)
-  
-    anim_ship.append(im)
 
 
 
 class Player_Ship():
     def __init__(self, screen):
         self.screen = screen
-  
         '''когда анимацию корабля будешь делать закомментишь'''
-         # Количесво кадров в игр
-        #self.image = pygame.image.load("work_images/ship_work.png")
         self.image = anim_ship[0]
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
