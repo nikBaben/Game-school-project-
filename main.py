@@ -14,7 +14,7 @@ def run():
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("Название игры")  # Надо придумать!!!
-    bg_color = (83, 193, 215)
+    bg_color = (95,205,228)
 
     enemy = Enemy(screen)
     inim.append(enemy)
@@ -28,30 +28,20 @@ def run():
     bullets = Group()
 
     while True:
+        flag = False
         """Коллизия для вражеского корабля"""
         #Если не  понравится, переделаешь, ну или найдешь другой способ
         for gun in bullets: 
                if enemy.rect.collidepoint(gun.rect.center):
                     pygame.image.load("work_images/island.png")
-                    enemy.y = -600
+                    enemy.y = -600 
                     enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
         """"""
         for enemy in inim: 
             if player_ship.rect.colliderect(enemy): 
                 player_ship.image = pygame.image.load("work_images/island.png")
-                pygame.QUIT
-                sys.exit()
-              
-           
-           # player_ship.kill()dw
-      #  for player_ship in bullets: 
-             #  if enemy.rect.collidepoint(player_ship.rect.center):
-               #     pygame.image.load("work_images/island.png")
-                #    player_ship.remove()
-                 #   enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
-       
-
         # dead_enemy.output()
+
         enemy_gun.update(enemy)
         enemy.moving_enemy()
         can.moving_can()
