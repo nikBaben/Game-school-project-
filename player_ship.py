@@ -87,7 +87,6 @@ class Player_Ship():
 
 
     def output(self):
-    
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now
