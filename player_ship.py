@@ -1,7 +1,10 @@
 import pygame
 from keys import movement
-
 import keys 
+from gun import Gun
+
+
+
 pic = pygame.image.load("imgs/ship_frame1.svg")
 bullet = pygame.image.load("imgs/bullet.svg")
 
@@ -75,6 +78,11 @@ class Player_Ship():
             self.image = anim_fire[0] # Меняет кадр, если нажата клавиша "F"
             """"""
            
+    def hit (self): 
+        pass
+      
+             #   if enemy.hitbox[0] < bullet.x < enemy.hitbox[0] + enemy.hitbox[2] and enemy.hitbox[1] < bullet.y<enemy.hitbox[1] + enemy.hitbox[3]:
+               #     print("hit")
 
 
 
