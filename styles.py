@@ -6,6 +6,9 @@ anim_fire=[]
 anim_ship=[]
 anim_can = []
 anim_island = []
+anim_shipplayer_moveup = []
+
+
 can = pygame.image.load("imgs/island1.png")
 
 
@@ -28,7 +31,19 @@ for i in range(1,15):
   
     anim_ship.append(im)
 
+
+"""Анимация для бочки"""
 for y in range(1,7): 
     file_name = "imgs/бочка{}.svg".format(y)
     img_can = pygame.image.load(file_name)
     anim_can.append(img_can)
+""""""
+
+
+
+"""Анимация для передвижения корабля вперед"""
+for moveup in range(1,33): 
+    filename_up= "imgs/player_ship_moveup{}.svg".format(moveup)
+    img_moveup = pygame.image.load(filename_up)
+    anim_shipplayer_moveup.append(img_moveup)
+""""""
