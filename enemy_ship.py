@@ -1,6 +1,6 @@
 import pygame
 from random import choice
-
+from styles import anim_ship
 '''спавн корабля по иксу'''
 spawn = []
 for i in range(-430, 431):
@@ -23,7 +23,6 @@ class Enemy():
         self.image = anim_enemy[0]
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        #self.image = pygame.image.load("work_images/enemy_work.png")
         self.speed = 0.3
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
@@ -33,6 +32,7 @@ class Enemy():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70
+        self.flag  = False
         self.hitbox = ((self.rect.centerx) -60 ,(self.rect.bottom)-150,120,150)
 
 
@@ -45,12 +45,10 @@ class Enemy():
             self.rect.centerx = self.screen_rect.centerx - spawn_x()
       
     def enemy_update(enemy): 
-        pass
+        pass# Я забыл  зачем создавал эта функция, ЪХАХАХАХАХ, мб пригодится
 
 
     def output(self):
-    
-
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now

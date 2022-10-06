@@ -8,7 +8,9 @@ from can import Can
 from enemy_ship import Enemy
 from enemy_gun import Enemy_gun
 from enemy_ship import spawn_x
-import time 
+from styles import anim_ship
+
+
 inim=[]
 def run():
     pygame.init()
@@ -27,19 +29,38 @@ def run():
     gun = Gun(screen, player_ship)
     bullets = Group()
 
+
     while True:
-        flag = False
         """Коллизия для вражеского корабля"""
-        #Если не  понравится, переделаешь, ну или найдешь другой способ
+        #Если не понравится, переделаешь, ну или найдешь другой способ
+        #Выглядит пока что страшно, но что поделать) Надо будет придумать как это уменьшить и довести до идеала
         for gun in bullets: 
                if enemy.rect.collidepoint(gun.rect.center):
-                    pygame.image.load("work_images/island.png")
-                    enemy.y = -600 
-                    enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
+                    now = enemy.last_update #Скорее всего проблема заключается в этом) Счетчик кадров как-то странно работает, 
+                                            #ну либо я тупой) Короче тоже посмотри, возможно тут не надо c класса (enemy) конкретный кадр брать
+                                            #Можно будет попробовать прямо в цикле взять счетчик, и его обновлять
+
+                    if now - enemy.last_update >enemy.frame_rate:
+                        enemy.last_update = now
+                        enemy.frame += 1 
+                    else:
+                        center = enemy.rect.center
+                        enemy.image = anim_ship[enemy.frame]# Хз почему, но пока что поигрывается только 1 кадр, надо тоже исправить, мб у тебя получится
+                        enemy.rect.center = center 
+                        if enemy.frame == len(anim_ship)-13:# Из-за того что поигрывается 1 кадр, пришлось сдлеать такую зависимость, если будут все кадры поигрываться, тогда уберем -13
+                            enemy.y = -600 
+                            enemy.rect.centerx = enemy.screen_rect.centerx - spawn_x()
+                            enemy.frame = 0
         """"""
+           
+                    
+                
+            
+        """Коллизия для нрашего корабля"""
         for enemy in inim: 
             if player_ship.rect.colliderect(enemy): 
                 player_ship.image = pygame.image.load("work_images/island.png")
+        """"""
         # dead_enemy.output()
 
         enemy_gun.update(enemy)
