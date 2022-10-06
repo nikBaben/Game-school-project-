@@ -3,6 +3,7 @@ from keys import movement
 import keys 
 from gun import Gun
 from styles import anim_fire, anim_ship
+from styles import anim_shipplayer_moveup
 
 
 pic = pygame.image.load("imgs/ship_frame1.svg")
@@ -46,13 +47,14 @@ class Player_Ship():
                 self.rect.centerx = 960
             self.rect.centerx -= 1
             """ Доделат!!!! Просто поле для проверки, что все работает) """
-            self.image  = bullet # Меняет кадр, если нажата клавиша "A" ef
+           # self.image  = bullet # Меняет кадр, если нажата клавиша "A" ef
             """"""
         if self.moveup:
             if self.rect.bottom <= 150:
                 self.moveup = False
                 self.rect.bottom = 150
             self.rect.bottom -= 1
+          #  self.image = anim_shipplayer_moveup[0]
         if self.movedown:
             if self.rect.bottom >= 1050:
                 self.movedown = False
@@ -63,19 +65,23 @@ class Player_Ship():
             self.image = anim_fire[0] # Меняет кадр, если нажата клавиша "F"
             """"""
            
-    def hit (self): 
-        pass
-      
-             #   if enemy.hitbox[0] < bullet.x < enemy.hitbox[0] + enemy.hitbox[2] and enemy.hitbox[1] < bullet.y<enemy.hitbox[1] + enemy.hitbox[3]:
-               #     print("hit")
-
-
-
+   
     def output(self):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now
-            self.frame += 1
+            self.frame += 1 # Надо переделать, для чистоты анимации
+
+            if self.moveup:
+                #self.frame +=1
+                if self.frame >= len(anim_shipplayer_moveup):
+                    self.frame = 0
+                else:
+                    center = self.rect.center
+                    self.image = anim_shipplayer_moveup[self.frame]
+                    self.rect = self.image.get_rect()
+                    self.rect.center = center
+
             if self.sht:
                 if self.frame >= len(anim_fire):
                     self.frame = 0
@@ -84,7 +90,27 @@ class Player_Ship():
                     self.image = anim_fire[self.frame]
                     self.rect = self.image.get_rect()
                     self.rect.center = center
-            else: 
+
+            if self.moveright: 
+                if self.frame >= len(anim_fire):
+                    self.frame = 0
+                else:
+                    center = self.rect.center
+                    self.image = anim_fire[self.frame]
+                    self.rect = self.image.get_rect()
+                    self.rect.center = center
+
+            if self.moveleft:
+                if self.frame >= len(anim_shipplayer_moveup):
+                    self.frame = 0
+                else:
+                    center = self.rect.center
+                    self.image = anim_shipplayer_moveup[self.frame]
+                    self.rect = self.image.get_rect()
+                    self.rect.center = center
+
+
+            if self.moveleft == False and self.moveright== False and self.sht == False and self.moveup == False: 
                 if self.frame >= len(anim_ship):
                     self.frame = 0
                 else:
