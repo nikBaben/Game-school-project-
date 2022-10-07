@@ -1,6 +1,6 @@
 import pygame
 from random import choice
-from styles import anim_island,can
+from styles import anim_island
 
 '''спавн острова по иксу'''
 spawn = []

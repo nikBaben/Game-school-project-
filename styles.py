@@ -16,11 +16,11 @@ back_ground = pygame.image.load("imgs/back_ground.png")
 """"""
 
 
-can = pygame.image.load("imgs/island1.png")
+#can = pygame.image.load("imgs/island1.png")
 
 
 """Анимация острова"""
-for island in range(1,13): 
+for island in range(1,17): 
     file = "imgs/island{}.svg".format(island)
     img = pygame.image.load(file)
     anim_island.append(img)
