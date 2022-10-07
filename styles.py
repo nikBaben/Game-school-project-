@@ -11,6 +11,7 @@ anim_ship=[]
 anim_can = []
 anim_island = []
 anim_shipplayer_moveup = []
+back_ground = pygame.image.load("imgs/back_ground.png")
 """"""
 
 

@@ -9,6 +9,7 @@ from enemy_ship import Enemy
 from enemy_gun import Enemy_gun
 from enemy_ship import spawn_x
 from styles import anim_ship
+from backgorund import Back
 
 
 inim=[]
@@ -16,7 +17,7 @@ def run():
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("Название игры")  # Надо придумать!!!
-    bg_color = (95,205,228)
+   # bg_color = back_ground
 
     enemy = Enemy(screen)
     inim.append(enemy)
@@ -28,6 +29,7 @@ def run():
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
+    back = Back(screen)
 
 
     while True:
@@ -62,7 +64,8 @@ def run():
                 player_ship.image = pygame.image.load("work_images/island.png")
         """"""
         # dead_enemy.output()
-
+      #  screen.blit(bg_color,(0,0))
+       
         enemy_gun.update(enemy)
         enemy.moving_enemy()
         can.moving_can()
@@ -71,7 +74,7 @@ def run():
         bullets.update()
         keys.movement(screen, player_ship, bullets)
         player_ship.move()
-        keys.update_screen(bg_color, screen, player_ship, bullets, island, can, enemy, enemy_gun)
+        keys.update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun)
 
 
 run()
