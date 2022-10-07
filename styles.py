@@ -17,11 +17,11 @@ anim_shipplayer_moveup = []
 can = pygame.image.load("imgs/island1.png")
 
 
-"""Анимация Коробля"""
-#for island in range(1,11): 
-  #  file = "imgs/island{}.png".format(island)
-   # img = pygame.image.load(file)
-   # anim_island.append(img)
+"""Анимация острова"""
+for island in range(1,13): 
+    file = "imgs/island{}.svg".format(island)
+    img = pygame.image.load(file)
+    anim_island.append(img)
 """"""
 
 
