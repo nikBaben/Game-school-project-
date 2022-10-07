@@ -1,6 +1,6 @@
 import pygame
 from random import choice
-from styles import anim_ship
+from styles import anim_ship,anim_enemy
 '''спавн корабля по иксу'''
 spawn = []
 for i in range(-430, 431):
@@ -10,17 +10,12 @@ for i in range(-430, 431):
 def spawn_x():
     return choice(spawn)
 
-anim_enemy=[]
-for j in range(1,11):
-    filename = "imgs/enemy_ship{}.svg".format(j)
-    img = pygame.image.load(filename)
-  
-    anim_enemy.append(img)
+
 
 class Enemy():
     def __init__(self, screen):
         self.screen = screen
-        self.image = anim_enemy[0]
+        self.image = (anim_enemy[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.speed = 0.3

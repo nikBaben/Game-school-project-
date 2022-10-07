@@ -11,6 +11,7 @@ anim_ship=[]
 anim_can = []
 anim_island = []
 anim_shipplayer_moveup = []
+anim_enemy=[]
 back_ground = pygame.image.load("imgs/back_ground.png")
 """"""
 
@@ -23,6 +24,15 @@ for island in range(1,13):
     file = "imgs/island{}.svg".format(island)
     img = pygame.image.load(file)
     anim_island.append(img)
+""""""
+
+
+
+"""Анимация вражеского корабля"""
+for enemy in range(1,13):
+    filename = "imgs/enemy_ship{}.svg".format(enemy)
+    enemy = pygame.image.load(filename)
+    anim_enemy.append(enemy)
 """"""
 
 
