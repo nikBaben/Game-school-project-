@@ -1,39 +1,37 @@
 import pygame
 from random import choice
 from styles import anim_can
-
-'''спавн бочки по иксу'''
-spawn = []
-for i in range(-430, 431):
-    spawn.append(i)
-
-
-def spawn_x():
-    return choice(spawn)
+from spawn import spawn_x, cords
 
 
 class Can():
     def __init__(self, screen):
+        global sp
         self.screen = screen
-        self.image = anim_can[0]
+        self.image = anim_can[0].convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.speed = 0.5
-        self.rect.centerx = self.screen_rect.centerx - choice(spawn)
+        sp = spawn_x()
+        self.rect.centerx = 60 * sp
         self.rect.bottom = self.screen_rect.bottom - 1100
         self.y = float(self.rect.y)
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
-        self.hitbox = ((self.rect.centerx) -60 ,(self.rect.bottom)-150,120,150) # Параметры хит бокса, можно протестить в функции output 
+        self.hitbox = ((self.rect.centerx) - 60, (self.rect.bottom) - 150, 120,
+                       150)  # Параметры хит бокса, можно протестить в функции output
 
     def moving_can(self):
+        global sp
         self.y += self.speed
         self.rect.y = self.y
 
         if self.y == 1100:
             self.y = -50
-            self.rect.centerx = self.screen_rect.centerx - spawn_x()
+            cords[sp] = True
+            sp = spawn_x()
+            self.rect.centerx = 60 * sp
 
     def output(self):
         now = pygame.time.get_ticks()

@@ -3,6 +3,7 @@ from gun import Gun
 from styles import back_ground
 from backgorund import Back
 
+
 def movement(screen, player_ship, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -42,18 +43,20 @@ def movement(screen, player_ship, bullets):
                 player_ship.sht = False  # убераем занчение True с shoot, если корабль не стреляет
 
 
-def update_screen(back,player_ship, bullets, island, can, enemy, enemy_gun):
+def update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
-   # screen.blit(bg_color,(0,0))
-   # screen.blit(bg_color,(0,0))
+    # screen.blit(bg_color,(0,0))
+    # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
     back.output_back()
     enemy_gun.output_enemy_bullet()
     enemy.output()
-    island.output()
     can.output()
+    submarine.output()
+    sub_gun.output_enemy_bullet()
     player_ship.output()
+    island.output()
     ####
 
     ###

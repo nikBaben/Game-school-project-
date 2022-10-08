@@ -1,6 +1,5 @@
 import pygame
 from enemy_ship import Enemy
-from enemy_ship import spawn
 
 class Enemy_gun(pygame.sprite.Sprite):
     def __init__(self, screen, enemy_ship):
@@ -10,7 +9,7 @@ class Enemy_gun(pygame.sprite.Sprite):
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
         self.image = pygame.image.load("work_images/pulya.png")
-        self.speed = 1
+        self.speed = 1.25
         self.rect.centerx = enemy_ship.rect.centerx
         self.rect.top = enemy_ship.rect.top + 125
         self.y = float(self.rect.y)
