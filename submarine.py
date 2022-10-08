@@ -1,6 +1,7 @@
 import pygame
 from styles import anim_ship, anim_enemy
 from spawn import spawn_x, cords
+from spawn import spawn_check, first
 
 
 class Submarine():
@@ -16,7 +17,10 @@ class Submarine():
         self.screen_rect = screen.get_rect()
         sp = spawn_x()
         self.rect.centerx = 60 * sp
-        self.rect.bottom = self.screen_rect.bottom - 1200
+        # self.rect.bottom = self.screen_rect.bottom - 1200
+        if spawn_check['submarine'] == False:
+            self.rect.bottom = self.screen_rect.bottom - 1350
+            first('submarine')
         self.y = float(self.rect.y)
 
     def moving_sub(self):
@@ -25,7 +29,7 @@ class Submarine():
         self.rect.y = self.y
 
         if self.y >= 1050:
-            self.y = -150
+            self.y = -220
             cords[sp] = True
             sp = spawn_x()
             self.rect.centerx = 60 * sp

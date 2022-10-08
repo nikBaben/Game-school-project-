@@ -2,6 +2,7 @@ import pygame
 from random import choice
 from styles import anim_island
 from spawn import spawn_x, cords
+from spawn import spawn_check, first
 
 
 class Island():
@@ -18,7 +19,10 @@ class Island():
         cords[sp1] = False
         cords[sp2] = False
         self.rect.centerx = 60 * sp
-        self.rect.bottom = self.screen_rect.bottom - 1050
+        # self.rect.bottom = self.screen_rect.bottom - 1050
+        if spawn_check['island'] == False:
+            self.rect.bottom = self.screen_rect.bottom - 1700
+            first('island')
         self.y = float(self.rect.y)
         self.frame = 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры

@@ -12,6 +12,7 @@ from styles import anim_ship
 from backgorund import Back
 from submarine import Submarine
 from sub_gun import Sub_gun
+from keys import update_bullet
 
 inim = []
 
@@ -28,7 +29,7 @@ def run():
     submarine = Submarine(screen)
     enemy_gun = Enemy_gun(screen, enemy)
     sub_gun = Sub_gun(screen, submarine)
-    # dead_enemy = Dead_enemy(screen, enemy)a
+    # dead_enemy = Dead_enemy(screen, enemy)
     can = Can(screen)
     island = Island(screen)
     player_ship = Player_Ship(screen)
@@ -37,16 +38,7 @@ def run():
     back = Back(screen)
 
     while True:
-        """"""
-
-        """Коллизия для нрашего корабля"""
-        for enemy in inim:
-            if player_ship.rect.colliderect(enemy):
-                player_ship.image = pygame.image.load("work_images/island.png")
-        """"""
-        # dead_enemy.output()
-        #  screen.blit(bg_color,(0,0))
-
+        update_bullet(bullets)
         sub_gun.update(submarine)
         submarine.moving_sub()
         enemy_gun.update(enemy)

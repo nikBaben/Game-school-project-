@@ -114,5 +114,5 @@ class Player_Ship():
                     self.rect.center = center
 
         self.screen.blit(self.image, self.rect)
-        self.hitbox = ((self.rect.centerx) - 35, (self.rect.bottom) - 130, 70, 130)  # Отрисовываю хит бокс для теста
-        pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
+        # self.hitbox = ((self.rect.centerx) - 35, (self.rect.bottom) - 130, 70, 130)  # Отрисовываю хит бокс для теста
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)

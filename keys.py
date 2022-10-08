@@ -25,10 +25,6 @@ def movement(screen, player_ship, bullets):
                 new_bullet = Gun(screen, player_ship)
                 bullets.add(new_bullet)
 
-
-
-
-
         elif event.type == pygame.KEYUP:
             '''движение'''
             if event.key == pygame.K_d:

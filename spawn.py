@@ -14,3 +14,10 @@ def spawn_x():
         else:
             ans = choice(spawn)
     return ans
+
+
+spawn_check = {'ship': False, 'can': False, 'island': False, 'submarine': False}
+
+def first(object):
+    if spawn_check[object] == False:
+        spawn_check[object] = True

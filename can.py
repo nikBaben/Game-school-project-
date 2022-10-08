@@ -2,6 +2,7 @@ import pygame
 from random import choice
 from styles import anim_can
 from spawn import spawn_x, cords
+from spawn import spawn_check, first
 
 
 class Can():
@@ -14,7 +15,10 @@ class Can():
         self.speed = 0.5
         sp = spawn_x()
         self.rect.centerx = 60 * sp
-        self.rect.bottom = self.screen_rect.bottom - 1100
+        # self.rect.bottom = self.screen_rect.bottom - 1100
+        if spawn_check['can'] == False:
+            self.rect.bottom = self.screen_rect.bottom - 1700
+            first('can')
         self.y = float(self.rect.y)
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
