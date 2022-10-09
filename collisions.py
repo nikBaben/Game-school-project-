@@ -1,12 +1,6 @@
-"""Коллизии""" 
+from player_ship import Player_Ship
+from enemy_ship import Enemy
 
-    #По идеи лучше все коллизии перенести отдельно, чтобы она не была прописана в соновном цикле игры, а то там лишний мусор получается, она должна быть чистая
-
-#from player_ship import Player_Ship
-#def collision_player_ship(player): 
-   # pass
-""""""
-
-
-
-
+def collisions(a, b):
+    if a.rect.colliderect(b):
+        pass

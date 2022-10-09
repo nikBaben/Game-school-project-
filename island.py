@@ -7,7 +7,7 @@ from spawn import spawn_check, first
 
 class Island():
     def __init__(self, screen):
-        global sp, sp1, sp2
+        global sp, sp1, sp2, sp3, sp4
         self.screen = screen
         # self.image = can
         self.image = anim_island[0].convert_alpha()
@@ -15,7 +15,7 @@ class Island():
         self.screen_rect = screen.get_rect()
         self.speed = 0.25
         sp = spawn_x()
-        sp1, sp2 = sp - 1, sp + 1
+        sp1, sp2, sp3, sp4 = sp - 1, sp + 1, sp - 2, sp + 2
         cords[sp1] = False
         cords[sp2] = False
         self.rect.centerx = 60 * sp
@@ -29,7 +29,7 @@ class Island():
         self.frame_rate = 70  # Количесво кадров в игре
 
     def moving(self):
-        global sp, sp1, sp2
+        global sp, sp1, sp2, sp3, sp4
         self.y += self.speed
         self.rect.y = self.y
 
@@ -38,10 +38,14 @@ class Island():
             cords[sp] = True
             cords[sp1] = True
             cords[sp2] = True
+            cords[sp3] = True
+            cords[sp4] = True
             sp = spawn_x()
-            sp1, sp2 = sp - 1, sp + 1
+            sp1, sp2, sp3, sp4 = sp - 1, sp + 1, sp - 2, sp + 2
             cords[sp1] = False
             cords[sp2] = False
+            cords[sp3] = False
+            cords[sp4] = False
             self.rect.centerx = 60 * sp
 
     def output(self):

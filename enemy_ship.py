@@ -1,5 +1,7 @@
 import pygame
 from random import choice
+
+import player_ship
 from styles import anim_ship, anim_enemy
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
@@ -26,6 +28,7 @@ class Enemy():
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70
         self.flag = False
+        self.hitbox = ((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
 
     def moving_enemy(self):
         global sp
@@ -38,6 +41,10 @@ class Enemy():
             sp = spawn_x()
             self.rect.centerx = 60 * sp
 
+        # pos = player_ship.Player_Ship.pos()
+        # if self.rect.colliderect(pos):
+        #     print('1')
+
         # if self.rect.colliderect(self, player_ship.position()):
         #     self.y = -300
         #     cords[sp] = True
@@ -49,3 +56,5 @@ class Enemy():
 
     def output(self):
         self.screen.blit(self.image, self.rect)
+        self.hitbox = ((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)  # Отрисовываю хит бокс для теста
+        pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
