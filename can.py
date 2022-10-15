@@ -1,5 +1,4 @@
 import pygame
-from random import choice
 from styles import anim_can
 from spawn import spawn_x, cords
 from spawn import spawn_check, first

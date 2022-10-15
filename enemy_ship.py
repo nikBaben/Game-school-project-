@@ -1,22 +1,22 @@
 import pygame
-from random import choice
-
-import player_ship
 from styles import anim_ship, anim_enemy
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
+from pygame.sprite import Sprite
 
 
-class Enemy():
+class Enemy(Sprite):
     def __init__(self, screen):
-        global sp
-        self.screen = screen
+        super().__init__()
         self.image = (anim_enemy[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
+
+        self.screen = screen
+        self.screen_rect = screen.get_rect()
+        global sp
         self.speed = 0.3
         self.rect = self.image.get_rect()
-        self.screen_rect = screen.get_rect()
         sp = spawn_x()
         self.rect.centerx = 60 * sp
         self.rect.bottom = self.screen_rect.bottom - 1200
@@ -41,18 +41,6 @@ class Enemy():
             sp = spawn_x()
             self.rect.centerx = 60 * sp
 
-        # pos = player_ship.Player_Ship.pos()
-        # if self.rect.colliderect(pos):
-        #     print('1')
-
-        # if self.rect.colliderect(self, player_ship.position()):
-        #     self.y = -300
-        #     cords[sp] = True
-        #     sp = spawn_x()
-        #     self.rect.centerx = 60 * sp
-
-    def enemy_update(enemy):
-        pass  # Я забыл  зачем создавал эта функция, ЪХАХАХАХАХ, мб пригодится
 
     def output(self):
         self.screen.blit(self.image, self.rect)
