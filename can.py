@@ -36,6 +36,13 @@ class Can():
             sp = spawn_x()
             self.rect.centerx = 60 * sp
 
+    def death(self):
+        global sp
+        self.y = -1000
+        cords[sp] = True
+        sp = spawn_x()
+        self.rect.centerx = 60 * sp
+
     def output(self):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:

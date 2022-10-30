@@ -34,5 +34,12 @@ class Submarine():
             sp = spawn_x()
             self.rect.centerx = 60 * sp
 
+    def death(self):
+        global sp
+        self.y = -600
+        cords[sp] = True
+        sp = spawn_x()
+        self.rect.centerx = 60 * sp
+
     def output(self):
         self.screen.blit(self.image, self.rect)

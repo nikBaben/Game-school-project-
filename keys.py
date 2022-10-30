@@ -51,8 +51,8 @@ def update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, sub
     can.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
-    player_ship.output()
     island.output()
+    player_ship.output()
     ####
 
     ###

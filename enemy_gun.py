@@ -1,6 +1,7 @@
 import pygame
 from enemy_ship import Enemy
 
+
 class Enemy_gun(pygame.sprite.Sprite):
     def __init__(self, screen, enemy_ship):
         super(Enemy_gun, self).__init__()
@@ -21,6 +22,10 @@ class Enemy_gun(pygame.sprite.Sprite):
         if self.y >= (enemy_ship.rect.bottom + 1060):
             self.y = enemy_ship.rect.bottom
             self.rect.centerx = enemy_ship.rect.centerx
+
+    def shot(self, enemy_ship):
+        self.y = enemy_ship.rect.bottom
+        self.rect.centerx = enemy_ship.rect.centerx
 
     def output_enemy_bullet(self):
         self.screen.blit(self.image, self.rect)

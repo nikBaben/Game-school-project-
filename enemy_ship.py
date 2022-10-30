@@ -16,7 +16,6 @@ class Enemy(Sprite):
         self.screen_rect = screen.get_rect()
         global sp
         self.speed = 0.3
-        self.rect = self.image.get_rect()
         sp = spawn_x()
         self.rect.centerx = 60 * sp
         self.rect.bottom = self.screen_rect.bottom - 1200
@@ -41,6 +40,12 @@ class Enemy(Sprite):
             sp = spawn_x()
             self.rect.centerx = 60 * sp
 
+    def death(self):
+        global sp
+        self.y = -500
+        cords[sp] = True
+        sp = spawn_x()
+        self.rect.centerx = 60 * sp
 
     def output(self):
         self.screen.blit(self.image, self.rect)

@@ -22,6 +22,10 @@ class Sub_gun(pygame.sprite.Sprite):
             self.y = submarine.rect.bottom
             self.rect.centerx = submarine.rect.centerx
 
+    def shot(self, enemy_ship):
+        self.y = enemy_ship.rect.bottom
+        self.rect.centerx = enemy_ship.rect.centerx
+
     def output_enemy_bullet(self):
         self.screen.blit(self.image, self.rect)
         # pygame.draw.rect(self.screen, self.rect)
