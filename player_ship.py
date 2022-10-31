@@ -22,6 +22,8 @@ class Player_Ship():
         self.screen_rect = screen.get_rect()
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+        self.x = float(self.rect.centerx)
+        self.y = float(self.rect.bottom)
         self.moveright = False
         self.moveleft = False
         self.moveup = False
@@ -30,31 +32,35 @@ class Player_Ship():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
-        a = self.hitbox = ((self.rect.centerx) - 35, (self.rect.bottom) - 130, 70, 130)
+        self.speed = 1
 
     def move(self):
         if self.moveright:
             if self.rect.centerx > 960:
                 self.rect.centerx = 0
-            self.rect.centerx += 1
+            self.x += self.speed
+            self.rect.centerx = self.x
         if self.moveleft:
             if self.rect.centerx < 0:
                 self.rect.centerx = 960
-            self.rect.centerx -= 1
+            self.x -= self.speed
+            self.rect.centerx = self.x
             """ Доделат!!!! Просто поле для проверки, что все работает) """
             # self.image  = bullet # Меняет кадр, если нажата клавиша "A" ef
             """"""
         if self.moveup:
             if self.rect.bottom <= 150:
                 self.moveup = False
-                self.rect.bottom = 150
-            self.rect.bottom -= 1
+                self.y = 150
+            self.y -= self.speed
+            self.rect.bottom = self.y
         #  self.image = anim_shipplayer_moveup[0]
         if self.movedown:
             if self.rect.bottom >= 1050:
                 self.movedown = False
                 self.rect.bottom = 1050
-            self.rect.bottom += 1
+            self.y += self.speed
+            self.rect.bottom = self.y
         if self.sht:
             """Доделать!!!! Просто поле для проверки что все рабоатет)"""
             self.image = anim_fire[0]  # Меняет кадр, если нажата клавиша "F"

@@ -39,13 +39,15 @@ def movement(screen, player_ship, bullets):
                 player_ship.sht = False  # убераем занчение True с shoot, если корабль не стреляет
 
 
-def update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun):
+def update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
     back.output_back()
+    # def b():
+    #     blow.draw()
     enemy_gun.output_enemy_bullet()
     enemy.output()
     can.output()
