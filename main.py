@@ -63,10 +63,6 @@ def run():
             enemy.death()
         if pygame.sprite.collide_rect(player_ship, enemy):
             enemy.death()
-            # b = True
-            blow.rect.x = 100
-            blow.rect.y = 500
-            blow.draw()
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True

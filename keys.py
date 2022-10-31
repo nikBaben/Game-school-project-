@@ -46,8 +46,6 @@ def update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, sub
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
     back.output_back()
-    # def b():
-    #     blow.draw()
     enemy_gun.output_enemy_bullet()
     enemy.output()
     can.output()
@@ -55,6 +53,18 @@ def update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, sub
     sub_gun.output_enemy_bullet()
     island.output()
     player_ship.output()
+    if pygame.sprite.collide_rect(player_ship, enemy) or pygame.sprite.spritecollideany(enemy, bullets):
+        blow.rect.x = enemy.rect.x
+        blow.rect.y = enemy.rect.y
+        blow.draw('ship')
+    if pygame.sprite.spritecollideany(submarine, bullets) or pygame.sprite.collide_rect(player_ship, submarine):
+        blow.rect.x = submarine.rect.x
+        blow.rect.y = submarine.rect.y
+        blow.draw('sub')
+    if pygame.sprite.spritecollideany(can, bullets) or pygame.sprite.collide_rect(player_ship, can):
+        blow.rect.x = can.rect.x
+        blow.rect.y = can.rect.y
+        blow.draw('can')
     ####
 
     ###
