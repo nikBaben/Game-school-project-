@@ -116,7 +116,7 @@ def run():
                 sys.exit()
 
         '''ОСТРОВ'''
-        if pygame.sprite.collide_rect(player_ship, island):
+        if pygame.Rect.colliderect(player_ship.rect, island.hitbox):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True

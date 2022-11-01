@@ -9,7 +9,6 @@ class Island():
     def __init__(self, screen):
         global sp, sp1, sp2, sp3, sp4
         self.screen = screen
-        # self.image = can
         self.image = anim_island[0].convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
@@ -23,10 +22,12 @@ class Island():
         if spawn_check['island'] == False:
             self.rect.bottom = self.screen_rect.bottom - 1700
             first('island')
+        self.x = self.rect.x
         self.y = float(self.rect.y)
         self.frame = 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
+        self.hitbox = pygame.Rect(self.x, self.y + 90, 201, 90)
 
     def moving(self):
         global sp, sp1, sp2, sp3, sp4
@@ -49,6 +50,8 @@ class Island():
             self.rect.centerx = 60 * sp
 
     def output(self):
+        self.hitbox = pygame.Rect(self.x, self.y + 90, 201, 90)
+        pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now
@@ -60,4 +63,5 @@ class Island():
                 self.image = anim_island[self.frame]
                 self.rect = self.image.get_rect()
                 self.rect.center = center
+
         self.screen.blit(self.image, self.rect)
