@@ -50,8 +50,8 @@ class Island():
             self.rect.centerx = 60 * sp
 
     def output(self):
-        self.hitbox = pygame.Rect(self.x, self.y + 90, 201, 90)
-        pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
+        self.hitbox = pygame.Rect(self.rect.centerx - 100, self.y + 90, 201, 90)
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now

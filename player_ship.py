@@ -20,7 +20,7 @@ class Player_Ship():
         self.image = anim_ship[0].convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.rect.centerx = self.screen_rect.centerx
+        self.rect.centerx = float(self.screen_rect.centerx)
         self.rect.bottom = self.screen_rect.bottom
         self.x = float(self.rect.centerx)
         self.y = float(self.rect.bottom)
@@ -32,8 +32,8 @@ class Player_Ship():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
-        self.speed = 1
-        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
+        self.speed = float(1)
+        # self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
 
     def move(self):
         if self.moveright:
@@ -46,26 +46,18 @@ class Player_Ship():
                 self.rect.centerx = 960
             self.x -= self.speed
             self.rect.centerx = self.x
-            """ Доделат!!!! Просто поле для проверки, что все работает) """
-            # self.image  = bullet # Меняет кадр, если нажата клавиша "A" ef
-            """"""
         if self.moveup:
             if self.rect.bottom <= 150:
                 self.moveup = False
-                self.y = 150
+                self.rect.bottom = 150
             self.y -= self.speed
             self.rect.bottom = self.y
-        #  self.image = anim_shipplayer_moveup[0]
         if self.movedown:
             if self.rect.bottom >= 1050:
                 self.movedown = False
                 self.rect.bottom = 1050
             self.y += self.speed
             self.rect.bottom = self.y
-        if self.sht:
-            """Доделать!!!! Просто поле для проверки что все рабоатет)"""
-            self.image = anim_fire[0]  # Меняет кадр, если нажата клавиша "F"
-            """"""
 
     def output(self):
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
