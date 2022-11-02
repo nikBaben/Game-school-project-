@@ -68,6 +68,7 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
+                # break
                 time.sleep(1)
                 sys.exit()
         if pygame.sprite.collide_rect(player_ship, enemy_gun):
@@ -125,5 +126,7 @@ def run():
                 time.sleep(1)
                 sys.exit()
 
+    # while True:
+    #     player_ship.move()
 
 run()
