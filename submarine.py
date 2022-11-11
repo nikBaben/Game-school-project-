@@ -9,7 +9,7 @@ class Submarine():
         global sp
         self.screen = screen
         # self.image = (anim_enemy[0]).convert_alpha()
-        self.image = pygame.image.load('work_images/sub.png')
+        self.image = pygame.image.load('work_images/sub1.svg')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.speed = 0.35

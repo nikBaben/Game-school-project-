@@ -17,7 +17,7 @@ class Player_Ship():
     def __init__(self, screen):
         self.screen = screen
         '''когда анимацию корабля будешь делать закомментишь'''
-        self.image = anim_ship[0].convert_alpha()
+        self.image = anim_shipplayer_moveup[1].convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.rect.centerx = self.screen_rect.centerx - 60
@@ -91,7 +91,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_fire[self.frame]
+                    self.image = anim_shipplayer_moveup[1]
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -100,16 +100,16 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_shipplayer_moveup[self.frame]
+                    self.image = anim_shipplayer_moveup[1]
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
             if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False:
-                if self.frame >= len(anim_ship):
+                if self.frame >= len(anim_shipplayer_moveup):
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_ship[self.frame]
+                    self.image = anim_shipplayer_moveup[1]
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 

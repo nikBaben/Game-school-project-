@@ -9,7 +9,7 @@ class Enemy_gun(pygame.sprite.Sprite):
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
-        self.image = pygame.image.load("work_images/pulya.png")
+        self.image = pygame.image.load("imgs/bullet.svg")
         self.speed = 1.25
         self.rect.centerx = enemy_ship.rect.centerx
         self.rect.top = enemy_ship.rect.top + 125
