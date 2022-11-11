@@ -9,13 +9,13 @@ from enemy_ship import Enemy
 from enemy_gun import Enemy_gun
 from enemy_ship import spawn_x
 from styles import anim_ship
-from backgorund import Back
+from backgorund import Back,Back2
 from submarine import Submarine
 from sub_gun import Sub_gun
 from keys import update_bullet
-import time
+import time 
 from blow import Blow
-
+from styles import back_ground
 # from dead_enemy import Dead_Enemy
 
 inim = []
@@ -39,11 +39,17 @@ def run():
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
+    back2 = Back2(screen)
     back = Back(screen)
+    
     blow = Blow(screen)
 
     hit = False
     while True:
+        back2.down()
+       # bg_color = back_ground
+        back.scroling()
+
         update_bullet(bullets)
         sub_gun.update(submarine)
         submarine.moving_sub()
@@ -56,7 +62,7 @@ def run():
         keys.movement(screen, player_ship, bullets)
         player_ship.move()
         # dead.output()
-        keys.update_screen(back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow)
+        keys.update_screen(back2,back,player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow)
 
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):

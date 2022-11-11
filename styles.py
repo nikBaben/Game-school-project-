@@ -13,6 +13,7 @@ anim_island = []
 anim_shipplayer_moveup = []
 anim_enemy=[]
 back_ground = pygame.image.load("imgs/back_ground.png")
+back_ground2 = pygame.image.load("imgs/back_ground2.png")
 """"""
 
 
