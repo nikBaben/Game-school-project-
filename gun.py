@@ -23,5 +23,4 @@ class Gun(pygame.sprite.Sprite):
 
     def output_bullet(self):
         self.screen.blit(self.image, self.rect)
-        # pygame.draw.rect(self.screen, self.rect)
-        # pygame.blit(self.image)
+        # pygame.draw.rect(self.screen, (0,0,0), self.rect, 1)

@@ -2,6 +2,7 @@ import pygame
 from styles import anim_can
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
+from random import choice
 
 
 class Can():
@@ -32,6 +33,7 @@ class Can():
         self.rect.y = self.y
 
         if self.y == 1100:
+            self.image = pygame.image.load('work_images/can.png')
             self.y = -50
             cords[sp] = True
             sp = spawn_x()

@@ -4,6 +4,9 @@ import keys
 from gun import Gun
 from styles import anim_fire, anim_ship
 from styles import anim_shipplayer_moveup
+from enemy_ship import Enemy
+from submarine import Submarine
+
 
 pic = pygame.image.load("imgs/ship_frame1.svg")
 bullet = pygame.image.load("imgs/bullet.svg")
@@ -34,6 +37,14 @@ class Player_Ship():
         self.frame_rate = 70  # Количесво кадров в игре
         self.speed = 1
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
+
+    def rocket(self, TF):
+        print('1')
+        if TF == 'True':
+            print(2)
+            if self.sht:
+                print(3)
+                return Enemy.death(), Submarine.death()
 
     def move(self):
         if self.moveright:

@@ -51,6 +51,7 @@ def run():
     blow = Blow(screen)
 
     hit = False
+    broke = False
     while True:
         back2.down()
         # bg_color = back_ground
@@ -132,36 +133,31 @@ def run():
                 can.image = pygame.image.load('work_images/health.png')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
             if broke:
-                print('---', img)
                 if img == 1:
-                    print('123123123123123')
+                    # player_ship.rocket('True')
                     enemy.death()
                     submarine.death()
-                    SCORES += 2
-                    print(SCORES)
-                print(hit)
-                print(player_ship.speed)
-                if img == 2:
+                    can.death()
+                    can.image = pygame.image.load('work_images/can.png')
+                else:
                     if hit:
                         hit = False
                         player_ship.speed = 1
-                img = 3
-            elif not broke:
-                print('111111111111')
+                    can.death()
+                    can.image = pygame.image.load('work_images/can.png')
+            else:
                 if not hit:
                     hit = True
                     player_ship.speed = 0.5
+                    can.death()
                 else:
                     time.sleep(1)
                     sys.exit()
-                # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
-                can.death()
                 can.image = pygame.image.load('work_images/can.png')
             broke = False
         if can.rect.y >= 1100:
             can.image = pygame.image.load('work_images/can.png')
-            img = 3
-
+            broke = False
         '''ОСТРОВ'''
         if pygame.Rect.colliderect(player_ship.hitbox, island.hitbox):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
