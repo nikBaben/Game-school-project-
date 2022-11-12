@@ -138,11 +138,17 @@ def run():
         '''БОЧКА'''
         if pygame.sprite.spritecollideany(can, bullets):
             broke = True
+            can.broke = True
             img = choice([1, 2])
             if img == 1:
-                can.image = pygame.image.load("imgs/heart.svg")
+                can.broke_heart = False
+                can.broke_rocket = True
+            #    can.image = pygame.image.load("imgs/heart.svg")
             if img == 2:
-                can.image = pygame.image.load('imgs/rocket.svg')
+                can.broke_rocket = False
+                can.broke_heart = True
+
+             #   can.image = pygame.image.load('imgs/rocket.svg')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
             if broke:
                 if img == 1:
@@ -150,13 +156,17 @@ def run():
                     can.death()
                     score_panel.update()
                     score_panel.update()
-                    can.image = imge_for_can
+                    can.broke = False
+                    can.broke_rocket = False
+                   # can.image = imge_for_can
                 else:
                     if hit:
                         hit = False
                         player_ship.speed = 1
-                    can.death()
-                    can.image = imge_for_can
+                        can.death()
+                        can.broke = False
+                        can.broke_heart = False
+                  #  can.image = imge_for_can
             else:
                 if not hit:
                     hit = True
@@ -165,11 +175,18 @@ def run():
                 else:
                     time.sleep(2)
                     sys.exit()
-                can.image =imge_for_can
+              #  can.image =imge_for_can
             broke = False
+            can.broke = False
+            can.broke_heart = False
+            can.broke_rocket = False
         if can.rect.y >= 1100:
-            can.image = imge_for_can
+            #can.image = imge_for_can
             broke = False
+            can.broke = False
+            can.broke_heart = False
+            can.broke_rocket = False
+
         '''ОСТРОВ'''
         if pygame.Rect.colliderect(player_ship.hitbox, island.hitbox):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
