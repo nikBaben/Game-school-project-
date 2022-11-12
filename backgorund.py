@@ -1,5 +1,5 @@
 from styles import back_ground, back_ground2
-import math 
+import math
 
 
 class Back():
@@ -17,7 +17,7 @@ class Back():
             self.y = 0
     def output_back(self):
         self.screen.blit(self.image,self.rect)
-    
+
 
 class Back2():
     def __init__(self, screen):

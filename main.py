@@ -25,6 +25,7 @@ inim = []
 
 SCORES = 0
 
+
 def run():
     global SCORES
     pygame.init()
@@ -131,25 +132,32 @@ def run():
                 can.image = pygame.image.load('work_images/health.png')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
             if broke:
-                broke = False
+                print('---', img)
                 if img == 1:
+                    print('123123123123123')
                     enemy.death()
                     submarine.death()
                     SCORES += 2
                     print(SCORES)
-                    img = 3
+                print(hit)
+                print(player_ship.speed)
                 if img == 2:
                     if hit:
                         hit = False
                         player_ship.speed = 1
-                        img = 3
+                img = 3
+            elif not broke:
+                print('111111111111')
+                if not hit:
+                    hit = True
+                    player_ship.speed = 0.5
                 else:
-                    if not hit:
-                        hit = True
-                        player_ship.speed = 0.5
+                    time.sleep(1)
+                    sys.exit()
                 # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
                 can.death()
                 can.image = pygame.image.load('work_images/can.png')
+            broke = False
         if can.rect.y >= 1100:
             can.image = pygame.image.load('work_images/can.png')
             img = 3
