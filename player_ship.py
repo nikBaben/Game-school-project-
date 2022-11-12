@@ -6,6 +6,7 @@ from styles import anim_fire, anim_ship
 from styles import anim_shipplayer_moveup
 from enemy_ship import Enemy
 from submarine import Submarine
+from styles import ainm_player_stand
 
 
 pic = pygame.image.load("imgs/ship_frame1.svg")
@@ -20,7 +21,7 @@ class Player_Ship():
     def __init__(self, screen):
         self.screen = screen
         '''когда анимацию корабля будешь делать закомментишь'''
-        self.image = anim_shipplayer_moveup[1].convert_alpha()
+        self.image = ainm_player_stand[0].convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.rect.centerx = self.screen_rect.centerx - 60
@@ -110,12 +111,12 @@ class Player_Ship():
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
-            if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False:
-                if self.frame >= len(anim_shipplayer_moveup):
+            if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False and self.movedown == False:
+                if self.frame >= len(ainm_player_stand):
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_shipplayer_moveup[1]
+                    self.image = ainm_player_stand[self.frame]
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 

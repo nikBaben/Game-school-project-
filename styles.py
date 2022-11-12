@@ -12,8 +12,11 @@ anim_can = []
 anim_island = []
 anim_shipplayer_moveup = []
 anim_enemy=[]
+anim_submarine = []
+ainm_player_stand = []
 back_ground = pygame.image.load("imgs/back_ground.png")
 back_ground2 = pygame.image.load("imgs/back_ground2.png")
+
 """"""
 
 
@@ -27,11 +30,16 @@ for island in range(1,17):
     anim_island.append(img)
 """"""
 
+for submarine in range(1,18):
+    sub_file = "imgs/submarine/submarine{}.svg".format(submarine)
+    sub = pygame.image.load(sub_file)
+    anim_submarine.append(sub)
+
 
 
 """Анимация вражеского корабля"""
 for enemy in range(1,13):
-    filename = "imgs/enemy_ship{}.svg".format(enemy)
+    filename = "imgs/enemy1_ship{}.svg".format(enemy)
     enemy = pygame.image.load(filename)
     anim_enemy.append(enemy)
 """"""
@@ -46,10 +54,10 @@ for j in range(1,13):
 
 
 """Анимация Коробля при бездействии"""
-for i in range(1,15):
-    file =  "imgs/ship_frame{}.svg".format(i)
-    im = pygame.image.load(file)
-    anim_ship.append(im)
+for player_stand in range(1,18):
+    player_stand = "imgs/player/player_stand{}.svg".format(player_stand)
+    player_stand_file = pygame.image.load(player_stand)
+    ainm_player_stand.append(player_stand_file)
 """"""
 
 

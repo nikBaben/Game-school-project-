@@ -48,7 +48,18 @@ class Enemy(Sprite):
         self.rect.centerx = 60 * sp
 
     def output(self):
-        self.screen.blit(self.image, self.rect)
-        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60,
+        now = pygame.time.get_ticks()
+        if now - self.last_update > self.frame_rate:
+            self.last_update = now
+            self.frame += 1
+        if self.frame >= len(anim_enemy):
+                    self.frame = 0
+        else:
+            center = self.rect.center
+            self.image = anim_enemy[self.frame]
+            self.rect = self.image.get_rect()
+            self.rect.center = center
+            self.screen.blit(self.image, self.rect)
+            self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60,
                                   130)  # Отрисовываю хит бокс для теста
         # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
