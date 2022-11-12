@@ -163,9 +163,10 @@ def run():
                     if hit:
                         hit = False
                         player_ship.speed = 1
-                        can.death()
                         can.broke = False
                         can.broke_heart = False
+                    can.death()
+                        
                   #  can.image = imge_for_can
             else:
                 if not hit:
