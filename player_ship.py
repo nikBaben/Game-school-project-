@@ -60,7 +60,7 @@ class Player_Ship():
         self.rect.y = self.y
 
     def output(self):
-        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
+        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 130, 60, 130)
         # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:

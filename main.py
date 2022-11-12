@@ -22,8 +22,10 @@ from styles import back_ground
 
 inim = []
 
+SCORES = 0
 
 def run():
+    global SCORES
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("Название игры")  # Надо придумать!!!
@@ -69,8 +71,12 @@ def run():
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
             enemy.death()
+            SCORES += 1
+            print(SCORES)
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
+            SCORES += 1
+            print(SCORES)
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
@@ -92,8 +98,12 @@ def run():
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
             submarine.death()
+            SCORES += 1
+            print(SCORES)
         if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
+            SCORES += 1
+            print(SCORES)
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
