@@ -30,7 +30,7 @@ def run():
     global SCORES
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
-    pygame.display.set_caption("Название игры")  # Надо придумать!!!
+    pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
     # bg_color = back_ground
 
     enemy = Enemy(screen)
