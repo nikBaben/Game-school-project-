@@ -8,7 +8,8 @@ class Can():
     def __init__(self, screen):
         global sp
         self.screen = screen
-        self.image = anim_can[0].convert_alpha()
+        # self.image = anim_can[0].convert_alpha() ДЛЯ РАЗРАБОТКИ ПОКА УБЕРУ, ВЕРНЕШЬ ПОТОМ
+        self.image = pygame.image.load('work_images/can.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.speed = 0.5
@@ -22,8 +23,8 @@ class Can():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
-        self.hitbox = ((self.rect.centerx) - 60, (self.rect.bottom) - 150, 120,
-                       150)  # Параметры хит бокса, можно протестить в функции output
+        self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20,
+                       20)  # Параметры хит бокса, можно протестить в функции output
 
     def moving_can(self):
         global sp
@@ -44,16 +45,18 @@ class Can():
         self.rect.centerx = 60 * sp
 
     def output(self):
-        now = pygame.time.get_ticks()
-        if now - self.last_update > self.frame_rate:
-            self.last_update = now
-            self.frame += 1
-            if self.frame >= len(anim_can):
-                self.frame = 0
-            else:
-                center = self.rect.center
-                self.image = anim_can[self.frame]
-                self.rect = self.image.get_rect()
-                self.rect.center = center
+        self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20, 20)
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
+        # now = pygame.time.get_ticks()
+        # if now - self.last_update > self.frame_rate:
+        #     self.last_update = now
+        #     self.frame += 1
+        #     if self.frame >= len(anim_can):                                   ВСЕ ВЕРНЕШЬ ПОТОМ !!!!
+        #         self.frame = 0
+        #     else:
+        #         center = self.rect.center
+        #         self.image = anim_can[self.frame]
+        #         self.rect = self.image.get_rect()
+        #         self.rect.center = center
 
         self.screen.blit(self.image, self.rect)

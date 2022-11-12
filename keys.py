@@ -2,7 +2,6 @@ import pygame, sys
 from gun import Gun
 
 
-
 def movement(screen, player_ship, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -38,7 +37,7 @@ def movement(screen, player_ship, bullets):
                 player_ship.sht = False  # убераем занчение True с shoot, если корабль не стреляет
 
 
-def update_screen(back2,back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow):
+def update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
@@ -46,22 +45,23 @@ def update_screen(back2,back, player_ship, bullets, island, can, enemy, enemy_gu
     # dead.output()
     back2.output_back2()
     back.output_back()
+    island.output()
     enemy_gun.output_enemy_bullet()
     enemy.output()
     can.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
-    island.output()
     player_ship.output()
-    if pygame.sprite.collide_rect(player_ship, enemy) or pygame.sprite.spritecollideany(enemy, bullets):
+    if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox) or pygame.sprite.spritecollideany(enemy, bullets):
         blow.rect.x = enemy.rect.x
         blow.rect.y = enemy.rect.y
         blow.draw('ship')
-    if pygame.sprite.spritecollideany(submarine, bullets) or pygame.sprite.collide_rect(player_ship, submarine):
+    if pygame.sprite.spritecollideany(submarine, bullets) or pygame.Rect.colliderect(player_ship.hitbox,
+                                                                                     submarine.hitbox):
         blow.rect.x = submarine.rect.x
         blow.rect.y = submarine.rect.y
         blow.draw('sub')
-    if pygame.sprite.spritecollideany(can, bullets) or pygame.sprite.collide_rect(player_ship, can):
+    if pygame.sprite.spritecollideany(can, bullets) or pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
         blow.rect.x = can.rect.x
         blow.rect.y = can.rect.y
         blow.draw('can')

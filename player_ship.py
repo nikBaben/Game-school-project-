@@ -33,7 +33,7 @@ class Player_Ship():
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  # Количесво кадров в игре
         self.speed = 1
-        # self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
+        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
 
     def move(self):
         if self.moveright:
@@ -61,7 +61,7 @@ class Player_Ship():
 
     def output(self):
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
-        pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now

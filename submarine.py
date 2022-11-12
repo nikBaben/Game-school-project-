@@ -22,6 +22,7 @@ class Submarine():
             self.rect.bottom = self.screen_rect.bottom - 1350
             first('submarine')
         self.y = float(self.rect.y)
+        self.hitbox = pygame.Rect((self.rect.centerx) - 26, (self.rect.bottom) - 195, 50, 190)
 
     def moving_sub(self):
         global sp
@@ -43,3 +44,5 @@ class Submarine():
 
     def output(self):
         self.screen.blit(self.image, self.rect)
+        self.hitbox = pygame.Rect((self.rect.centerx) - 26, (self.rect.bottom) - 195, 50, 190)
+        # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)

@@ -9,13 +9,15 @@ from enemy_ship import Enemy
 from enemy_gun import Enemy_gun
 from enemy_ship import spawn_x
 from styles import anim_ship
-from backgorund import Back,Back2
+from backgorund import Back, Back2
 from submarine import Submarine
 from sub_gun import Sub_gun
 from keys import update_bullet
-import time 
+import time
 from blow import Blow
+from random import choice
 from styles import back_ground
+
 # from dead_enemy import Dead_Enemy
 
 inim = []
@@ -41,13 +43,13 @@ def run():
     bullets = Group()
     back2 = Back2(screen)
     back = Back(screen)
-    
+
     blow = Blow(screen)
 
     hit = False
     while True:
         back2.down()
-       # bg_color = back_ground
+        # bg_color = back_ground
         back.scroling()
 
         update_bullet(bullets)
@@ -62,12 +64,12 @@ def run():
         keys.movement(screen, player_ship, bullets)
         player_ship.move()
         # dead.output()
-        keys.update_screen(back2,back,player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow)
+        keys.update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow)
 
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
             enemy.death()
-        if pygame.sprite.collide_rect(player_ship, enemy):
+        if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
@@ -77,7 +79,7 @@ def run():
                 # break
                 time.sleep(1)
                 sys.exit()
-        if pygame.sprite.collide_rect(player_ship, enemy_gun):
+        if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             enemy_gun.shot(enemy)
             if not hit:
@@ -90,7 +92,7 @@ def run():
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
             submarine.death()
-        if pygame.sprite.collide_rect(player_ship, submarine):
+        if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
@@ -99,7 +101,7 @@ def run():
             else:
                 time.sleep(1)
                 sys.exit()
-        if pygame.sprite.collide_rect(player_ship, sub_gun):
+        if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             sub_gun.shot(submarine)
             if not hit:
@@ -111,19 +113,37 @@ def run():
 
         '''БОЧКА'''
         if pygame.sprite.spritecollideany(can, bullets):
-            can.death()
-        if pygame.sprite.collide_rect(player_ship, can):
-            player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
-            can.death()
-            if not hit:
-                hit = True
-                player_ship.speed = 0.5
-            else:
-                time.sleep(1)
-                sys.exit()
+            broke = True
+            img = choice([1, 2])
+            if img == 1:
+                can.image = pygame.image.load('work_images/rocket.png')
+            if img == 2:
+                can.image = pygame.image.load('work_images/health.png')
+        if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
+            if broke:
+                broke = False
+                if img == 1:
+                    enemy.death()
+                    submarine.death()
+                    img = 3
+                if img == 2:
+                    if hit:
+                        hit = False
+                        player_ship.speed = 1
+                        img = 3
+                else:
+                    if not hit:
+                        hit = True
+                        player_ship.speed = 0.5
+                # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+                can.death()
+                can.image = pygame.image.load('work_images/can.png')
+        if can.rect.y >= 1100:
+            can.image = pygame.image.load('work_images/can.png')
+            img = 3
 
         '''ОСТРОВ'''
-        if pygame.Rect.colliderect(player_ship.rect, island.hitbox):
+        if pygame.Rect.colliderect(player_ship.hitbox, island.hitbox):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
@@ -132,7 +152,5 @@ def run():
                 time.sleep(1)
                 sys.exit()
 
-    # while True:
-    #     player_ship.move()
 
 run()

@@ -49,5 +49,6 @@ class Enemy(Sprite):
 
     def output(self):
         self.screen.blit(self.image, self.rect)
-        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)  # Отрисовываю хит бокс для теста
+        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60,
+                                  130)  # Отрисовываю хит бокс для теста
         # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
