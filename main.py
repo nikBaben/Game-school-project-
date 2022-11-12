@@ -21,6 +21,7 @@ from random import choice
 from score_panel import Score_panel
 # from score_counter import draw_text
 from styles import back_ground
+from styles import anim_can
 
 # from dead_enemy import Dead_Enemy
 
@@ -60,6 +61,7 @@ def run():
     bullets = Group()
     back2 = Back2(screen)
     back = Back(screen)
+    imge_for_can  = anim_can[0].convert_alpha()
 
     blow = Blow(screen)
 
@@ -138,9 +140,9 @@ def run():
             broke = True
             img = choice([1, 2])
             if img == 1:
-                can.image = pygame.image.load('work_images/rocket.png')
+                can.image = pygame.image.load("imgs/heart.svg")
             if img == 2:
-                can.image = pygame.image.load('work_images/health.png')
+                can.image = pygame.image.load('imgs/rocket.svg')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
             if broke:
                 if img == 1:
@@ -148,13 +150,13 @@ def run():
                     can.death()
                     score_panel.update()
                     score_panel.update()
-                    can.image = pygame.image.load('work_images/can.png')
+                    can.image = imge_for_can
                 else:
                     if hit:
                         hit = False
                         player_ship.speed = 1
                     can.death()
-                    can.image = pygame.image.load('work_images/can.png')
+                    can.image = imge_for_can
             else:
                 if not hit:
                     hit = True
@@ -163,10 +165,10 @@ def run():
                 else:
                     time.sleep(2)
                     sys.exit()
-                can.image = pygame.image.load('work_images/can.png')
+                can.image =imge_for_can
             broke = False
         if can.rect.y >= 1100:
-            can.image = pygame.image.load('work_images/can.png')
+            can.image = imge_for_can
             broke = False
         '''ОСТРОВ'''
         if pygame.Rect.colliderect(player_ship.hitbox, island.hitbox):
