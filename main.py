@@ -16,6 +16,7 @@ from keys import update_bullet
 import time
 from blow import Blow
 from random import choice
+# from score_counter import draw_text
 from styles import back_ground
 
 # from dead_enemy import Dead_Enemy
@@ -53,7 +54,6 @@ def run():
         back2.down()
         # bg_color = back_ground
         back.scroling()
-
         update_bullet(bullets)
         sub_gun.update(submarine)
         submarine.moving_sub()
@@ -135,6 +135,8 @@ def run():
                 if img == 1:
                     enemy.death()
                     submarine.death()
+                    SCORES += 2
+                    print(SCORES)
                     img = 3
                 if img == 2:
                     if hit:
