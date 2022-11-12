@@ -1,10 +1,13 @@
 import pygame, sys
 from gun import Gun
+import json
 
 
-def movement(screen, player_ship, bullets):
+def movement(screen, player_ship, bullets, enemy, submarine, score_panel):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            with open('save.json', 'w') as file:
+                json.dump(score_panel.score, file)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             '''движение'''
@@ -16,9 +19,12 @@ def movement(screen, player_ship, bullets):
                 player_ship.moveup = True
             if event.key == pygame.K_s:
                 player_ship.movedown = True
-
             '''стрельба'''
             if event.key == pygame.K_SPACE:
+                if player_ship.have_rocket:
+                    enemy.death()
+                    submarine.death()
+                    player_ship.have_rocket = False
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
                 new_bullet = Gun(screen, player_ship)
                 bullets.add(new_bullet)
@@ -37,7 +43,7 @@ def movement(screen, player_ship, bullets):
                 player_ship.sht = False  # убераем занчение True с shoot, если корабль не стреляет
 
 
-def update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow):
+def update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow, score_panel):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
@@ -52,6 +58,7 @@ def update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_g
     submarine.output()
     sub_gun.output_enemy_bullet()
     player_ship.output()
+    score_panel.draw_score()
     if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox) or pygame.sprite.spritecollideany(enemy, bullets):
         blow.rect.x = enemy.rect.x
         blow.rect.y = enemy.rect.y

@@ -1,3 +1,5 @@
+import json
+
 import pygame, sys
 from player_ship import Player_Ship
 from gun import Gun
@@ -16,6 +18,7 @@ from keys import update_bullet
 import time
 from blow import Blow
 from random import choice
+from score_panel import Score_panel
 # from score_counter import draw_text
 from styles import back_ground
 
@@ -23,19 +26,29 @@ from styles import back_ground
 
 inim = []
 
-SCORES = 0
-
 
 def run():
-    global SCORES
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
     # bg_color = back_ground
+    game_over = False
 
     enemy = Enemy(screen)
     inim.append(enemy)
+    try:
+        file = open('save.json')
+        score = (json.load(file))
+    except:
+        score = 0
 
+    score_panel = Score_panel(screen, score)
+    try:
+        file = open('save.json')
+        score_panel.score = (json.load(file))
+    except:
+        pass
+    score_panel.update()
     submarine = Submarine(screen)
     enemy_gun = Enemy_gun(screen, enemy)
     sub_gun = Sub_gun(screen, submarine)
@@ -65,27 +78,26 @@ def run():
         island.moving()
         gun.output_bullet()
         bullets.update()
-        keys.movement(screen, player_ship, bullets)
         player_ship.move()
+        score_panel.draw_score()
+        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel)
         # dead.output()
-        keys.update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow)
+        keys.update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun,
+                           blow, score_panel)
 
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
             enemy.death()
-            SCORES += 1
-            print(SCORES)
+            score_panel.update()
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
-            SCORES += 1
-            print(SCORES)
+            score_panel.update()
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
             else:
-                # break
-                time.sleep(1)
+                time.sleep(2)
                 sys.exit()
         if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
@@ -94,24 +106,22 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
-                time.sleep(1)
+                time.sleep(2)
                 sys.exit()
 
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
             submarine.death()
-            SCORES += 1
-            print(SCORES)
+            score_panel.update()
         if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
-            SCORES += 1
-            print(SCORES)
+            score_panel.update()
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
             else:
-                time.sleep(1)
+                time.sleep(2)
                 sys.exit()
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
@@ -120,7 +130,7 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
-                time.sleep(1)
+                time.sleep(2)
                 sys.exit()
 
         '''БОЧКА'''
@@ -134,10 +144,10 @@ def run():
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
             if broke:
                 if img == 1:
-                    # player_ship.rocket('True')
-                    enemy.death()
-                    submarine.death()
+                    player_ship.have_rocket = True
                     can.death()
+                    score_panel.update()
+                    score_panel.update()
                     can.image = pygame.image.load('work_images/can.png')
                 else:
                     if hit:
@@ -151,7 +161,7 @@ def run():
                     player_ship.speed = 0.5
                     can.death()
                 else:
-                    time.sleep(1)
+                    time.sleep(2)
                     sys.exit()
                 can.image = pygame.image.load('work_images/can.png')
             broke = False
@@ -165,7 +175,7 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
-                time.sleep(1)
+                time.sleep(2)
                 sys.exit()
 
 
