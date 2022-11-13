@@ -144,6 +144,7 @@ def run():
         '''БОЧКА'''
         if pygame.sprite.spritecollideany(can, bullets):
             if not broke:
+                can.change = True
                 broke = True
                 can.broke = True
                 img = choice([1, 2])
@@ -170,6 +171,7 @@ def run():
                         player_ship.speed = 1
                         can.broke = False
                         can.broke_heart = False
+                    can.change = False
                     can.death()
                         
                   #  can.image = imge_for_can
@@ -177,6 +179,7 @@ def run():
                 if not hit:
                     hit = True
                     player_ship.speed = 0.5
+                    can.change = False
                     can.death()
                 else:
                     time.sleep(2)

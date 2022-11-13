@@ -74,9 +74,10 @@ def update_screen(color,back,screen, bullets,  island, player_ship,can, enemy, e
         blow.rect.y = submarine.rect.y
         blow.draw('sub')
     if pygame.sprite.spritecollideany(can, bullets) or pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
-        blow.rect.x = can.rect.x
-        blow.rect.y = can.rect.y
-        blow.draw('can')
+        if not can.change:
+            blow.rect.x = can.rect.x
+            blow.rect.y = can.rect.y
+            blow.draw('can')
     ####
 
     ###

@@ -32,6 +32,7 @@ class Can():
         self.frame_rate = 70  # Количесво кадров в игре
         self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20,
                        20)  # Параметры хит бокса, можно протестить в функции output
+        self.change = False
 
     def moving_can(self):
         global sp
@@ -74,17 +75,4 @@ class Can():
 
         
         self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20, 20)
-        # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)
-        # now = pygame.time.get_ticks()
-        # if now - self.last_update > self.frame_rate:
-        #     self.last_update = now
-        #     self.frame += 1
-        #     if self.frame >= len(anim_can):                                   ВСЕ ВЕРНЕШЬ ПОТОМ !!!!
-        #         self.frame = 0
-        #     else:
-        #         center = self.rect.center
-        #         self.image = anim_can[self.frame]
-        #         self.rect = self.image.get_rect()
-        #         self.rect.center = center
-
         self.screen.blit(self.image, self.rect)
