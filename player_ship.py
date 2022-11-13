@@ -9,8 +9,8 @@ from submarine import Submarine
 from styles import ainm_player_stand
 
 
-pic = pygame.image.load("imgs/ship_frame1.svg")
-bullet = pygame.image.load("imgs/bullet.svg")
+#pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
+#bullet = pygame.image.load("imgs/bullet.svg").convert_alpha()
 
 BLACK = (0, 0, 0)
 
@@ -21,7 +21,7 @@ class Player_Ship():
     def __init__(self, screen):
         self.screen = screen
         '''когда анимацию корабля будешь делать закомментишь'''
-        self.image = ainm_player_stand[0].convert_alpha()
+        self.image = (ainm_player_stand[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.rect.centerx = self.screen_rect.centerx - 60
@@ -80,7 +80,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_shipplayer_moveup[self.frame]
+                    self.image = (anim_shipplayer_moveup[self.frame]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -89,7 +89,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_fire[self.frame]
+                    self.image = (anim_fire[self.frame]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -98,7 +98,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_shipplayer_moveup[1]
+                    self.image = (anim_shipplayer_moveup[1]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -107,7 +107,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = anim_shipplayer_moveup[1]
+                    self.image = (anim_shipplayer_moveup[1]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -116,7 +116,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = ainm_player_stand[self.frame]
+                    self.image = (ainm_player_stand[self.frame]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 

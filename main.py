@@ -11,7 +11,7 @@ from enemy_ship import Enemy
 from enemy_gun import Enemy_gun
 from enemy_ship import spawn_x
 from styles import anim_ship
-from backgorund import Back, Back2
+from backgorund import Back
 from submarine import Submarine
 from sub_gun import Sub_gun
 from keys import update_bullet
@@ -20,7 +20,6 @@ from blow import Blow
 from random import choice
 from score_panel import Score_panel
 # from score_counter import draw_text
-from styles import back_ground
 from styles import anim_can
 
 # from dead_enemy import Dead_Enemy
@@ -34,7 +33,7 @@ def run():
     pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
     # bg_color = back_ground
     game_over = False
-
+    color = (95,205,228)
     enemy = Enemy(screen)
     inim.append(enemy)
     try:
@@ -59,17 +58,14 @@ def run():
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
-    back2 = Back2(screen)
     back = Back(screen)
-    imge_for_can  = anim_can[0].convert_alpha()
+   # imge_for_can  = anim_can[0].convert_alpha()
 
     blow = Blow(screen)
 
     hit = False
     broke = False
     while True:
-        back2.down()
-        # bg_color = back_ground
         back.scroling()
         update_bullet(bullets)
         sub_gun.update(submarine)
@@ -84,7 +80,7 @@ def run():
         score_panel.draw_score()
         keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel)
         # dead.output()
-        keys.update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun,
+        keys.update_screen(color,back,screen, bullets, island,player_ship, can, enemy, enemy_gun, submarine, sub_gun,
                            blow, score_panel)
 
         '''КОРАБЛЬ ВРАГ'''

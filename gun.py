@@ -8,7 +8,7 @@ class Gun(pygame.sprite.Sprite):
         self.screen = screen
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
-        self.image = pygame.image.load("imgs/bullet.svg")
+        self.image = pygame.image.load("imgs/bullet.svg").convert_alpha()
         self.speed = 2
         self.rect.centerx = player_ship.rect.centerx
         self.rect.top = player_ship.rect.top + 25

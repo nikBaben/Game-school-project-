@@ -8,14 +8,16 @@ from pygame.sprite import Sprite
 class Enemy(Sprite):
     def __init__(self, screen):
         super().__init__()
+        global sp
+        self.screen = screen
         self.image = (anim_enemy[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-
-        self.screen = screen
-        self.screen_rect = screen.get_rect()
-        global sp
         self.speed = 0.3
+        self.rect = self.image.get_rect()
+        self.screen_rect = screen.get_rect()
+        
+
         sp = spawn_x()
         self.rect.centerx = 60 * sp
         self.rect.bottom = self.screen_rect.bottom - 1200
@@ -25,7 +27,7 @@ class Enemy(Sprite):
         self.y = float(self.rect.y)
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
-        self.frame_rate = 70
+        self.frame_rate = 90
         self.flag = False
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
 
@@ -56,10 +58,10 @@ class Enemy(Sprite):
                     self.frame = 0
         else:
             center = self.rect.center
-            self.image = anim_enemy[self.frame]
+            self.image = (anim_enemy[self.frame]).convert_alpha()
             self.rect = self.image.get_rect()
             self.rect.center = center
-            self.screen.blit(self.image, self.rect)
-            self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60,
+        self.screen.blit(self.image, self.rect)
+        self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60,
                                   130)  # Отрисовываю хит бокс для теста
         # pygame.draw.rect(self.screen, (0, 0, 0), self.hitbox, 1)

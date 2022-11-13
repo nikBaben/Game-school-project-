@@ -43,21 +43,22 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel):
                 player_ship.sht = False  # убераем занчение True с shoot, если корабль не стреляет
 
 
-def update_screen(back2, back, player_ship, bullets, island, can, enemy, enemy_gun, submarine, sub_gun, blow, score_panel):
+def update_screen(color,back,screen, bullets,  island, player_ship,can, enemy, enemy_gun, submarine, sub_gun, blow, score_panel):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
-    back2.output_back2()
+    screen.fill(color)
     back.output_back()
     island.output()
     enemy_gun.output_enemy_bullet()
     enemy.output()
     can.output()
+    player_ship.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
-    player_ship.output()
+    #player_ship.output()
     score_panel.draw_score()
     if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox) or pygame.sprite.spritecollideany(enemy, bullets):
         blow.rect.x = enemy.rect.x

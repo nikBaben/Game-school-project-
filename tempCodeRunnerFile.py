@@ -1,2 +1,2 @@
 
-    gun = Gun(screen, player_ship)
+    while True:

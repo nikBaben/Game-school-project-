@@ -54,7 +54,7 @@ class Submarine():
                     self.frame = 0
         else:
             center = self.rect.center
-            self.image = anim_submarine[self.frame]
+            self.image = (anim_submarine[self.frame]).convert_alpha()
             self.rect = self.image.get_rect()
             self.rect.center = center
         self.screen.blit(self.image, self.rect)

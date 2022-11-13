@@ -8,7 +8,7 @@ class Sub_gun(pygame.sprite.Sprite):
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
-        self.image = pygame.image.load("work_images/bulet_for_sub.svg")
+        self.image = pygame.image.load("work_images/bulet_for_sub.svg").convert_alpha()
         self.speed = 0.75
         self.rect.centerx = submarine.rect.centerx
         self.rect.top = submarine.rect.top + 125

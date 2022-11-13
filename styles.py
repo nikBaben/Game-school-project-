@@ -10,12 +10,11 @@ anim_fire=[]
 anim_ship=[]
 anim_can = []
 anim_island = []
-anim_shipplayer_moveup = []
 anim_enemy=[]
+anim_shipplayer_moveup = []
 anim_submarine = []
 ainm_player_stand = []
-back_ground = pygame.image.load("imgs/back_ground.png")
-back_ground2 = pygame.image.load("imgs/back_ground2.png")
+back = pygame.image.load("imgs/lll.png")
 
 """"""
 

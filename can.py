@@ -9,7 +9,7 @@ class Can():
     def __init__(self, screen):
         global sp
         self.screen = screen
-        self.image = anim_can[0].convert_alpha() #ДЛЯ РАЗРАБОТКИ ПОКА УБЕРУ, ВЕРНЕШЬ ПОТОМ
+        self.image = (anim_can[0]).convert_alpha() #ДЛЯ РАЗРАБОТКИ ПОКА УБЕРУ, ВЕРНЕШЬ ПОТОМ
         #self.image = pygame.image.load('work_images/can.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
@@ -39,7 +39,7 @@ class Can():
         self.rect.y = self.y
 
         if self.y == 1100:
-            self.image = anim_can[0].convert_alpha()
+            self.image = (anim_can[0]).convert_alpha()
            # self.image = pygame.image.load('work_images/can.png')
             self.y = -50
             cords[sp] = True
@@ -63,7 +63,7 @@ class Can():
                 self.frame = 0
             else:
                 center = self.rect.center
-                self.image = anim_can[self.frame]
+                self.image = (anim_can[self.frame]).convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.center = center
             if self.broke == True: 

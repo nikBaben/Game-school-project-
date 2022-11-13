@@ -9,7 +9,7 @@ class Island():
     def __init__(self, screen):
         global sp, sp1, sp2, sp3, sp4
         self.screen = screen
-        self.image = anim_island[0].convert_alpha()
+        self.image = (anim_island[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.speed = 0.25
@@ -60,7 +60,7 @@ class Island():
                 self.frame = 0
             else:
                 center = self.rect.center
-                self.image = anim_island[self.frame]
+                self.image = (anim_island[self.frame]).convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.center = center
 
