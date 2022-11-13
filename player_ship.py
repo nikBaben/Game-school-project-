@@ -45,11 +45,11 @@ class Player_Ship():
     def move(self):
         if self.moveright:
             if self.rect.centerx > 960:
-                self.x = 0
+                self.x = -75
             self.x += self.speed
         if self.moveleft:
             if self.rect.centerx < 0:
-                self.x = 960
+                self.x = 915
             self.x -= self.speed
         self.rect.x = self.x
         if self.moveup:

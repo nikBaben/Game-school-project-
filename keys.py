@@ -6,8 +6,10 @@ import json
 def movement(screen, player_ship, bullets, enemy, submarine, score_panel):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            if score_panel.new_score > score_panel.record:
+                score_panel.record = score_panel.new_score
             with open('save.json', 'w') as file:
-                json.dump(score_panel.score, file)
+                json.dump(score_panel.record, file)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             '''движение'''
@@ -24,6 +26,8 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel):
                 if player_ship.have_rocket:
                     enemy.death()
                     submarine.death()
+                    score_panel.update()
+                    score_panel.update()
                     player_ship.have_rocket = False
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
                 new_bullet = Gun(screen, player_ship)

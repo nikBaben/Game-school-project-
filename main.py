@@ -43,12 +43,6 @@ def run():
         score = 0
 
     score_panel = Score_panel(screen, score)
-    try:
-        file = open('save.json')
-        score_panel.score = (json.load(file))
-    except:
-        pass
-    score_panel.update()
     submarine = Submarine(screen)
     enemy_gun = Enemy_gun(screen, enemy)
     sub_gun = Sub_gun(screen, submarine)
@@ -95,6 +89,10 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
+                if score_panel.new_score > score_panel.record:
+                    score_panel.record = score_panel.new_score
+                with open('save.json', 'w') as file:
+                    json.dump(score_panel.record, file)
                 time.sleep(2)
                 sys.exit()
         if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
@@ -104,6 +102,10 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
+                if score_panel.new_score > score_panel.record:
+                    score_panel.record = score_panel.new_score
+                with open('save.json', 'w') as file:
+                    json.dump(score_panel.record, file)
                 time.sleep(2)
                 sys.exit()
 
@@ -119,6 +121,10 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
+                if score_panel.new_score > score_panel.record:
+                    score_panel.record = score_panel.new_score
+                with open('save.json', 'w') as file:
+                    json.dump(score_panel.record, file)
                 time.sleep(2)
                 sys.exit()
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
@@ -128,21 +134,26 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
+                if score_panel.new_score > score_panel.record:
+                    score_panel.record = score_panel.new_score
+                with open('save.json', 'w') as file:
+                    json.dump(score_panel.record, file)
                 time.sleep(2)
                 sys.exit()
 
         '''БОЧКА'''
         if pygame.sprite.spritecollideany(can, bullets):
-            broke = True
-            can.broke = True
-            img = choice([1, 2])
-            if img == 1:
-                can.broke_heart = False
-                can.broke_rocket = True
-            #    can.image = pygame.image.load("imgs/heart.svg")
-            if img == 2:
-                can.broke_rocket = False
-                can.broke_heart = True
+            if not broke:
+                broke = True
+                can.broke = True
+                img = choice([1, 2])
+                if img == 1:
+                    can.broke_heart = False
+                    can.broke_rocket = True
+                #    can.image = pygame.image.load("imgs/heart.svg")
+                if img == 2:
+                    can.broke_rocket = False
+                    can.broke_heart = True
 
              #   can.image = pygame.image.load('imgs/rocket.svg')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
@@ -150,8 +161,6 @@ def run():
                 if img == 1:
                     player_ship.have_rocket = True
                     can.death()
-                    score_panel.update()
-                    score_panel.update()
                     can.broke = False
                     can.broke_rocket = False
                    # can.image = imge_for_can
@@ -191,8 +200,16 @@ def run():
                 hit = True
                 player_ship.speed = 0.5
             else:
+                if score_panel.new_score > score_panel.record:
+                    score_panel.record = score_panel.new_score
+                with open('save.json', 'w') as file:
+                    json.dump(score_panel.record, file)
                 time.sleep(2)
                 sys.exit()
+        if pygame.Rect.colliderect(enemy.hitbox, island.hitbox):
+            enemy.death()
+        if pygame.Rect.colliderect(submarine.hitbox, island.hitbox):
+            submarine.death()
 
 
 run()
