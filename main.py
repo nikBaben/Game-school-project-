@@ -22,8 +22,6 @@ from score_panel import Score_panel
 # from score_counter import draw_text
 from styles import anim_can
 
-# from dead_enemy import Dead_Enemy
-
 inim = []
 
 
@@ -33,7 +31,7 @@ def run():
     pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
     # bg_color = back_ground
     game_over = False
-    color = (95,205,228)
+    color = (95, 205, 228)
     enemy = Enemy(screen)
     inim.append(enemy)
     try:
@@ -46,14 +44,13 @@ def run():
     submarine = Submarine(screen)
     enemy_gun = Enemy_gun(screen, enemy)
     sub_gun = Sub_gun(screen, submarine)
-    # dead_enemy = Dead_enemy(screen, enemy)
     can = Can(screen)
     island = Island(screen)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
     bullets = Group()
     back = Back(screen)
-   # imge_for_can  = anim_can[0].convert_alpha()
+    # imge_for_can  = anim_can[0].convert_alpha()
 
     blow = Blow(screen)
 
@@ -73,8 +70,7 @@ def run():
         player_ship.move()
         score_panel.draw_score()
         keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel)
-        # dead.output()
-        keys.update_screen(color,back,screen, bullets, island,player_ship, can, enemy, enemy_gun, submarine, sub_gun,
+        keys.update_screen(color, back, screen, bullets, island, player_ship, can, enemy, enemy_gun, submarine, sub_gun,
                            blow, score_panel)
 
         '''КОРАБЛЬ ВРАГ'''
@@ -156,7 +152,7 @@ def run():
                     can.broke_rocket = False
                     can.broke_heart = True
 
-             #   can.image = pygame.image.load('imgs/rocket.svg')
+            #   can.image = pygame.image.load('imgs/rocket.svg')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
             if broke:
                 if img == 1:
@@ -164,7 +160,7 @@ def run():
                     can.death()
                     can.broke = False
                     can.broke_rocket = False
-                   # can.image = imge_for_can
+                # can.image = imge_for_can
                 else:
                     if hit:
                         hit = False
@@ -173,8 +169,8 @@ def run():
                         can.broke_heart = False
                     can.change = False
                     can.death()
-                        
-                  #  can.image = imge_for_can
+
+                #  can.image = imge_for_can
             else:
                 if not hit:
                     hit = True
@@ -182,15 +178,19 @@ def run():
                     can.change = False
                     can.death()
                 else:
+                    if score_panel.new_score > score_panel.record:
+                        score_panel.record = score_panel.new_score
+                    with open('save.json', 'w') as file:
+                        json.dump(score_panel.record, file)
                     time.sleep(2)
                     sys.exit()
-              #  can.image =imge_for_can
+            #  can.image =imge_for_can
             broke = False
             can.broke = False
             can.broke_heart = False
             can.broke_rocket = False
         if can.rect.y >= 1100:
-            #can.image = imge_for_can
+            # can.image = imge_for_can
             broke = False
             can.broke = False
             can.broke_heart = False
