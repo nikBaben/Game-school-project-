@@ -29,8 +29,6 @@ def run():
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
     pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
-    # bg_color = back_ground
-    game_over = False
     color = (95, 205, 228)
     enemy = Enemy(screen)
     inim.append(enemy)
@@ -56,6 +54,7 @@ def run():
 
     hit = False
     broke = False
+    speedup = False
     while True:
         back.scroling()
         update_bullet(bullets)
@@ -73,6 +72,17 @@ def run():
         keys.update_screen(color, back, screen, bullets, island, player_ship, can, enemy, enemy_gun, submarine, sub_gun,
                            blow, score_panel)
 
+        if (score_panel.new_score > 0) and (score_panel.new_score % 50) == 0:
+            if not speedup:
+                enemy.speed += 0.3
+                submarine.speed += 0.3
+                can.speed += 0.3
+                island.speed += 0.3
+                sub_gun.speed += 0.3
+                enemy_gun.speed += 0.3
+                speedup = True
+        if (score_panel.new_score > 0) and (score_panel.new_score % 50) != 0:
+            speedup = False
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
             enemy.death()
@@ -213,6 +223,8 @@ def run():
             enemy.death()
         if pygame.Rect.colliderect(submarine.hitbox, island.hitbox):
             submarine.death()
+        if pygame.Rect.colliderect(island.hitbox, can.hitbox):
+            can.death()
 
 
 run()

@@ -39,7 +39,7 @@ class Can():
         self.y += self.speed
         self.rect.y = self.y
 
-        if self.y == 1100:
+        if self.y >= 1100:
             self.image = (anim_can[0]).convert_alpha()
            # self.image = pygame.image.load('work_images/can.png')
             self.y = -50

@@ -34,7 +34,7 @@ class Island():
         self.y += self.speed
         self.rect.y = self.y
 
-        if self.y == 1150:
+        if self.y >= 1150:
             self.y = -200
             cords[sp] = True
             cords[sp1] = True
