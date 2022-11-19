@@ -21,8 +21,17 @@ from random import choice
 from score_panel import Score_panel
 # from score_counter import draw_text
 from styles import anim_can
+from menu import Menu, MenuItem
 
 inim = []
+
+
+def start_game():
+    print('Начать игру')
+
+
+def end_game():
+    exit()
 
 
 def run():
@@ -48,6 +57,11 @@ def run():
     gun = Gun(screen, player_ship)
     bullets = Group()
     back = Back(screen)
+
+    start_menu = Menu(screen)
+    start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
+
     # imge_for_can  = anim_can[0].convert_alpha()
 
     blow = Blow(screen)
@@ -68,9 +82,9 @@ def run():
         bullets.update()
         player_ship.move()
         score_panel.draw_score()
-        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel)
+        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu)
         keys.update_screen(color, back, screen, bullets, island, player_ship, can, enemy, enemy_gun, submarine, sub_gun,
-                           blow, score_panel)
+                           blow, score_panel, start_menu)
 
         if (score_panel.new_score > 0) and (score_panel.new_score % 50) == 0:
             if not speedup:
