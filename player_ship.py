@@ -7,6 +7,7 @@ from styles import anim_shipplayer_moveup
 from enemy_ship import Enemy
 from submarine import Submarine
 from styles import ainm_player_stand
+from styles import player_move_up
 
 
 #pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
@@ -76,11 +77,11 @@ class Player_Ship():
 
             if self.moveup:
                 # self.frame +=1
-                if self.frame >= len(anim_shipplayer_moveup):
+                if self.frame >= len(player_move_up):
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = (anim_shipplayer_moveup[self.frame]).convert_alpha()
+                    self.image = (player_move_up[self.frame]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -98,7 +99,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = (anim_shipplayer_moveup[1]).convert_alpha()
+                    self.image = (player_move_up[1]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 
@@ -107,7 +108,7 @@ class Player_Ship():
                     self.frame = 0
                 else:
                     center = self.rect.center
-                    self.image = (anim_shipplayer_moveup[1]).convert_alpha()
+                    self.image = (player_move_up[1]).convert_alpha()
                     self.rect = self.image.get_rect()
                     self.rect.center = center
 

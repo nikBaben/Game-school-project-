@@ -51,14 +51,16 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
             start_menu.check_click(event.pos)
 
 
-def update_screen(color,back,screen, bullets,  island, player_ship,can, enemy, enemy_gun, submarine, sub_gun, blow, score_panel, start_menu):
+def update_screen(color,back,screen,score_panel ,bullets,  island, player_ship,can, enemy, enemy_gun, submarine, sub_gun, blow, start_menu):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
+    
     screen.fill(color)
     back.output_back()
+    score_panel.draw_score()
     island.output()
     enemy_gun.output_enemy_bullet()
     enemy.output()
@@ -67,7 +69,7 @@ def update_screen(color,back,screen, bullets,  island, player_ship,can, enemy, e
     submarine.output()
     sub_gun.output_enemy_bullet()
     #player_ship.output()
-    score_panel.draw_score()
+    
     start_menu.draw()
     if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox) or pygame.sprite.spritecollideany(enemy, bullets):
         blow.rect.x = enemy.rect.x

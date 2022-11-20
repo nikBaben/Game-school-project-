@@ -24,7 +24,7 @@ from styles import anim_can
 from menu import Menu, MenuItem
 
 inim = []
-
+#print(pygame.font.get_fonts())
 
 def start_game():
     print('Начать игру')
@@ -67,7 +67,7 @@ def run():
     blow = Blow(screen)
 
     hit = False
-    broke = False
+    broke = False                         
     speedup = False
     while True:
         back.scroling()
@@ -81,10 +81,11 @@ def run():
         gun.output_bullet()
         bullets.update()
         player_ship.move()
+        blow.draw("nothing")
         score_panel.draw_score()
         keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu)
-        keys.update_screen(color, back, screen, bullets, island, player_ship, can, enemy, enemy_gun, submarine, sub_gun,
-                           blow, score_panel, start_menu)
+        keys.update_screen(color, back, screen,  score_panel, bullets, island, player_ship, can, enemy, enemy_gun, submarine, sub_gun,
+                           blow,  start_menu)
 
         if (score_panel.new_score > 0) and (score_panel.new_score % 50) == 0:
             if not speedup:
@@ -131,8 +132,18 @@ def run():
 
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
-            submarine.death()
-            score_panel.update()
+        
+            #blow.draw("sub")
+           # submarine.dead = False
+            submarine.blow = True
+
+        if submarine.hit == True:
+            if submarine.dead == True: 
+                submarine.death()
+                score_panel.update()
+           # else: 
+             #   pass
+            #submarine.blow = False
         if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
             score_panel.update()
@@ -167,14 +178,17 @@ def run():
                 can.change = True
                 broke = True
                 can.broke = True
+                can.blow = True
                 img = choice([1, 2])
                 if img == 1:
                     can.broke_heart = False
                     can.broke_rocket = True
+                   # can.blow = False
                 #    can.image = pygame.image.load("imgs/heart.svg")
                 if img == 2:
                     can.broke_rocket = False
                     can.broke_heart = True
+                   # can.blow = False
 
             #   can.image = pygame.image.load('imgs/rocket.svg')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):
