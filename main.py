@@ -27,7 +27,7 @@ inim = []
 #print(pygame.font.get_fonts())
 
 def start_game():
-    print('Начать игру')
+    print('начать игру')
 
 
 def end_game():
