@@ -60,7 +60,6 @@ def update_screen(color,back,screen,score_panel ,bullets,  island, player_ship,c
     
     screen.fill(color)
     back.output_back()
-    score_panel.draw_score()
     island.output()
     enemy_gun.output_enemy_bullet()
     enemy.output()
@@ -68,6 +67,7 @@ def update_screen(color,back,screen,score_panel ,bullets,  island, player_ship,c
     player_ship.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
+    score_panel.draw_score()
     #player_ship.output()
     
     start_menu.draw()

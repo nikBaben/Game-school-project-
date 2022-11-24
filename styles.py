@@ -19,11 +19,7 @@ player_move_up = []
 blow_ship_anim = []
 blow_sub_anim = []
 back = pygame.image.load("imgs/lll.png")
-
 """"""
-
-
-#can = pygame.image.load("imgs/island1.png")
 
 
 """Анимация острова"""
@@ -33,27 +29,37 @@ for island in range(1,17):
     anim_island.append(img)
 """"""
 
+
+"""Анимация подлодки"""
 for submarine in range(1,18):
     sub_file = "imgs/submarine/submarine{}.svg".format(submarine)
     sub = pygame.image.load(sub_file)
     anim_submarine.append(sub)
+""""""
 
 
+"""Анимация взрыва бочки"""
 for blow_can in range(1,6):
     blow_can_file = "imgs/blow_can{}.svg".format(blow_can)
     blow_can = pygame.image.load(blow_can_file)
     blow_can_anim.append(blow_can)
+""""""
 
-for blow_ship in range(1,10):
-    blow_ship_file = "imgs/blow_can{}.svg".format(blow_ship)
+
+"""Анимация взрыва Вражеского корабля"""
+for blow_ship in range(1,5):
+    blow_ship_file = "imgs/blow_enemy{}.svg".format(blow_ship)
     blow_ship = pygame.image.load(blow_ship_file)
     blow_ship_anim.append(blow_ship)
+""""""
 
-for blow_sub in range(1,10):
-    blow_sub_file = "imgs/blow_can{}.svg".format(blow_sub)
+
+"""Анимация взрыва подлодки"""
+for blow_sub in range(1,6):
+    blow_sub_file = "imgs/blow_sub{}.svg".format(blow_sub)
     blow_sub = pygame.image.load(blow_sub_file)
     blow_sub_anim.append(blow_sub)
-
+""""""
 
 
 """Анимация вражеского корабля"""
@@ -93,9 +99,4 @@ for moveup in range(1,17):
     player_moveup_file = "imgs/player/player_move_up{}.svg".format(moveup)
     player_moveup =pygame.image.load(player_moveup_file)
     player_move_up.append(player_moveup)
-
-#for moveup in range(1,33): 
-    #filename_up= "imgs/player_ship_moveup{}.svg".format(moveup)
-    #img_moveup = pygame.image.load(filename_up)
-    #anim_shipplayer_moveup.append(img_moveup)
 """"""

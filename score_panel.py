@@ -4,18 +4,18 @@ import pygame
 class Score_panel():
     def __init__(self, screen, score):
         self.screen = screen
-        self.font = pygame.font.Font("imgs/supermario286rusbylyajka.otf", 100)
-        self.font1 = pygame.font.Font("imgs/supermario286rusbylyajka.otf", 30)
+        self.font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 100)
+        self.font1 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 30)
         self.record = score
         self.img = pygame.image.load("imgs/score.svg").convert_alpha()
         self.image = pygame.transform.scale(self.img, (50, 50))
         self.new_score = 0
-        self.record_img = self.font1.render(f'{str(self.record)}', True, (81, 179, 199))
-        self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (81, 179, 199))
+        self.record_img = self.font1.render(f'{str(self.record)}', True, (255, 255, 255))
+        self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
 
     def update(self):
         self.new_score += 1
-        self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (81, 179, 199))
+        self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
 
     def draw_score(self):
         self.screen.blit(self.record_img, (self.screen.get_rect().width - self.record_img.get_rect().width - 10, 10))

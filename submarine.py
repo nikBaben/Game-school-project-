@@ -3,7 +3,7 @@ from styles import anim_ship, anim_enemy
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
 from styles import anim_submarine
-from styles import blow_can_anim
+from styles import blow_sub_anim
 class Submarine():
     def __init__(self, screen):
         global sp
@@ -82,7 +82,7 @@ class Submarine():
                 if now1 - self.last_update1 > self.frame_rate1:
                     self.last_update1 = now1
                     self.frame_blow += 1
-                    if self.frame_blow >= len(blow_can_anim):
+                    if self.frame_blow >= len(blow_sub_anim):
                         self.frame_blow = 0
                         self.blow  = False
                         self.dead = True
@@ -93,7 +93,7 @@ class Submarine():
                    
                     else:
                         center = self.rect.center
-                        self.image = (blow_can_anim[self.frame_blow]).convert_alpha()
+                        self.image = (blow_sub_anim[self.frame_blow]).convert_alpha()
                         self.rect = self.image.get_rect()
                         self.rect.center = center
                         self.y_True = False

@@ -24,7 +24,7 @@ from styles import anim_can
 from menu import Menu, MenuItem
 
 inim = []
-#print(pygame.font.get_fonts())
+
 
 def start_game():
     print('начать игру')
@@ -62,7 +62,7 @@ def run():
     start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
 
-    # imge_for_can  = anim_can[0].convert_alpha()
+ 
 
     blow = Blow(screen)
 
@@ -100,8 +100,15 @@ def run():
             speedup = False
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
-            enemy.death()
-            score_panel.update()
+
+            enemy.blow = True
+
+        if enemy.hit == True:
+            if enemy.dead == True: 
+                enemy.death()
+                score_panel.update()
+           # enemy.death()
+           # score_panel.update()
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
             score_panel.update()
