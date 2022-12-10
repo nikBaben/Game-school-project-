@@ -56,8 +56,7 @@ def run():
     '''КНОПКИ'''
 
     def start_game():
-        Game(screen, color, enemy, score_panel, submarine, enemy_gun, sub_gun, can, island, player_ship, gun, bullets,
-             back, blow, start_menu)
+        print(1)
 
     def end_game():
         if score_panel.new_score > score_panel.record:
