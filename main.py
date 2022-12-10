@@ -29,7 +29,6 @@ inim = []
 # print(pygame.font.get_fonts())
 
 
-
 def run():
     pygame.init()
     screen = pygame.display.set_mode((960, 1050))
@@ -54,10 +53,11 @@ def run():
     bullets = Group()
     back = Back(screen)
 
-
     '''КНОПКИ'''
+
     def start_game():
-        print('начать игру')
+        Game(screen, color, enemy, score_panel, submarine, enemy_gun, sub_gun, can, island, player_ship, gun, bullets,
+             back, blow, start_menu)
 
     def end_game():
         if score_panel.new_score > score_panel.record:
@@ -77,10 +77,6 @@ def run():
     start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
     '''КНОПКИ'''
-
-
-    # imge_for_can  = anim_can[0].convert_alpha()
-
     blow = Blow(screen)
 
     hit = False
