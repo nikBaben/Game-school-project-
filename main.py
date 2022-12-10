@@ -26,12 +26,8 @@ from menu import Menu, MenuItem
 inim = []
 
 
-def start_game():
-    print('начать игру')
+# print(pygame.font.get_fonts())
 
-
-def end_game():
-    exit()
 
 
 def run():
@@ -58,16 +54,37 @@ def run():
     bullets = Group()
     back = Back(screen)
 
+
+    '''КНОПКИ'''
+    def start_game():
+        print('начать игру')
+
+    def end_game():
+        if score_panel.new_score > score_panel.record:
+            score_panel.record = score_panel.new_score
+        with open('save.json', 'w') as file:
+            json.dump(score_panel.record, file)
+        sys.exit()
+
+    def score_del():
+        if Score_panel:
+            with open('save.json', 'w') as file:
+                json.dump(0, file)
+            score_panel.zeroing()
+
     start_menu = Menu(screen)
     start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
+    '''КНОПКИ'''
 
- 
+
+    # imge_for_can  = anim_can[0].convert_alpha()
 
     blow = Blow(screen)
 
     hit = False
-    broke = False                         
+    broke = False
     speedup = False
     while True:
         back.scroling()
@@ -84,8 +101,9 @@ def run():
         blow.draw("nothing")
         score_panel.draw_score()
         keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu)
-        keys.update_screen(color, back, screen,  score_panel, bullets, island, player_ship, can, enemy, enemy_gun, submarine, sub_gun,
-                           blow,  start_menu)
+        keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
+                           submarine, sub_gun,
+                           blow, start_menu)
 
         if (score_panel.new_score > 0) and (score_panel.new_score % 50) == 0:
             if not speedup:
@@ -100,15 +118,8 @@ def run():
             speedup = False
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
-
-            enemy.blow = True
-
-        if enemy.hit == True:
-            if enemy.dead == True: 
-                enemy.death()
-                score_panel.update()
-           # enemy.death()
-           # score_panel.update()
+            enemy.death()
+            score_panel.update()
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
             score_panel.update()
@@ -139,18 +150,17 @@ def run():
 
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
-        
-            #blow.draw("sub")
-           # submarine.dead = False
+            # blow.draw("sub")
+            # submarine.dead = False
             submarine.blow = True
 
         if submarine.hit == True:
-            if submarine.dead == True: 
+            if submarine.dead == True:
                 submarine.death()
                 score_panel.update()
-           # else: 
-             #   pass
-            #submarine.blow = False
+        # else:
+        #   pass
+        # submarine.blow = False
         if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
             score_panel.update()
@@ -190,12 +200,12 @@ def run():
                 if img == 1:
                     can.broke_heart = False
                     can.broke_rocket = True
-                   # can.blow = False
+                # can.blow = False
                 #    can.image = pygame.image.load("imgs/heart.svg")
                 if img == 2:
                     can.broke_rocket = False
                     can.broke_heart = True
-                   # can.blow = False
+                # can.blow = False
 
             #   can.image = pygame.image.load('imgs/rocket.svg')
         if pygame.Rect.colliderect(player_ship.hitbox, can.hitbox):

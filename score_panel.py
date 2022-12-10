@@ -16,6 +16,14 @@ class Score_panel():
     def update(self):
         self.new_score += 1
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
+        if self.new_score > self.record:
+            self.record_img = self.font1.render(f'{str(self.new_score)}', True, (255, 255, 255))
+
+    def zeroing(self):
+        self.record = 0
+        self.new_score = 0
+        self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
+        self.record_img = self.font1.render(f'{str(self.record)}', True, (255, 255, 255))
 
     def draw_score(self):
         self.screen.blit(self.record_img, (self.screen.get_rect().width - self.record_img.get_rect().width - 10, 10))
