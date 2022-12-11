@@ -23,35 +23,81 @@ from score_panel import Score_panel
 from styles import anim_can
 from menu import Menu, MenuItem
 
-inim = []
+
+pygame.init()
+screen = pygame.display.set_mode((960, 1050))
+pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
+color = (95, 205, 228)
 
 
-# print(pygame.font.get_fonts())
+enemy = Enemy(screen)
+submarine = Submarine(screen)
+enemy_gun = Enemy_gun(screen, enemy)
+sub_gun = Sub_gun(screen, submarine)
+can = Can(screen)
+island = Island(screen)
+bullets = Group()
+back = Back(screen)
+
+
+current = None
+
+
+def switch(scene):
+    global current
+    current = scene
+
+
+def menu():
+    runing = True
+    while runing:
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
+                runing = False
+                switch(None)
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_q:
+                switch(run)
+                runing = False
+            elif  e.type == pygame.KEYDOWN and e.key == pygame.K_d:
+                switch(deadi)
+                runing = False
+        font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 50)
+        new_score_img = font.render(f'{str("Press (q) to start")}', True, (255, 255, 255))
+        screen.fill((0,0,0))
+        screen.blit(new_score_img,(100,100)) 
+        pygame.display.flip()
+       
+
+
+def deadi():
+    runing = True
+    while runing:
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
+                runing = False
+                switch(None)
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_g:
+                switch(run)
+                runing = False
+        font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
+        new_score_img = font.render(f'{str("XAXAXAXA  LOSER press (g) to try again")}', True, (255, 255, 255))
+        screen.fill((0,0,0))
+        screen.blit(new_score_img,(230,500))  
+        pygame.display.flip()
+      
 
 
 def run():
-    pygame.init()
-    screen = pygame.display.set_mode((960, 1050))
-    pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
-    color = (95, 205, 228)
-    enemy = Enemy(screen)
-    inim.append(enemy)
     try:
         file = open('save.json')
         score = (json.load(file))
     except:
         score = 0
-
+ 
     score_panel = Score_panel(screen, score)
-    submarine = Submarine(screen)
-    enemy_gun = Enemy_gun(screen, enemy)
-    sub_gun = Sub_gun(screen, submarine)
-    can = Can(screen)
-    island = Island(screen)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
-    bullets = Group()
-    back = Back(screen)
+   
 
     '''КНОПКИ'''
 
@@ -81,7 +127,8 @@ def run():
     hit = False
     broke = False
     speedup = False
-    while True:
+    runing = True
+    while runing:
         back.scroling()
         update_bullet(bullets)
         sub_gun.update(submarine)
@@ -127,8 +174,12 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
-                time.sleep(2)
-                sys.exit()
+                submarine.death()
+                can.death()
+                enemy.death()
+                island.y = -500
+                switch(deadi)
+                runing = False
         if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             enemy_gun.shot(enemy)
@@ -140,8 +191,12 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
-                time.sleep(2)
-                sys.exit()
+                submarine.death()
+                can.death()
+                enemy.death()
+                island.y = -500
+                switch(deadi)
+                runing = False
 
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
@@ -168,8 +223,12 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
-                time.sleep(2)
-                sys.exit()
+                submarine.death()
+                can.death()
+                enemy.death()
+                island.y = -500
+                switch(deadi)
+                runing = False
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             sub_gun.shot(submarine)
@@ -181,8 +240,12 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
-                time.sleep(2)
-                sys.exit()
+                submarine.death()
+                can.death()
+                enemy.death()
+                island.y = -500
+                switch(deadi)
+                runing = False
 
         '''БОЧКА'''
         if pygame.sprite.spritecollideany(can, bullets):
@@ -232,8 +295,12 @@ def run():
                         score_panel.record = score_panel.new_score
                     with open('save.json', 'w') as file:
                         json.dump(score_panel.record, file)
-                    time.sleep(2)
-                    sys.exit()
+                    submarine.death()
+                    can.death()
+                    enemy.death()
+                    island.y = -500
+                    switch(deadi)
+                    runing = False
             #  can.image =imge_for_can
             broke = False
             can.broke = False
@@ -257,8 +324,12 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
-                time.sleep(2)
-                sys.exit()
+                submarine.death()
+                can.death()
+                enemy.death()
+                island.y = -500
+                switch(deadi)
+                runing = False
         if pygame.Rect.colliderect(enemy.hitbox, island.hitbox):
             enemy.death()
         if pygame.Rect.colliderect(submarine.hitbox, island.hitbox):
@@ -267,4 +338,9 @@ def run():
             can.death()
 
 
-run()
+switch(menu)
+while  current is not None: 
+    current()
+  
+
+pygame.quit()
