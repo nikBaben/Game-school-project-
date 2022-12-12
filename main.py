@@ -23,12 +23,10 @@ from score_panel import Score_panel
 from styles import anim_can
 from menu import Menu, MenuItem
 
-
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
 pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
 color = (95, 205, 228)
-
 
 enemy = Enemy(screen)
 submarine = Submarine(screen)
@@ -39,7 +37,6 @@ island = Island(screen)
 bullets = Group()
 back = Back(screen)
 
-
 current = None
 
 
@@ -49,24 +46,55 @@ def switch(scene):
 
 
 def menu():
+    # try:
+    #     file = open('save.json')
+    #     score = (json.load(file))
+    # except:
+    #     score = 0
     runing = True
+    # score_panel = Score_panel(screen, score)
+    #
+    # def start_game():
+    #     print(1)
+    #
+    # def end_game():
+    #     if score_panel.new_score > score_panel.record:
+    #         score_panel.record = score_panel.new_score
+    #     with open('save.json', 'w') as file:
+    #         json.dump(score_panel.record, file)
+    #     sys.exit()
+    #
+    # def score_del():
+    #     if Score_panel:
+    #         with open('save.json', 'w') as file:
+    #             json.dump(0, file)
+    #         score_panel.zeroing()
+    #
+    # start_menu = Menu(screen)
+    # start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
+    # start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
+    # start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
     while runing:
-        for e in pygame.event.get():
-            if e.type == pygame.QUIT:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 runing = False
                 switch(None)
-            elif e.type == pygame.KEYDOWN and e.key == pygame.K_q:
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_q:
                 switch(run)
                 runing = False
-            elif  e.type == pygame.KEYDOWN and e.key == pygame.K_d:
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_d:
                 switch(deadi)
                 runing = False
+    #         elif event.type == pygame.MOUSEMOTION:
+    #             start_menu.update(event.pos)
+    #         elif event.type == pygame.MOUSEBUTTONDOWN:
+    #             start_menu.check_click(event.pos)
         font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 50)
         new_score_img = font.render(f'{str("Press (q) to start")}', True, (255, 255, 255))
-        screen.fill((0,0,0))
-        screen.blit(new_score_img,(100,100)) 
+        # start_menu.draw()
+        screen.fill((255, 0, 0))
+        screen.blit(new_score_img, (100, 100))
         pygame.display.flip()
-       
 
 
 def deadi():
@@ -81,10 +109,9 @@ def deadi():
                 runing = False
         font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
         new_score_img = font.render(f'{str("XAXAXAXA  LOSER press (g) to try again")}', True, (255, 255, 255))
-        screen.fill((0,0,0))
-        screen.blit(new_score_img,(230,500))  
+        screen.fill((0, 0, 0))
+        screen.blit(new_score_img, (230, 500))
         pygame.display.flip()
-      
 
 
 def run():
@@ -93,17 +120,12 @@ def run():
         score = (json.load(file))
     except:
         score = 0
- 
+
     score_panel = Score_panel(screen, score)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
-   
 
     '''КНОПКИ'''
-
-    def start_game():
-        print(1)
-
     def end_game():
         if score_panel.new_score > score_panel.record:
             score_panel.record = score_panel.new_score
@@ -118,7 +140,6 @@ def run():
             score_panel.zeroing()
 
     start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
     '''КНОПКИ'''
@@ -339,8 +360,7 @@ def run():
 
 
 switch(menu)
-while  current is not None: 
+while current is not None:
     current()
-  
 
 pygame.quit()

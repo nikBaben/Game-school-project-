@@ -32,6 +32,10 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
                 new_bullet = Gun(screen, player_ship)
                 bullets.add(new_bullet)
+            # '''меню'''
+            # if event.key == pygame.K_m:
+            #     start_menu.draw()
+            #     print(1)
 
         elif event.type == pygame.KEYUP:
             '''движение'''
@@ -51,13 +55,14 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
             start_menu.check_click(event.pos)
 
 
-def update_screen(color,back,screen,score_panel ,bullets,  island, player_ship,can, enemy, enemy_gun, submarine, sub_gun, blow, start_menu):
+def update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun, submarine,
+                  sub_gun, blow, start_menu):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
-    
+
     screen.fill(color)
     back.output_back()
     island.output()
@@ -68,8 +73,8 @@ def update_screen(color,back,screen,score_panel ,bullets,  island, player_ship,c
     submarine.output()
     sub_gun.output_enemy_bullet()
     score_panel.draw_score()
-    #player_ship.output()
-    
+    # player_ship.output()
+
     start_menu.draw()
     if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox) or pygame.sprite.spritecollideany(enemy, bullets):
         blow.rect.x = enemy.rect.x
@@ -91,7 +96,6 @@ def update_screen(color,back,screen,score_panel ,bullets,  island, player_ship,c
     for bullet in bullets.sprites():
         bullet.output_bullet()
     pygame.display.flip()
-
 
 
 def update_bullet(bullets):

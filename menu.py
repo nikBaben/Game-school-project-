@@ -1,6 +1,6 @@
 import pygame
 
-NON_ACTIVE = (100, 100, 100)
+NON_ACTIVE = (0, 0, 0)
 ACTIVE = (255, 255, 255)
 class MenuItem():
     def __init__(self, text, func, item_pos):
