@@ -46,54 +46,53 @@ def switch(scene):
 
 
 def menu():
-    # try:
-    #     file = open('save.json')
-    #     score = (json.load(file))
-    # except:
-    #     score = 0
+    try:
+        file = open('save.json')
+        score = (json.load(file))
+    except:
+        score = 0
     runing = True
-    # score_panel = Score_panel(screen, score)
-    #
-    # def start_game():
-    #     print(1)
-    #
-    # def end_game():
-    #     if score_panel.new_score > score_panel.record:
-    #         score_panel.record = score_panel.new_score
-    #     with open('save.json', 'w') as file:
-    #         json.dump(score_panel.record, file)
-    #     sys.exit()
-    #
-    # def score_del():
-    #     if Score_panel:
-    #         with open('save.json', 'w') as file:
-    #             json.dump(0, file)
-    #         score_panel.zeroing()
-    #
-    # start_menu = Menu(screen)
-    # start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
-    # start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
-    # start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
+    score_panel = Score_panel(screen, score)
+
+    def start_game():
+        switch(run)
+        run()
+
+    def end_game():
+        if score_panel.new_score > score_panel.record:
+            score_panel.record = score_panel.new_score
+        with open('save.json', 'w') as file:
+            json.dump(score_panel.record, file)
+        sys.exit()
+
+    def score_del():
+        if Score_panel:
+            with open('save.json', 'w') as file:
+                json.dump(0, file)
+            score_panel.zeroing()
+
+    start_menu = Menu(screen)
+    start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
     while runing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 runing = False
                 switch(None)
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_q:
-                switch(run)
-                runing = False
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_d:
                 switch(deadi)
                 runing = False
-    #         elif event.type == pygame.MOUSEMOTION:
-    #             start_menu.update(event.pos)
-    #         elif event.type == pygame.MOUSEBUTTONDOWN:
-    #             start_menu.check_click(event.pos)
-        font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 50)
-        new_score_img = font.render(f'{str("Press (q) to start")}', True, (255, 255, 255))
-        # start_menu.draw()
+            elif event.type == pygame.MOUSEMOTION:
+                start_menu.update(event.pos)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                start_menu.check_click(event.pos)
+        # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 50)
+        # new_score_img = font.render(f'{str("Press (q) to start")}', True, (255, 255, 255))
         screen.fill((255, 0, 0))
-        screen.blit(new_score_img, (100, 100))
+        # screen.blit(new_score_img, (100, 100))
+        start_menu.draw()
+        score_panel.draw_score()
         pygame.display.flip()
 
 
@@ -126,12 +125,13 @@ def run():
     gun = Gun(screen, player_ship)
 
     '''КНОПКИ'''
-    def end_game():
+    def go_to_menu():
         if score_panel.new_score > score_panel.record:
             score_panel.record = score_panel.new_score
         with open('save.json', 'w') as file:
             json.dump(score_panel.record, file)
-        sys.exit()
+        switch(menu)
+        menu()
 
     def score_del():
         if Score_panel:
@@ -140,7 +140,7 @@ def run():
             score_panel.zeroing()
 
     start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Выход в меню', go_to_menu, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
     '''КНОПКИ'''
     blow = Blow(screen)
