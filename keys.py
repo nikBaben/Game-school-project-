@@ -32,10 +32,6 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
                 new_bullet = Gun(screen, player_ship)
                 bullets.add(new_bullet)
-            # '''меню'''
-            # if event.key == pygame.K_m:
-            #     start_menu.draw()
-            #     print(1)
 
         elif event.type == pygame.KEYUP:
             '''движение'''

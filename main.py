@@ -56,7 +56,6 @@ def menu():
 
     def start_game():
         switch(run)
-        run()
 
     def end_game():
         if score_panel.new_score > score_panel.record:
@@ -78,8 +77,8 @@ def menu():
     while runing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                runing = False
                 switch(None)
+                sys.exit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_d:
                 switch(deadi)
                 runing = False
@@ -87,12 +86,18 @@ def menu():
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
+                x, y = event.pos
+                if (480 < x < 663) and (380 < y < 430):
+                    runing = False
+        # if not stop:
+        #     runing = False
+        #     switch(run)
         # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 50)
         # new_score_img = font.render(f'{str("Press (q) to start")}', True, (255, 255, 255))
         screen.fill((255, 0, 0))
         # screen.blit(new_score_img, (100, 100))
         start_menu.draw()
-        score_panel.draw_score()
+        score_panel.draw_record()
         pygame.display.flip()
 
 
@@ -125,6 +130,7 @@ def run():
     gun = Gun(screen, player_ship)
 
     '''КНОПКИ'''
+
     def go_to_menu():
         if score_panel.new_score > score_panel.record:
             score_panel.record = score_panel.new_score
