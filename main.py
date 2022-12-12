@@ -22,6 +22,7 @@ from score_panel import Score_panel
 # from score_counter import draw_text
 from styles import anim_can
 from menu import Menu, MenuItem
+import random
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -38,6 +39,22 @@ bullets = Group()
 back = Back(screen)
 
 current = None
+particles = []
+def emit_particle(x,y,x_vel,y_vel,radius):
+    particles.append([[x,y],[x_vel,y_vel],radius])
+
+
+def update_particle():
+    for i, particle in reversed(list(enumerate(particles))):
+        particle[1][1] += particle[1][0]
+        particle[1][1] += particle[1][0]
+  
+        particle[2] -=0.1
+        
+        reversed_particle = particles[len(particles)-i-1]
+        pygame.draw.circle(screen,(255,255,255), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),reversed_particle[2])
+        if particle[2]<= 0: 
+            particles.pop(i)
 
 
 def switch(scene):
@@ -98,6 +115,9 @@ def menu():
         # screen.blit(new_score_img, (100, 100))
         start_menu.draw()
         score_panel.draw_record()
+        mx,my = pygame.mouse.get_pos()
+        emit_particle(mx,my,15,random.uniform(-10,10),random.uniform(-20,20))
+        update_particle()
         pygame.display.flip()
 
 
