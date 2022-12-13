@@ -40,20 +40,23 @@ back = Back(screen)
 
 current = None
 particles = []
-def emit_particle(x,y,x_vel,y_vel,radius):
-    particles.append([[x,y],[x_vel,y_vel],radius])
+
+
+def emit_particle(x, y, x_vel, y_vel, radius):
+    particles.append([[x, y], [x_vel, y_vel], radius])
 
 
 def update_particle():
     for i, particle in reversed(list(enumerate(particles))):
         particle[1][1] += particle[1][0]
         particle[1][1] += particle[1][0]
-  
-        particle[2] -=0.05
-        
-        reversed_particle = particles[len(particles)-i-1]
-        pygame.draw.circle(screen,(255,255,255), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),reversed_particle[2])
-        if particle[2]<= 0: 
+
+        particle[2] -= 0.05
+
+        reversed_particle = particles[len(particles) - i - 1]
+        pygame.draw.circle(screen, (255, 255, 255), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
+                           reversed_particle[2])
+        if particle[2] <= 0:
             particles.pop(i)
 
 
@@ -115,8 +118,8 @@ def menu():
         # screen.blit(new_score_img, (100, 100))
         start_menu.draw()
         score_panel.draw_record()
-        mx,my = pygame.mouse.get_pos()
-        emit_particle(mx,my,12,random.uniform(-12,12),random.uniform(-12,12))
+        mx, my = pygame.mouse.get_pos()
+        emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
         update_particle()
         pygame.display.flip()
 
@@ -148,28 +151,21 @@ def run():
     score_panel = Score_panel(screen, score)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
+    start_menu = Menu(screen)
 
-    '''КНОПКИ'''
+    blow = Blow(screen)
 
     def go_to_menu():
+        print(1111111111111111111111111111111111)
         if score_panel.new_score > score_panel.record:
             score_panel.record = score_panel.new_score
         with open('save.json', 'w') as file:
             json.dump(score_panel.record, file)
         switch(menu)
-        menu()
 
-    def score_del():
-        if Score_panel:
-            with open('save.json', 'w') as file:
-                json.dump(0, file)
-            score_panel.zeroing()
-
-    start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('Выход в меню', go_to_menu, (start_menu.cur_x, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
     '''КНОПКИ'''
-    blow = Blow(screen)
+    start_menu.add_item(MenuItem('Выход в меню', go_to_menu, (0, 0)))
+    '''КНОПКИ'''
 
     hit = False
     broke = False
