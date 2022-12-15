@@ -2,6 +2,8 @@ import pygame
 
 NON_ACTIVE = (0, 0, 0)
 ACTIVE = (255, 255, 255)
+
+
 class MenuItem():
     def __init__(self, text, func, item_pos):
         self.font = pygame.font.SysFont(None, 40, True)
@@ -14,7 +16,8 @@ class MenuItem():
     def check_hover(self, pos):
         x, y = pos
         return (self.x <= x <= self.x + self.text_img.get_width()) and (
-                    self.y <= y <= self.y + self.text_img.get_height())
+                self.y <= y <= self.y + self.text_img.get_height())
+
     def draw_item(self, screen):
         screen.blit(self.text_img, (self.x, self.y))
 
@@ -24,12 +27,11 @@ class Menu():
         self.screen = screen
         self.items = []
         self.cur_x = self.screen.get_width() // 2
-        self.cur_y= 400
+        self.cur_y = 400
 
     def add_item(self, menu_item):
         self.items.append(menu_item)
         self.cur_y += 30
-
 
     def update(self, pos):
         for item in self.items:
@@ -47,4 +49,3 @@ class Menu():
     def draw(self):
         for item in self.items:
             item.draw_item(self.screen)
-

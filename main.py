@@ -22,6 +22,7 @@ from score_panel import Score_panel
 # from score_counter import draw_text
 from styles import anim_can
 from menu import Menu, MenuItem
+from checker import Checker
 import random
 
 pygame.init()
@@ -37,6 +38,7 @@ can = Can(screen)
 island = Island(screen)
 bullets = Group()
 back = Back(screen)
+checker = Checker()
 
 current = None
 particles = []
@@ -71,11 +73,11 @@ def menu():
         score = (json.load(file))
     except:
         score = 0
-    runing = True
     score_panel = Score_panel(screen, score)
 
     def start_game():
         switch(run)
+        checker.menu = False
 
     def end_game():
         if score_panel.new_score > score_panel.record:
@@ -94,28 +96,21 @@ def menu():
     start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
     start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
+    runing = True
     while runing:
+        if not checker.menu:
+            checker.menu = True
+            runing = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 switch(None)
                 sys.exit()
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_d:
-                switch(deadi)
                 runing = False
             elif event.type == pygame.MOUSEMOTION:
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
-                x, y = event.pos
-                if (480 < x < 663) and (380 < y < 430):
-                    runing = False
-        # if not stop:
-        #     runing = False
-        #     switch(run)
-        # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 50)
-        # new_score_img = font.render(f'{str("Press (q) to start")}', True, (255, 255, 255))
         screen.fill((255, 0, 0))
-        # screen.blit(new_score_img, (100, 100))
         start_menu.draw()
         score_panel.draw_record()
         mx, my = pygame.mouse.get_pos()
@@ -125,18 +120,35 @@ def menu():
 
 
 def deadi():
+    def go_menu():
+        switch(menu)
+        checker.deadi = False
+
+    def go_play():
+        switch(run)
+        checker.deadi = False
+
+    start_menu = Menu(screen)
+    start_menu.add_item(MenuItem('Вернуться в меню', go_menu, (400, 400)))
+    start_menu.add_item(MenuItem('Начать заново', go_play, (400, 440)))
+
     runing = True
     while runing:
-        for e in pygame.event.get():
-            if e.type == pygame.QUIT:
+        if not checker.deadi:
+            checker.deadi = True
+            runing = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 runing = False
                 switch(None)
-            elif e.type == pygame.KEYDOWN and e.key == pygame.K_g:
-                switch(run)
-                runing = False
+            elif event.type == pygame.MOUSEMOTION:
+                start_menu.update(event.pos)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                start_menu.check_click(event.pos)
         font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
-        new_score_img = font.render(f'{str("XAXAXAXA  LOSER press (g) to try again")}', True, (255, 255, 255))
-        screen.fill((0, 0, 0))
+        new_score_img = font.render(f'{str("OXXYMIRON TYPE BEAT")}', True, (255, 255, 255))
+        screen.fill((44, 124, 34))
+        start_menu.draw()
         screen.blit(new_score_img, (230, 500))
         pygame.display.flip()
 
@@ -151,18 +163,18 @@ def run():
     score_panel = Score_panel(screen, score)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
-    start_menu = Menu(screen)
 
     blow = Blow(screen)
 
     def go_to_menu():
-        print(1111111111111111111111111111111111)
         if score_panel.new_score > score_panel.record:
             score_panel.record = score_panel.new_score
         with open('save.json', 'w') as file:
             json.dump(score_panel.record, file)
         switch(menu)
+        checker.run = False
 
+    start_menu = Menu(screen)
     '''КНОПКИ'''
     start_menu.add_item(MenuItem('Выход в меню', go_to_menu, (0, 0)))
     '''КНОПКИ'''
@@ -172,6 +184,13 @@ def run():
     speedup = False
     runing = True
     while runing:
+        if not checker.run:
+            submarine.death()
+            can.death()
+            enemy.death()
+            island.y = -500
+            runing = False
+            checker.run = True
         back.scroling()
         update_bullet(bullets)
         sub_gun.update(submarine)
@@ -222,7 +241,11 @@ def run():
                 enemy.death()
                 island.y = -500
                 switch(deadi)
+                enemy_gun.death(enemy)
+                sub_gun.death(submarine)
+                hit = False
                 runing = False
+
         if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             enemy_gun.shot(enemy)
@@ -239,6 +262,9 @@ def run():
                 enemy.death()
                 island.y = -500
                 switch(deadi)
+                enemy_gun.death(enemy)
+                sub_gun.death(submarine)
+                hit = False
                 runing = False
 
         '''ПОДВОДНАЯ ЛОДКА'''
@@ -271,7 +297,11 @@ def run():
                 enemy.death()
                 island.y = -500
                 switch(deadi)
+                enemy_gun.death(enemy)
+                sub_gun.death(submarine)
+                hit = False
                 runing = False
+
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
             player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             sub_gun.shot(submarine)
@@ -288,6 +318,9 @@ def run():
                 enemy.death()
                 island.y = -500
                 switch(deadi)
+                enemy_gun.death(enemy)
+                sub_gun.death(submarine)
+                hit = False
                 runing = False
 
         '''БОЧКА'''
@@ -343,6 +376,9 @@ def run():
                     enemy.death()
                     island.y = -500
                     switch(deadi)
+                    enemy_gun.death(enemy)
+                    sub_gun.death(submarine)
+                    hit = False
                     runing = False
             #  can.image =imge_for_can
             broke = False
@@ -372,6 +408,9 @@ def run():
                 enemy.death()
                 island.y = -500
                 switch(deadi)
+                enemy_gun.death(enemy)
+                sub_gun.death(submarine)
+                hit = False
                 runing = False
         if pygame.Rect.colliderect(enemy.hitbox, island.hitbox):
             enemy.death()

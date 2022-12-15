@@ -17,15 +17,14 @@ class Enemy(Sprite):
         self.speed = 0.3
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-      # Номер кадра в списке anim, изначально равне 0
-        self.last_update1 = pygame.time.get_ticks() # Получаем последний кадр игры
+        # Номер кадра в списке anim, изначально равне 0
+        self.last_update1 = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate1 = 70  # Количесво кадров в игре
         self.dead = False
         self.blow = False
         self.hit = False
-        self.frame_blow = 0 
+        self.frame_blow = 0
         self.y_True = True
-        
 
         sp = spawn_x()
         self.rect.centerx = 60 * sp
@@ -54,7 +53,7 @@ class Enemy(Sprite):
 
     def death(self):
         global sp
-        self.y = -500
+        self.y = -350
         cords[sp] = True
         sp = spawn_x()
         self.rect.centerx = 60 * sp
@@ -64,15 +63,14 @@ class Enemy(Sprite):
 
     def output(self):
         now = pygame.time.get_ticks()
-        now1 =  pygame.time.get_ticks()
+        now1 = pygame.time.get_ticks()
 
-        
         if now - self.last_update > self.frame_rate:
             self.last_update = now
             self.frame += 1
 
             if self.frame >= len(anim_enemy):
-                    self.frame = 0
+                self.frame = 0
 
             else:
                 center = self.rect.center
@@ -80,8 +78,7 @@ class Enemy(Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.center = center
 
-
-            if self.blow == True and self.dead == False: 
+            if self.blow == True and self.dead == False:
 
                 if now1 - self.last_update1 > self.frame_rate1:
                     self.last_update1 = now1
@@ -89,18 +86,17 @@ class Enemy(Sprite):
 
                     if self.frame_blow >= len(blow_ship_anim):
                         self.frame_blow = 0
-                        self.blow  = False
+                        self.blow = False
                         self.dead = True
                         self.hit = True
                         self.y_True = True
-                      
+
                     else:
                         center = self.rect.center
                         self.image = (blow_ship_anim[self.frame_blow]).convert_alpha()
                         self.rect = self.image.get_rect()
                         self.rect.center = center
                         self.y_True = False
-
 
         self.screen.blit(self.image, self.rect)
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60,

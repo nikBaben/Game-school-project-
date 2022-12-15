@@ -13,6 +13,7 @@ class Sub_gun(pygame.sprite.Sprite):
         self.rect.centerx = submarine.rect.centerx
         self.rect.top = submarine.rect.top + 125
         self.y = float(self.rect.y)
+        self.start_pos = False
 
     def update(self, submarine):
         self.y += self.speed
@@ -25,6 +26,10 @@ class Sub_gun(pygame.sprite.Sprite):
     def shot(self, enemy_ship):
         self.y = enemy_ship.rect.bottom
         self.rect.centerx = enemy_ship.rect.centerx
+
+    def death(self, submarine):
+        self.y = submarine.rect.bottom
+        self.rect.centerx = submarine.rect.centerx
 
     def output_enemy_bullet(self):
         self.screen.blit(self.image, self.rect)
