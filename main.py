@@ -117,10 +117,12 @@ def menu():
     while runing:
         if not checker.menu:
             checker.menu = True
+            video.stop()
             runing = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 switch(None)
+                video.stop()
                 sys.exit()
             
                # runing = False
@@ -128,6 +130,7 @@ def menu():
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
+                video.stop()
         video.draw_to(screen, (0, 0))
         #screen.fill((255, 0, 0))
         t = video.current_time.format("%h:%m:%s")
@@ -171,7 +174,8 @@ def deadi():
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
-        font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
+                
+       # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
        # new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
         a = back_for_dye2
         screen.blit(a,(0,0))
