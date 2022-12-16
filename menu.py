@@ -18,7 +18,6 @@ class MenuItem():
         self.text_img1 = self.font1.render(self.text, True, self.color)
      #   self.text_img_logo = self.font_logo.render(self.text, True, self.color)
         self.x, self.y = item_pos
-        print(self.text_img.get_width())
         #self.game = False
 
     def check_hover(self, pos):
