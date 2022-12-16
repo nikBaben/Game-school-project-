@@ -93,9 +93,9 @@ def menu():
             score_panel.zeroing()
 
     start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('Начать игру', start_game, (start_menu.cur_x, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('Выход', end_game, (start_menu.cur_x, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('ИГРАТЬ', start_game, (start_menu.cur_x - 60.5, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('ВЫХОД', end_game, (start_menu.cur_x - 60, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x - 110, start_menu.cur_y)))
     runing = True
     while runing:
         if not checker.menu:
@@ -129,8 +129,8 @@ def deadi():
         checker.deadi = False
 
     start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('Вернуться в меню', go_menu, (400, 400)))
-    start_menu.add_item(MenuItem('Начать заново', go_play, (400, 440)))
+    start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_menu, (start_menu.cur_x - 164, 400)))
+    start_menu.add_item(MenuItem('НАЧАТЬ ЗАНОВО', go_play, (start_menu.cur_x - 133, 440)))
 
     runing = True
     while runing:
@@ -146,7 +146,7 @@ def deadi():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
         font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
-        new_score_img = font.render(f'{str("OXXYMIRON TYPE BEAT")}', True, (255, 255, 255))
+        new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
         screen.fill((44, 124, 34))
         start_menu.draw()
         screen.blit(new_score_img, (230, 500))
