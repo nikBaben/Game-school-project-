@@ -130,7 +130,7 @@ def menu():
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
-                video.stop()
+               
         video.draw_to(screen, (0, 0))
         #screen.fill((255, 0, 0))
         t = video.current_time.format("%h:%m:%s")
@@ -264,7 +264,7 @@ def run():
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
             score_panel.update()
-            player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+           # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
@@ -284,7 +284,7 @@ def run():
                 runing = False
 
         if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
-            player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+           # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             enemy_gun.shot(enemy)
             if not hit:
                 hit = True
@@ -320,7 +320,7 @@ def run():
         if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
             score_panel.update()
-            player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+           # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
@@ -340,7 +340,7 @@ def run():
                 runing = False
 
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
-            player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+          #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             sub_gun.shot(submarine)
             if not hit:
                 hit = True
@@ -431,7 +431,7 @@ def run():
 
         '''ОСТРОВ'''
         if pygame.Rect.colliderect(player_ship.hitbox, island.hitbox):
-            player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+          #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
