@@ -6,13 +6,16 @@ class Score_panel():
         self.screen = screen
         self.font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 100)
         self.font1 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 30)
+        self.font2 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 40)
         self.record = score
         self.img = pygame.image.load("imgs/score.svg").convert_alpha()
+        self.img_menu = pygame.transform.scale(self.img,(65,65))
         self.image = pygame.transform.scale(self.img, (50, 50))
         self.new_score = 0
         self.record_img = self.font1.render(f'{str(self.record)}', True, (255, 255, 255))
+        self.record_img2 = self.font2.render(f'{str(self.record)}', True, (255, 255, 255))
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
-
+        self.menu = False
     def update(self):
         self.new_score += 1
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
@@ -24,7 +27,7 @@ class Score_panel():
         self.new_score = 0
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
         self.record_img = self.font1.render(f'{str(self.record)}', True, (255, 255, 255))
-
+        self.record_img2 = self.font2.render(f'{str(self.record)}', True, (255, 255, 255))
     def draw_score(self):
         self.screen.blit(self.record_img, (self.screen.get_rect().width - self.record_img.get_rect().width - 10, 10))
         self.screen.blit(self.new_score_img, (470,
@@ -32,5 +35,10 @@ class Score_panel():
         self.screen.blit(self.image, (self.screen.get_rect().width - self.image.get_rect().width - 60, 10))
 
     def draw_record(self):
-        self.screen.blit(self.record_img, (self.screen.get_rect().width - self.record_img.get_rect().width - 10, 10))
-        self.screen.blit(self.image, (self.screen.get_rect().width - self.image.get_rect().width - 60, 10))
+        if self.menu: 
+            self.screen.blit(self.record_img2, (440,300))
+            self.screen.blit(self.img_menu, (480,300))
+
+        else: 
+            self.screen.blit(self.record_img, (self.screen.get_rect().width - self.record_img.get_rect().width - 10, 10))
+            self.screen.blit(self.image, (self.screen.get_rect().width - self.image.get_rect().width - 60, 10))

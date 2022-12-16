@@ -24,6 +24,8 @@ from styles import anim_can
 from menu import Menu, MenuItem
 from checker import Checker
 import random
+from vid import Video 
+from styles import vidi,back_for_vidi,back_for_dye
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -39,9 +41,19 @@ island = Island(screen)
 bullets = Group()
 back = Back(screen)
 checker = Checker()
-
+video = Video(vidi)
 current = None
+
 particles = []
+backi = back_for_vidi.convert_alpha()
+back_for_dye2 = back_for_dye.convert_alpha()
+backi.set_alpha(225)
+
+
+font_logo =  pygame.font.Font("imgs/tetx.ttf", 70)
+font_lose =  pygame.font.Font("imgs/tetx.ttf", 40)
+text_logo = font_logo.render('SHIP WARS',False,(0, 255, 255))
+text_lose = font_lose.render('ВЫ ПРОИГРАЛИ!',False,(0, 255, 255))
 
 
 def emit_particle(x, y, x_vel, y_vel, radius):
@@ -56,7 +68,7 @@ def update_particle():
         particle[2] -= 0.05
 
         reversed_particle = particles[len(particles) - i - 1]
-        pygame.draw.circle(screen, (255, 255, 255), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
+        pygame.draw.circle(screen, (0, 255, 255), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
                            reversed_particle[2])
         if particle[2] <= 0:
             particles.pop(i)
@@ -68,16 +80,20 @@ def switch(scene):
 
 
 def menu():
+    video.play()
+
     try:
         file = open('save.json')
         score = (json.load(file))
     except:
         score = 0
     score_panel = Score_panel(screen, score)
+    score_panel.menu = True
 
     def start_game():
         switch(run)
         checker.menu = False
+        score_panel.menu = False
 
     def end_game():
         if score_panel.new_score > score_panel.record:
@@ -93,9 +109,10 @@ def menu():
             score_panel.zeroing()
 
     start_menu = Menu(screen)
+   # start_menu.add_item(MenuItem('SHIP WARS', start_game, (start_menu.cur_x - 60.5, start_menu.logo_y)))
     start_menu.add_item(MenuItem('ИГРАТЬ', start_game, (start_menu.cur_x - 60.5, start_menu.cur_y)))
     start_menu.add_item(MenuItem('ВЫХОД', end_game, (start_menu.cur_x - 60, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x - 110, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x - 160, start_menu.cur_y)))
     runing = True
     while runing:
         if not checker.menu:
@@ -105,12 +122,19 @@ def menu():
             if event.type == pygame.QUIT:
                 switch(None)
                 sys.exit()
-                runing = False
+            
+               # runing = False
             elif event.type == pygame.MOUSEMOTION:
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
-        screen.fill((255, 0, 0))
+        video.draw_to(screen, (0, 0))
+        #screen.fill((255, 0, 0))
+        t = video.current_time.format("%h:%m:%s")
+        if t == "00:02:26":
+            video.restart()
+        screen.blit(backi,(0,0))
+        screen.blit(text_logo, (200,200))
         start_menu.draw()
         score_panel.draw_record()
         mx, my = pygame.mouse.get_pos()
@@ -127,10 +151,12 @@ def deadi():
     def go_play():
         switch(run)
         checker.deadi = False
+   
+    
 
     start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_menu, (start_menu.cur_x - 164, 400)))
-    start_menu.add_item(MenuItem('НАЧАТЬ ЗАНОВО', go_play, (start_menu.cur_x - 133, 440)))
+    start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_menu, (start_menu.cur_x - 250, 400)))
+    start_menu.add_item(MenuItem('НАЧАТЬ ЗАНОВО', go_play, (start_menu.cur_x - 190, 450)))
 
     runing = True
     while runing:
@@ -146,10 +172,16 @@ def deadi():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
         font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
-        new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
-        screen.fill((44, 124, 34))
+       # new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
+        a = back_for_dye2
+        screen.blit(a,(0,0))
+        screen.blit(backi,(0,0))
+        screen.blit(text_lose, (240,200))
         start_menu.draw()
-        screen.blit(new_score_img, (230, 500))
+        mx, my = pygame.mouse.get_pos()
+        emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
+        update_particle()
+       # screen.blit(new_score_img, (230, 500))
         pygame.display.flip()
 
 
@@ -175,6 +207,7 @@ def run():
         checker.run = False
 
     start_menu = Menu(screen)
+    start_menu.game = True
     '''КНОПКИ'''
     start_menu.add_item(MenuItem('Выход в меню', go_to_menu, (0, 0)))
     '''КНОПКИ'''

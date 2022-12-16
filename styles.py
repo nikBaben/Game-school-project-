@@ -19,6 +19,15 @@ player_move_up = []
 blow_ship_anim = []
 blow_sub_anim = []
 back = pygame.image.load("imgs/lll.png")
+vidi = "imgs/video.mp4"
+back_for_vidi = pygame.image.load("imgs/for_vid.png")
+back_for_dy = pygame.image.load("imgs/back_for_dye.png")
+back_for_dye = pygame.transform.scale(back_for_dy, (960, 1050)) 
+
+
+
+
+
 """"""
 
 
