@@ -25,7 +25,7 @@ from menu import Menu, MenuItem
 from checker import Checker
 import random
 from vid import Video
-from styles import vidi, back_for_vidi, back_for_dye
+from styles import vidi, back_for_vidi, back_for_dye,menu1
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -136,12 +136,14 @@ def menu():
         if t == "00:02:26":
             video.restart()
         screen.blit(backi, (0, 0))
-        screen.blit(text_logo, (200, 200))
+        a = menu1.convert_alpha()
+        screen.blit(a,(150,100))
+       # screen.blit(text_logo, (200, 200))
         start_menu.draw()
         score_panel.draw_record()
-        mx, my = pygame.mouse.get_pos()
-        emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
-        update_particle()
+       ## mx, my = pygame.mouse.get_pos()
+       # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
+       # update_particle()
         pygame.display.flip()
 
 
@@ -179,9 +181,9 @@ def deadi():
         screen.blit(backi, (0, 0))
         screen.blit(text_lose, (240, 200))
         start_menu.draw()
-        mx, my = pygame.mouse.get_pos()
-        emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
-        update_particle()
+       # mx, my = pygame.mouse.get_pos()
+       # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
+      #  update_particle()
         # screen.blit(new_score_img, (230, 500))
         pygame.display.flip()
 
