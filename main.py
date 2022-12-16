@@ -24,8 +24,8 @@ from styles import anim_can
 from menu import Menu, MenuItem
 from checker import Checker
 import random
-from vid import Video 
-from styles import vidi,back_for_vidi,back_for_dye
+from vid import Video
+from styles import vidi, back_for_vidi, back_for_dye
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -49,11 +49,10 @@ backi = back_for_vidi.convert_alpha()
 back_for_dye2 = back_for_dye.convert_alpha()
 backi.set_alpha(225)
 
-
-font_logo =  pygame.font.Font("imgs/tetx.ttf", 70)
-font_lose =  pygame.font.Font("imgs/tetx.ttf", 40)
-text_logo = font_logo.render('SHIP WARS',False,(0, 255, 255))
-text_lose = font_lose.render('ВЫ ПРОИГРАЛИ!',False,(0, 255, 255))
+font_logo = pygame.font.Font("imgs/tetx.ttf", 70)
+font_lose = pygame.font.Font("imgs/tetx.ttf", 40)
+text_logo = font_logo.render('SHIP WARS', False, (0, 255, 255))
+text_lose = font_lose.render('ВЫ ПРОИГРАЛИ!', False, (0, 255, 255))
 
 
 def emit_particle(x, y, x_vel, y_vel, radius):
@@ -109,10 +108,10 @@ def menu():
             score_panel.zeroing()
 
     start_menu = Menu(screen)
-   # start_menu.add_item(MenuItem('SHIP WARS', start_game, (start_menu.cur_x - 60.5, start_menu.logo_y)))
-    start_menu.add_item(MenuItem('ИГРАТЬ', start_game, (start_menu.cur_x - 60.5, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('ВЫХОД', end_game, (start_menu.cur_x - 60, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x - 160, start_menu.cur_y)))
+    # start_menu.add_item(MenuItem('SHIP WARS', start_game, (start_menu.cur_x - 60.5, start_menu.logo_y)))
+    start_menu.add_item(MenuItem('ИГРАТЬ', start_game, (start_menu.cur_x - 105, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('ВЫХОД', end_game, (start_menu.cur_x - 87.5, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x - 227.5, start_menu.cur_y)))
     runing = True
     while runing:
         if not checker.menu:
@@ -124,20 +123,20 @@ def menu():
                 switch(None)
                 video.stop()
                 sys.exit()
-            
-               # runing = False
+
+            # runing = False
             elif event.type == pygame.MOUSEMOTION:
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
-               
+
         video.draw_to(screen, (0, 0))
-        #screen.fill((255, 0, 0))
+        # screen.fill((255, 0, 0))
         t = video.current_time.format("%h:%m:%s")
         if t == "00:02:26":
             video.restart()
-        screen.blit(backi,(0,0))
-        screen.blit(text_logo, (200,200))
+        screen.blit(backi, (0, 0))
+        screen.blit(text_logo, (200, 200))
         start_menu.draw()
         score_panel.draw_record()
         mx, my = pygame.mouse.get_pos()
@@ -154,12 +153,10 @@ def deadi():
     def go_play():
         switch(run)
         checker.deadi = False
-   
-    
 
     start_menu = Menu(screen)
-    start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_menu, (start_menu.cur_x - 250, 400)))
-    start_menu.add_item(MenuItem('НАЧАТЬ ЗАНОВО', go_play, (start_menu.cur_x - 190, 450)))
+    start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_menu, (start_menu.cur_x - 280, 400)))
+    start_menu.add_item(MenuItem('НАЧАТЬ ЗАНОВО', go_play, (start_menu.cur_x - 227.5, 450)))
 
     runing = True
     while runing:
@@ -174,18 +171,18 @@ def deadi():
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
-                
-       # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
-       # new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
+
+        # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
+        # new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
         a = back_for_dye2
-        screen.blit(a,(0,0))
-        screen.blit(backi,(0,0))
-        screen.blit(text_lose, (240,200))
+        screen.blit(a, (0, 0))
+        screen.blit(backi, (0, 0))
+        screen.blit(text_lose, (240, 200))
         start_menu.draw()
         mx, my = pygame.mouse.get_pos()
         emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
         update_particle()
-       # screen.blit(new_score_img, (230, 500))
+        # screen.blit(new_score_img, (230, 500))
         pygame.display.flip()
 
 
@@ -264,7 +261,7 @@ def run():
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             enemy.death()
             score_panel.update()
-           # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+            # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
@@ -284,7 +281,7 @@ def run():
                 runing = False
 
         if pygame.Rect.colliderect(player_ship.hitbox, enemy_gun.rect):
-           # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+            # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             enemy_gun.shot(enemy)
             if not hit:
                 hit = True
@@ -320,7 +317,7 @@ def run():
         if pygame.Rect.colliderect(player_ship.hitbox, submarine.hitbox):
             submarine.death()
             score_panel.update()
-           # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+            # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
@@ -340,7 +337,7 @@ def run():
                 runing = False
 
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
-          #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+            #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             sub_gun.shot(submarine)
             if not hit:
                 hit = True
@@ -431,7 +428,7 @@ def run():
 
         '''ОСТРОВ'''
         if pygame.Rect.colliderect(player_ship.hitbox, island.hitbox):
-          #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
+            #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
                 player_ship.speed = 0.5
