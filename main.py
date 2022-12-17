@@ -25,7 +25,7 @@ from menu import Menu, MenuItem
 from checker import Checker
 import random
 from vid import Video
-from styles import vidi, back_for_vidi, back_for_dye,menu1
+from styles import vidi, back_for_vidi, back_for_dye, menu1
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -107,11 +107,16 @@ def menu():
                 json.dump(0, file)
             score_panel.zeroing()
 
+    def go_skins():
+        switch(skins_menu)
+        checker.menu = False
+
     start_menu = Menu(screen)
     # start_menu.add_item(MenuItem('SHIP WARS', start_game, (start_menu.cur_x - 60.5, start_menu.logo_y)))
     start_menu.add_item(MenuItem('ИГРАТЬ', start_game, (start_menu.cur_x - 105, start_menu.cur_y)))
     start_menu.add_item(MenuItem('ВЫХОД', end_game, (start_menu.cur_x - 87.5, start_menu.cur_y)))
-    start_menu.add_item(MenuItem('Сбросить счет', score_del, (start_menu.cur_x - 227.5, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('ВЫБРАТЬ СКИН', go_skins, (start_menu.cur_x - 210, start_menu.cur_y)))
+    start_menu.add_item(MenuItem('СБРОСИТЬ СЧЕТ', score_del, (start_menu.cur_x - 227.5, start_menu.cur_y)))
     runing = True
     while runing:
         if not checker.menu:
@@ -137,13 +142,13 @@ def menu():
             video.restart()
         screen.blit(backi, (0, 0))
         a = menu1.convert_alpha()
-        screen.blit(a,(150,100))
-       # screen.blit(text_logo, (200, 200))
+        screen.blit(a, (150, 100))
+        # screen.blit(text_logo, (200, 200))
         start_menu.draw()
         score_panel.draw_record()
-       ## mx, my = pygame.mouse.get_pos()
-       # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
-       # update_particle()
+        ## mx, my = pygame.mouse.get_pos()
+        # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
+        # update_particle()
         pygame.display.flip()
 
 
@@ -181,10 +186,48 @@ def deadi():
         screen.blit(backi, (0, 0))
         screen.blit(text_lose, (240, 200))
         start_menu.draw()
-       # mx, my = pygame.mouse.get_pos()
-       # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
-      #  update_particle()
+        # mx, my = pygame.mouse.get_pos()
+        # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
+        #  update_particle()
         # screen.blit(new_score_img, (230, 500))
+        pygame.display.flip()
+
+
+def skins_menu():
+    def go_to_menu():
+        checker.skins = False
+        switch(menu)
+
+    def skin_1():
+        print(1)
+
+    def skin_2():
+        print(2)
+
+    def skin_3():
+        print(3)
+
+    start_menu = Menu(screen)
+    start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_to_menu, (start_menu.cur_x - 280, 100)))
+    start_menu.add_item(MenuItem('скин 1', skin_1, (start_menu.cur_x - 450, 400)))
+    start_menu.add_item(MenuItem('скин 2', skin_2, (start_menu.cur_x - 450, 700)))
+    start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 1000)))
+    runing = True
+    while runing:
+        if not checker.skins:
+            checker.skins = True
+            runing = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                runing = False
+                switch(None)
+            elif event.type == pygame.MOUSEMOTION:
+                start_menu.update(event.pos)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                start_menu.check_click(event.pos)
+
+        screen.fill((100, 100, 100))
+        start_menu.draw()
         pygame.display.flip()
 
 

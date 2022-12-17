@@ -3,3 +3,4 @@ class Checker:
         self.run = True
         self.menu = True
         self.deadi = True
+        self.skins = True
