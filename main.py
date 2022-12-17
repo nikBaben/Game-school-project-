@@ -329,7 +329,7 @@ def run():
                     player_ship.skin3 = True
                     player_ship.changed = True
 
-        if (score_panel.new_score > 3) and (score_panel.new_score % 50 == 0):
+        if (score_panel.new_score > 0) and score_panel.new_score % 50 == 0:
             if not speedup.check:
                 enemy.speed += 0.3
                 submarine.speed += 0.3
@@ -483,6 +483,15 @@ def run():
                     can.death()
                     can.broke = False
                     can.broke_rocket = False
+                    if score_panel.new_score == 49:
+                        enemy.speed += 0.3
+                        submarine.speed += 0.3
+                        can.speed += 0.3
+                        island.speed += 0.3
+                        sub_gun.speed += 0.3
+                        enemy_gun.speed += 0.3
+                        score_panel.update_money('score')
+                        speedup.check = True
                 # can.image = imge_for_can
                 else:
                     if hit:
