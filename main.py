@@ -141,7 +141,7 @@ def menu():
         t = video.current_time.format("%h:%m:%s")
         if t == "00:02:26":
             video.restart()
-        screen.blit(backi, (0, 0))
+       # screen.blit(backi, (0, 0))
         a = menu1.convert_alpha()
         screen.blit(a, (150, 100))
         # screen.blit(text_logo, (200, 200))
