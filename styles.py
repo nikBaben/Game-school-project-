@@ -18,8 +18,12 @@ blow_can_anim=[]
 player_move_up = []
 blow_ship_anim = []
 blow_sub_anim = []
+anim_skin1 = []
+skin4 = pygame.image.load("work_images/skin_1.png")
+skin2 = pygame.image.load("work_images/skin_2.png")
+skin3 = pygame.image.load("work_images/skin_3.png")
 back = pygame.image.load("imgs/lll.png")
-vidi = "imgs/video_back.mp4"
+vidi = "imgs/game_back.mp4"
 back_for_vidi = pygame.image.load("imgs/for_vid.png")
 back_for_dy = pygame.image.load("imgs/back_for_dye.png")
 back_for_dye = pygame.transform.scale(back_for_dy, (960, 1050)) 
@@ -39,6 +43,10 @@ for island in range(1,17):
     anim_island.append(img)
 """"""
 
+for skin1 in range(1,18): 
+    sub_file1 = "imgs/submarine/submarine{}.svg".format(skin1)
+    sub1 = pygame.image.load(sub_file1)
+    anim_skin1.append(sub1)
 
 """Анимация подлодки"""
 for submarine in range(1,18):

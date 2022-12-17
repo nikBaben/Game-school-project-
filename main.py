@@ -43,6 +43,7 @@ bullets = Group()
 back = Back(screen)
 checker = Checker()
 video = Video(vidi)
+skins = Skins_changer()
 current = None
 
 particles = []
@@ -195,8 +196,6 @@ def deadi():
 
 
 def skins_menu():
-    skins = Skins_changer
-
     def go_to_menu():
         checker.skins = False
         switch(menu)
@@ -206,21 +205,18 @@ def skins_menu():
         skins.first = True
         skins.second = False
         skins.third = False
-        print(1)
 
     def skin_2():
         skins.changed = True
         skins.first = False
         skins.second = True
         skins.third = False
-        print(2)
 
     def skin_3():
         skins.changed = True
         skins.first = False
         skins.second = False
         skins.third = True
-        print(3)
 
     start_menu = Menu(screen)
     start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_to_menu, (start_menu.cur_x - 280, 100)))
@@ -247,7 +243,6 @@ def skins_menu():
 
 
 def run():
-    skins = Skins_changer
     try:
         file = open('save.json')
         score = (json.load(file))
@@ -255,7 +250,7 @@ def run():
         score = 0
 
     score_panel = Score_panel(screen, score)
-    player_ship = Player_Ship(screen, skins)
+    player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
 
     blow = Blow(screen)
@@ -286,6 +281,8 @@ def run():
             island.y = -500
             runing = False
             checker.run = True
+                
+      
         back.scroling()
         update_bullet(bullets)
         sub_gun.update(submarine)
@@ -295,7 +292,7 @@ def run():
         can.moving_can()
         island.moving()
         gun.output_bullet()
-        bullets.update()
+        bullets.update() 
         player_ship.move()
         blow.draw("nothing")
         score_panel.draw_score()
@@ -303,6 +300,20 @@ def run():
         keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
                            blow, start_menu)
+
+
+        if player_ship.changed == False:
+            if skins.changed:
+                if skins.first:
+                    player_ship.skin1 = True
+                    player_ship.changed = True
+                elif skins.second:
+                    player_ship.skin2 = True
+                    player_ship.changed = True
+                elif skins.third:
+                    player_ship.skin3 = True
+                    player_ship.changed = True
+
 
         if (score_panel.new_score > 0) and (score_panel.new_score % 50) == 0:
             if not speedup:
