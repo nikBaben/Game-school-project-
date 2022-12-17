@@ -10,6 +10,8 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
                 score_panel.record = score_panel.new_score
             with open('save.json', 'w') as file:
                 json.dump(score_panel.record, file)
+            with open('money.json', 'w') as file:
+                json.dump(score_panel.balance, file)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             '''движение'''

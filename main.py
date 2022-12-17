@@ -27,6 +27,7 @@ import random
 from vid import Video
 from styles import vidi, back_for_vidi, back_for_dye, menu1
 from skins import Skins_changer
+from speeduper import Speedup
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -88,7 +89,14 @@ def menu():
         score = (json.load(file))
     except:
         score = 0
-    score_panel = Score_panel(screen, score)
+
+    try:
+        file = open('money.json')
+        money = (json.load(file))
+    except:
+        money = 0
+
+    score_panel = Score_panel(screen, score, money)
     score_panel.menu = True
 
     def start_game():
@@ -148,6 +156,7 @@ def menu():
         # screen.blit(text_logo, (200, 200))
         start_menu.draw()
         score_panel.draw_record()
+        score_panel.draw_balance()
         ## mx, my = pygame.mouse.get_pos()
         # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
         # update_particle()
@@ -249,7 +258,13 @@ def run():
     except:
         score = 0
 
-    score_panel = Score_panel(screen, score)
+    try:
+        file = open('money.json')
+        money = (json.load(file))
+    except:
+        money = 0
+
+    score_panel = Score_panel(screen, score, money)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
 
@@ -260,19 +275,21 @@ def run():
             score_panel.record = score_panel.new_score
         with open('save.json', 'w') as file:
             json.dump(score_panel.record, file)
+        with open('money.json', 'w') as file:
+            json.dump(score_panel.balance, file)
         switch(menu)
         checker.run = False
 
     start_menu = Menu(screen)
     start_menu.game = True
     '''КНОПКИ'''
-    start_menu.add_item(MenuItem('Выход в меню', go_to_menu, (0, 0)))
+    start_menu.add_item(MenuItem('←', go_to_menu, (5, 5)))
     '''КНОПКИ'''
 
     hit = False
     broke = False
-    speedup = False
     runing = True
+    speedup = Speedup()
     while runing:
         if not checker.run:
             submarine.death()
@@ -281,8 +298,7 @@ def run():
             island.y = -500
             runing = False
             checker.run = True
-                
-      
+
         back.scroling()
         update_bullet(bullets)
         sub_gun.update(submarine)
@@ -292,7 +308,7 @@ def run():
         can.moving_can()
         island.moving()
         gun.output_bullet()
-        bullets.update() 
+        bullets.update()
         player_ship.move()
         blow.draw("nothing")
         score_panel.draw_score()
@@ -300,7 +316,6 @@ def run():
         keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
                            blow, start_menu)
-
 
         if player_ship.changed == False:
             if skins.changed:
@@ -314,18 +329,18 @@ def run():
                     player_ship.skin3 = True
                     player_ship.changed = True
 
-
-        if (score_panel.new_score > 0) and (score_panel.new_score % 50) == 0:
-            if not speedup:
+        if (score_panel.new_score > 3) and (score_panel.new_score % 50 == 0):
+            if not speedup.check:
                 enemy.speed += 0.3
                 submarine.speed += 0.3
                 can.speed += 0.3
                 island.speed += 0.3
                 sub_gun.speed += 0.3
                 enemy_gun.speed += 0.3
-                speedup = True
-        if (score_panel.new_score > 0) and (score_panel.new_score % 50) != 0:
-            speedup = False
+                score_panel.update_money('score')
+                speedup.check = True
+        if (score_panel.new_score > 0) and (score_panel.new_score % 50 != 0):
+            speedup.check = False
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
             enemy.death()
@@ -363,6 +378,8 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
                 submarine.death()
                 can.death()
                 enemy.death()
@@ -398,6 +415,8 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
                 submarine.death()
                 can.death()
                 enemy.death()
@@ -419,6 +438,8 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
                 submarine.death()
                 can.death()
                 enemy.death()
@@ -436,15 +457,22 @@ def run():
                 broke = True
                 can.broke = True
                 can.blow = True
-                img = choice([1, 2])
+                img = choice([1, 1, 2, 2, 3])
                 if img == 1:
                     can.broke_heart = False
                     can.broke_rocket = True
+                    can.broke_money = False
                 # can.blow = False
                 #    can.image = pygame.image.load("imgs/heart.svg")
                 if img == 2:
                     can.broke_rocket = False
                     can.broke_heart = True
+                    can.broke_money = False
+                if img == 3:
+                    can.broke_heart = False
+                    can.broke_rocket = False
+                    can.broke_money = True
+                    can.image = pygame.image.load('work_images/money.png')
                 # can.blow = False
 
             #   can.image = pygame.image.load('imgs/rocket.svg')
@@ -467,25 +495,31 @@ def run():
 
                 #  can.image = imge_for_can
             else:
-                if not hit:
-                    hit = True
-                    player_ship.speed = 0.5
-                    can.change = False
-                    can.death()
-                else:
-                    if score_panel.new_score > score_panel.record:
-                        score_panel.record = score_panel.new_score
-                    with open('save.json', 'w') as file:
-                        json.dump(score_panel.record, file)
-                    submarine.death()
-                    can.death()
-                    enemy.death()
-                    island.y = -500
-                    switch(deadi)
-                    enemy_gun.death(enemy)
-                    sub_gun.death(submarine)
-                    hit = False
-                    runing = False
+                if img == 2:
+                    if not hit:
+                        hit = True
+                        player_ship.speed = 0.5
+                        can.change = False
+                        can.death()
+                    else:
+                        if score_panel.new_score > score_panel.record:
+                            score_panel.record = score_panel.new_score
+                        with open('save.json', 'w') as file:
+                            json.dump(score_panel.record, file)
+                        with open('money.json', 'w') as file:
+                            json.dump(score_panel.balance, file)
+                        submarine.death()
+                        can.death()
+                        enemy.death()
+                        island.y = -500
+                        switch(deadi)
+                        enemy_gun.death(enemy)
+                        sub_gun.death(submarine)
+                        hit = False
+                        runing = False
+                if img == 3:
+                    score_panel.update_money('can')
+
             #  can.image =imge_for_can
             broke = False
             can.broke = False
@@ -509,6 +543,8 @@ def run():
                     score_panel.record = score_panel.new_score
                 with open('save.json', 'w') as file:
                     json.dump(score_panel.record, file)
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
                 submarine.death()
                 can.death()
                 enemy.death()

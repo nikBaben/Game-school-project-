@@ -20,6 +20,7 @@ class Can():
         self.broke = False
         self.broke_heart = False
         self.broke_rocket = False
+        self.broke_money = False
         self.blow = False
         self.blow_frame = 0
         sp = spawn_x()
