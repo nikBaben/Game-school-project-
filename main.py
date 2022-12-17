@@ -141,7 +141,7 @@ def menu():
         t = video.current_time.format("%h:%m:%s")
         if t == "00:02:26":
             video.restart()
-       # screen.blit(backi, (0, 0))
+        # screen.blit(backi, (0, 0))
         a = menu1.convert_alpha()
         screen.blit(a, (150, 100))
         # screen.blit(text_logo, (200, 200))
@@ -247,6 +247,7 @@ def skins_menu():
 
 
 def run():
+    skins = Skins_changer
     try:
         file = open('save.json')
         score = (json.load(file))
@@ -254,7 +255,7 @@ def run():
         score = 0
 
     score_panel = Score_panel(screen, score)
-    player_ship = Player_Ship(screen)
+    player_ship = Player_Ship(screen, skins)
     gun = Gun(screen, player_ship)
 
     blow = Blow(screen)

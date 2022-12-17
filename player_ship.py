@@ -19,10 +19,9 @@ skins = Skins_changer()
 
 
 class Player_Ship():
-    def __init__(self, screen):
+    def __init__(self, screen, skins):
         self.screen = screen
         '''когда анимацию корабля будешь делать закомментишь'''
-        print(skins.changed)
         if skins.changed:
             if skins.first:
                 self.image = pygame.image.load('work_images/skin_1.png')
