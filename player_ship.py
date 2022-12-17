@@ -8,13 +8,13 @@ from enemy_ship import Enemy
 from submarine import Submarine
 from styles import ainm_player_stand
 from styles import player_move_up
+from skins import Skins_changer
 
-
-#pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
-#bullet = pygame.image.load("imgs/bullet.svg").convert_alpha()
+# pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
+# bullet = pygame.image.load("imgs/bullet.svg").convert_alpha()
 
 BLACK = (0, 0, 0)
-
+skins = Skins_changer()
 '''АНИМАЦИЯ КОРАБЛЯ'''
 
 
@@ -22,7 +22,16 @@ class Player_Ship():
     def __init__(self, screen):
         self.screen = screen
         '''когда анимацию корабля будешь делать закомментишь'''
-        self.image = (ainm_player_stand[0]).convert_alpha()
+        print(skins.changed)
+        if skins.changed:
+            if skins.first:
+                self.image = pygame.image.load('work_images/skin_1.png')
+            elif skins.second:
+                self.image = pygame.image.load('work_images/skin_2.png')
+            elif skins.third:
+                self.image = pygame.image.load('work_images/skin_3.png')
+        else:
+            self.image = (ainm_player_stand[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.rect.centerx = self.screen_rect.centerx - 60
@@ -40,8 +49,6 @@ class Player_Ship():
         self.speed = 1
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
         self.have_rocket = False
-
-
 
     def move(self):
         if self.moveright:

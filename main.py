@@ -26,6 +26,7 @@ from checker import Checker
 import random
 from vid import Video
 from styles import vidi, back_for_vidi, back_for_dye, menu1
+from skins import Skins_changer
 
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -194,17 +195,31 @@ def deadi():
 
 
 def skins_menu():
+    skins = Skins_changer
+
     def go_to_menu():
         checker.skins = False
         switch(menu)
 
     def skin_1():
+        skins.changed = True
+        skins.first = True
+        skins.second = False
+        skins.third = False
         print(1)
 
     def skin_2():
+        skins.changed = True
+        skins.first = False
+        skins.second = True
+        skins.third = False
         print(2)
 
     def skin_3():
+        skins.changed = True
+        skins.first = False
+        skins.second = False
+        skins.third = True
         print(3)
 
     start_menu = Menu(screen)
