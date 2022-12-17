@@ -25,7 +25,7 @@ from menu import Menu, MenuItem
 from checker import Checker
 import random
 from vid import Video
-from styles import vidi, back_for_vidi, back_for_dye, menu1
+from styles import vidi, back_for_vidi, back_for_dye, menu1,skins_1
 from skins import Skins_changer
 from speeduper import Speedup
 
@@ -205,6 +205,8 @@ def deadi():
 
 
 def skins_menu():
+    skin1 = skins_1.convert_alpha()
+    skin = pygame.transform.scale(skin1, (250, 250))
     def go_to_menu():
         checker.skins = False
         switch(menu)
@@ -247,6 +249,9 @@ def skins_menu():
                 start_menu.check_click(event.pos)
 
         screen.fill((100, 100, 100))
+        screen.blit(skin,(500,300))
+        screen.blit(skin,(500,600))
+        screen.blit(skin,(500,900))
         start_menu.draw()
         pygame.display.flip()
 

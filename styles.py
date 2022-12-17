@@ -28,6 +28,7 @@ back_for_vidi = pygame.image.load("imgs/for_vid.png")
 back_for_dy = pygame.image.load("imgs/back_for_dye.png")
 back_for_dye = pygame.transform.scale(back_for_dy, (960, 1050)) 
 menu1 = pygame.image.load("imgs/menu2.png")
+skins_1 = pygame.image.load("imgs/skins1.png")
 
 
 
