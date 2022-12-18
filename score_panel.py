@@ -2,7 +2,7 @@ import pygame
 
 
 class Score_panel():
-    def __init__(self, screen, score, money, purchase):
+    def __init__(self, screen, score, money, purchase, num, bought):
         self.screen = screen
         self.font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 100)
         self.font1 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 30)
@@ -43,6 +43,27 @@ class Score_panel():
         self.no_money1 = self.font3.render('Не хватает денег', True, (255, 0, 0))
         self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
 
+        if bought == 0:
+            if (num > 75) and (num < 100):
+                self.no_money1 = self.font3.render('', True, (255, 255, 255))
+                self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
+            if num >= 100:
+                self.no_money1 = self.font3.render('', True, (255, 255, 255))
+                self.no_money2 = self.font3.render('', True, (255, 255, 255))
+        if bought == 2:
+            self.no_money1 = self.font3.render('', True, (255, 255, 255))
+            self.no_money2 = self.font3.render('', True, (255, 255, 255))
+            if num < 100:
+                self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
+        if bought == 3:
+            self.no_money1 = self.font3.render('', True, (255, 0, 0))
+            if num < 75:
+                self.no_money1 = self.font3.render('Не хватает денег', True, (255, 0, 0))
+            self.no_money2 = self.font3.render('', True, (255, 255, 255))
+        if bought >= 5:
+            self.no_money1 = self.font3.render('', True, (255, 255, 255))
+            self.no_money2 = self.font3.render('', True, (255, 255, 255))
+
     def update(self):
         self.new_score += 1
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
@@ -74,12 +95,22 @@ class Score_panel():
             self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
             self.status3 = self.font3.render('Доступно', True, (255, 255, 255))
 
-    def update_no_money(self, num):
-        if num == 1:
+    def update_no_money(self, num, bought):
+        if bought == 0:
+            if (num > 75) and (num < 100):
+                self.no_money1 = self.font3.render('', True, (255, 255, 255))
+            if num >= 100:
+                self.no_money1 = self.font3.render('', True, (255, 255, 255))
+                self.no_money2 = self.font3.render('', True, (255, 255, 255))
+        if bought == 2:
             self.no_money1 = self.font3.render('', True, (255, 255, 255))
-        elif num == 2:
+            if num < 100:
+                self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
+        if bought == 3:
             self.no_money2 = self.font3.render('', True, (255, 255, 255))
-        else:
+            if num < 75:
+                self.no_money1 = self.font3.render('Не хватает денег', True, (255, 0, 0))
+        if bought >= 5:
             self.no_money1 = self.font3.render('', True, (255, 255, 255))
             self.no_money2 = self.font3.render('', True, (255, 255, 255))
 

@@ -102,7 +102,8 @@ def menu():
     except:
         purchase = 0
 
-    score_panel = Score_panel(screen, score, money, purchase)
+    COUNT2 = [purchase]
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
     score_panel.menu = True
 
     def start_game():
@@ -237,11 +238,11 @@ def skins_menu():
     except:
         last_skin = 1
 
-    score_panel = Score_panel(screen, score, money, purchase)
+    COUNT2 = [purchase]
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
     score_panel.menu = True
 
     COUNT = [purchase]
-    COUNT2 = [0]
 
     def go_to_menu():
         checker.skins = False
@@ -272,8 +273,8 @@ def skins_menu():
                 skins.first = False
                 skins.second = True
                 skins.third = False
-                COUNT2[0] += 1
-                score_panel.update_no_money(COUNT2[0])
+                COUNT2[0] += 2
+                score_panel.update_no_money(money - 75, COUNT2[0])
                 last_skin = 2
                 with open('last_skin.json', 'w') as file:
                     json.dump(last_skin, file)
@@ -304,7 +305,7 @@ def skins_menu():
                 skins.second = False
                 skins.third = True
                 COUNT2[0] += 3
-                score_panel.update_no_money(COUNT2[0])
+                score_panel.update_no_money(money - 100, COUNT2[0])
                 last_skin = 3
                 with open('last_skin.json', 'w') as file:
                     json.dump(last_skin, file)
@@ -326,6 +327,7 @@ def skins_menu():
     start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 850)))
     runing = True
     while runing:
+        # score_panel.update_no_money(money, COUNT2[0])
         if not checker.skins:
             checker.skins = True
             runing = False
@@ -374,7 +376,8 @@ def run():
     except:
         purchase = 0
 
-    score_panel = Score_panel(screen, score, money, purchase)
+    COUNT2 = [purchase]
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
 
