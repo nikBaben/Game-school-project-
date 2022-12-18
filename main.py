@@ -344,9 +344,9 @@ def skins_menu():
                 start_menu.check_click(event.pos)
 
         screen.fill((100, 100, 100))
-        screen.blit(skin, (500, 300))
-        screen.blit(skin, (500, 600))
-        screen.blit(skin, (500, 900))
+        screen.blit(skin, (500, 200))
+        screen.blit(skin, (500, 500))
+        screen.blit(skin, (500, 800))
         score_panel.draw_balance()
         score_panel.draw_status()
         score_panel.draw_no_money()
