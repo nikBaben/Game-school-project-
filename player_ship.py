@@ -7,7 +7,7 @@ from styles import anim_shipplayer_moveup
 from enemy_ship import Enemy
 from submarine import Submarine
 from styles import ainm_player_stand
-from styles import player_move_up,anim_skin1,skin4,skin2,skin3
+from styles import player_move_up, anim_skin1, skin4, skin2, skin3
 from skins import Skins_changer
 
 # pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
@@ -21,8 +21,8 @@ skins = Skins_changer()
 class Player_Ship():
     def __init__(self, screen):
         self.screen = screen
-        self.skin1 = False 
-        self.skin2 = False 
+        self.skin1 = False
+        self.skin2 = False
         self.skin3 = False
         self.changed = False
         self.image = (ainm_player_stand[0]).convert_alpha()
@@ -77,25 +77,25 @@ class Player_Ship():
             self.last_update = now
             self.frame += 1  # Надо переделать, для чистоты анимаци
             if self.changed:
-                if self.skin1: 
+                if self.skin1:
                     self.image = (ainm_player_stand[0]).convert_alpha()
-                if self.skin2: 
+                if self.skin2:
                     self.image = skin2.convert_alpha()
-                if self.skin3: 
+                if self.skin3:
                     self.image = skin3.convert_alpha()
-            
-               # if self.frame >= len(anim_skin1):
-                #    self.frame = 0
-                #else:
-                #    center = self.rect.center
-                  #  self.image = (anim_skin1[self.frame]).convert_alpha()
-                   # self.rect = self.image.get_rect()
-                  #  self.rect.center = center
 
-            else: 
+            # if self.frame >= len(anim_skin1):
+            #    self.frame = 0
+            # else:
+            #    center = self.rect.center
+            #  self.image = (anim_skin1[self.frame]).convert_alpha()
+            # self.rect = self.image.get_rect()
+            #  self.rect.center = center
+
+            else:
 
                 if self.moveup:
-                # self.frame +=1
+                    # self.frame +=1
                     if self.frame >= len(player_move_up):
                         self.frame = 0
                     else:

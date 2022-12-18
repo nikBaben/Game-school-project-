@@ -96,7 +96,13 @@ def menu():
     except:
         money = 0
 
-    score_panel = Score_panel(screen, score, money)
+    try:
+        file = open('purchases.json')
+        purchase = (json.load(file))
+    except:
+        purchase = 0
+
+    score_panel = Score_panel(screen, score, money, purchase)
     score_panel.menu = True
 
     def start_game():
@@ -225,58 +231,93 @@ def skins_menu():
     except:
         purchase = 0
 
-    score_panel = Score_panel(screen, score, money)
+    try:
+        file = open('last_skin.json')
+        last_skin = (json.load(file))
+    except:
+        last_skin = 1
+
+    score_panel = Score_panel(screen, score, money, purchase)
     score_panel.menu = True
+
+    COUNT = [purchase]
+    COUNT2 = [0]
 
     def go_to_menu():
         checker.skins = False
         switch(menu)
 
     def skin_1():
+        global last_skin
         skins.changed = True
         skins.first = True
         skins.second = False
         skins.third = False
+        last_skin = 1
+        with open('last_skin.json', 'w') as file:
+            json.dump(last_skin, file)
 
     def skin_2():
-        if (purchase != 2) and (purchase != 5):
+        global last_skin
+        if (purchase != 2) and (purchase != 5) and (purchase < 6) and (COUNT[0] < 5):
             if score_panel.balance >= 75:
+                COUNT[0] += 2
                 score_panel.update_money('buy1')
                 with open('money.json', 'w') as file:
                     json.dump(score_panel.balance, file)
                 with open('purchases.json', 'w') as file:
-                    json.dump(purchase + 2, file)
+                    json.dump(purchase + COUNT[0], file)
+                score_panel.update_status(COUNT[0])
                 skins.changed = True
                 skins.first = False
                 skins.second = True
                 skins.third = False
+                COUNT2[0] += 1
+                score_panel.update_no_money(COUNT2[0])
+                last_skin = 2
+                with open('last_skin.json', 'w') as file:
+                    json.dump(last_skin, file)
             else:
-                print('не хватает денег')
+                pass
         else:
             skins.changed = True
             skins.first = False
             skins.second = True
             skins.third = False
+            last_skin = 2
+            with open('last_skin.json', 'w') as file:
+                json.dump(last_skin, file)
 
     def skin_3():
-        if (purchase != 3) and (purchase != 5):
+        global last_skin
+        if (purchase != 3) and (purchase != 5) and (purchase < 6) and (COUNT[0] < 5):
             if score_panel.balance >= 100:
+                COUNT[0] += 3
                 score_panel.update_money('buy2')
                 with open('money.json', 'w') as file:
                     json.dump(score_panel.balance, file)
                 with open('purchases.json', 'w') as file:
-                    json.dump(purchase + 3, file)
+                    json.dump(purchase + COUNT[0], file)
+                score_panel.update_status(COUNT[0])
                 skins.changed = True
                 skins.first = False
                 skins.second = False
                 skins.third = True
+                COUNT2[0] += 3
+                score_panel.update_no_money(COUNT2[0])
+                last_skin = 3
+                with open('last_skin.json', 'w') as file:
+                    json.dump(last_skin, file)
             else:
-                print('не хватает денег')
+                pass
         else:
             skins.changed = True
             skins.first = False
             skins.second = False
             skins.third = True
+            last_skin = 3
+            with open('last_skin.json', 'w') as file:
+                json.dump(last_skin, file)
 
     start_menu = Menu(screen)
     start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_to_menu, (start_menu.cur_x - 280, 100)))
@@ -302,6 +343,8 @@ def skins_menu():
         screen.blit(skin, (500, 600))
         screen.blit(skin, (500, 900))
         score_panel.draw_balance()
+        score_panel.draw_status()
+        score_panel.draw_no_money()
         start_menu.draw()
         pygame.display.flip()
 
@@ -319,7 +362,19 @@ def run():
     except:
         money = 0
 
-    score_panel = Score_panel(screen, score, money)
+    try:
+        file = open('last_skin.json')
+        last_skin = (json.load(file))
+    except:
+        last_skin = 1
+
+    try:
+        file = open('purchases.json')
+        purchase = (json.load(file))
+    except:
+        purchase = 0
+
+    score_panel = Score_panel(screen, score, money, purchase)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
 
@@ -346,7 +401,22 @@ def run():
     runing = True
     speedup = Speedup()
     while runing:
-        if (score_panel.new_score == 51) and speedup.rocket_shot:
+        if last_skin == 1:
+            player_ship.skin1 = True
+            player_ship.skin2 = False
+            player_ship.skin3 = False
+            player_ship.changed = True
+        if last_skin == 2:
+            player_ship.skin1 = False
+            player_ship.skin2 = True
+            player_ship.skin3 = False
+            player_ship.changed = True
+        if last_skin == 3:
+            player_ship.skin1 = False
+            player_ship.skin2 = False
+            player_ship.skin3 = True
+            player_ship.changed = True
+        if ((score_panel.new_score % 50) == 1) and speedup.rocket_shot:
             enemy.speed += 0.3
             submarine.speed += 0.3
             can.speed += 0.3

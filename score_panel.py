@@ -2,11 +2,12 @@ import pygame
 
 
 class Score_panel():
-    def __init__(self, screen, score, money):
+    def __init__(self, screen, score, money, purchase):
         self.screen = screen
         self.font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 100)
         self.font1 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 30)
         self.font2 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 40)
+        self.font3 = pygame.font.Font(None, 30)
         self.record = score
         self.balance = money
         self.img = pygame.image.load("imgs/score.svg").convert_alpha()
@@ -21,6 +22,26 @@ class Score_panel():
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
         self.balance_img = self.font1.render(f'{str(self.balance)}', True, (255, 255, 255))
         self.menu = False
+
+        if purchase == 0:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Не куплено: цена - 75', True, (255, 255, 255))
+            self.status3 = self.font3.render('Не куплено: цена - 100', True, (255, 255, 255))
+        elif purchase == 2:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status3 = self.font3.render('Не куплено: цена - 100', True, (255, 255, 255))
+        elif purchase == 3:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Не куплено: цена - 75', True, (255, 255, 255))
+            self.status3 = self.font3.render('Доступно', True, (255, 255, 255))
+        elif purchase == 5:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status3 = self.font3.render('Доступно', True, (255, 255, 255))
+
+        self.no_money1 = self.font3.render('Не хватает денег', True, (255, 0, 0))
+        self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
 
     def update(self):
         self.new_score += 1
@@ -38,6 +59,29 @@ class Score_panel():
         elif type == 'buy2':
             self.balance -= 100
         self.balance_img = self.font1.render(f'{str(self.balance)}', True, (255, 255, 255))
+
+    def update_status(self, purchase):
+        if purchase == 2:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status3 = self.font3.render('Не куплено: цена - 100', True, (255, 255, 255))
+        if purchase == 3:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Не куплено: цена - 75', True, (255, 255, 255))
+            self.status3 = self.font3.render('Доступно', True, (255, 255, 255))
+        if purchase >= 5:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status3 = self.font3.render('Доступно', True, (255, 255, 255))
+
+    def update_no_money(self, num):
+        if num == 1:
+            self.no_money1 = self.font3.render('', True, (255, 255, 255))
+        elif num == 2:
+            self.no_money2 = self.font3.render('', True, (255, 255, 255))
+        else:
+            self.no_money1 = self.font3.render('', True, (255, 255, 255))
+            self.no_money2 = self.font3.render('', True, (255, 255, 255))
 
     def zeroing(self):
         self.record = 0
@@ -71,3 +115,12 @@ class Score_panel():
     def draw_balance(self):
         self.screen.blit(self.monet, (5, 5))
         self.screen.blit(self.balance_img, (self.screen.get_rect().width - 900, 10))
+
+    def draw_status(self):
+        self.screen.blit(self.status1, (30, 300))
+        self.screen.blit(self.status2, (30, 600))
+        self.screen.blit(self.status3, (30, 900))
+
+    def draw_no_money(self):
+        self.screen.blit(self.no_money1, (30, 620))
+        self.screen.blit(self.no_money2, (30, 920))
