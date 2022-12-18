@@ -1,1 +1,2 @@
-asdawsdad
+
+                    player_ship.changed = True

@@ -1,8 +1,11 @@
 import pygame, sys
 from gun import Gun
 import json
+import random
+import time
 
-
+part= [ ]
+part1 = []
 def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -61,6 +64,16 @@ def update_screen(color, back, screen, score_panel, bullets, island, player_ship
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
+    def particle (x,y): 
+        part.append([[x,y], [random.randint(0,20) / 10 - 1,-2],random.randint(4,6)])
+        for p in part: 
+            p[0][0] += p[1][0]
+            p[0][1] += p[1][1]
+            p[2] -= 0.1
+            #p[1][1] +=0.1
+            pygame.draw.circle(screen,(132,209,225),[int(p[0][0]),int(p[0][1])] , int(p[2]))
+            if p[2] <= 0: 
+                part.remove(p)
 
     screen.fill(color)
     back.output_back()
@@ -71,6 +84,8 @@ def update_screen(color, back, screen, score_panel, bullets, island, player_ship
     player_ship.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
+    particle(enemy.rect.centerx,enemy.y+8)
+    particle(submarine.rect.centerx,submarine.y)
     score_panel.draw_score()
     # player_ship.output()
 
@@ -94,7 +109,9 @@ def update_screen(color, back, screen, score_panel, bullets, island, player_ship
     ###
     for bullet in bullets.sprites():
         bullet.output_bullet()
+
     pygame.display.flip()
+   # clock.tick(60)
 
 
 def update_bullet(bullets):

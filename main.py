@@ -28,7 +28,7 @@ from vid import Video
 from styles import vidi, back_for_vidi, back_for_dye, menu1, skins_1
 from skins import Skins_changer
 from speeduper import Speedup
-
+clock = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
 pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
@@ -47,7 +47,7 @@ video = Video(vidi)
 skins = Skins_changer()
 current = None
 
-particles = []
+#particles = []
 backi = back_for_vidi.convert_alpha()
 back_for_dye2 = back_for_dye.convert_alpha()
 backi.set_alpha(225)
@@ -57,23 +57,23 @@ font_lose = pygame.font.Font("imgs/tetx.ttf", 40)
 text_logo = font_logo.render('SHIP WARS', False, (0, 255, 255))
 text_lose = font_lose.render('ВЫ ПРОИГРАЛИ!', False, (0, 255, 255))
 
+#part = []
+#def emit_particle(x, y, x_vel, y_vel, radius):
+ #   particles.append([[x, y], [x_vel, y_vel], radius])
 
-def emit_particle(x, y, x_vel, y_vel, radius):
-    particles.append([[x, y], [x_vel, y_vel], radius])
 
+#def update_particle():
+  #  for i, particle in reversed(list(enumerate(particles))):
+     #   particle[1][1] += particle[1][0]
+      #  particle[1][1] += particle[1][0]
 
-def update_particle():
-    for i, particle in reversed(list(enumerate(particles))):
-        particle[1][1] += particle[1][0]
-        particle[1][1] += particle[1][0]
+      #  particle[2] -= 0.05
 
-        particle[2] -= 0.05
-
-        reversed_particle = particles[len(particles) - i - 1]
-        pygame.draw.circle(screen, (0, 255, 255), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
-                           reversed_particle[2])
-        if particle[2] <= 0:
-            particles.pop(i)
+      # # reversed_particle = particles[len(particles) - i - 1]
+       # pygame.draw.circle(screen, (132,209,225), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
+       #                    reversed_particle[2])
+       # if particle[2] <= 0:
+       ##     particles.pop(i)
 
 
 def switch(scene):
@@ -153,6 +153,9 @@ def menu():
                 start_menu.check_click(event.pos)
 
         video.draw_to(screen, (0, 0))
+       # mouse_x,mouse_y = pygame.mouse.get_pos()
+       
+
         # screen.fill((255, 0, 0))
         t = video.current_time.format("%h:%m:%s")
         if t == "00:02:26":
@@ -461,7 +464,7 @@ def run():
         keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
                            blow, start_menu)
-
+        #pygame.display.flip()
         if player_ship.changed == False:
             if skins.changed:
                 if skins.first:
@@ -742,7 +745,7 @@ def run():
         if pygame.Rect.colliderect(island.hitbox, can.hitbox):
             can.death()
 
-
+      #  clock.tick(60)
 switch(menu)
 while current is not None:
     current()
