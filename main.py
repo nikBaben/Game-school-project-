@@ -25,7 +25,7 @@ from menu import Menu, MenuItem
 from checker import Checker
 import random
 from vid import Video
-from styles import vidi, back_for_vidi, back_for_dye, menu1,skins_1
+from styles import vidi, back_for_vidi, back_for_dye, menu1, skins_1
 from skins import Skins_changer
 from speeduper import Speedup
 
@@ -207,6 +207,27 @@ def deadi():
 def skins_menu():
     skin1 = skins_1.convert_alpha()
     skin = pygame.transform.scale(skin1, (250, 250))
+    try:
+        file = open('save.json')
+        score = (json.load(file))
+    except:
+        score = 0
+
+    try:
+        file = open('money.json')
+        money = (json.load(file))
+    except:
+        money = 0
+
+    try:
+        file = open('purchases.json')
+        purchase = (json.load(file))
+    except:
+        purchase = 0
+
+    score_panel = Score_panel(screen, score, money)
+    score_panel.menu = True
+
     def go_to_menu():
         checker.skins = False
         switch(menu)
@@ -218,22 +239,50 @@ def skins_menu():
         skins.third = False
 
     def skin_2():
-        skins.changed = True
-        skins.first = False
-        skins.second = True
-        skins.third = False
+        if (purchase != 2) and (purchase != 5):
+            if score_panel.balance >= 75:
+                score_panel.update_money('buy1')
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
+                with open('purchases.json', 'w') as file:
+                    json.dump(purchase + 2, file)
+                skins.changed = True
+                skins.first = False
+                skins.second = True
+                skins.third = False
+            else:
+                print('не хватает денег')
+        else:
+            skins.changed = True
+            skins.first = False
+            skins.second = True
+            skins.third = False
 
     def skin_3():
-        skins.changed = True
-        skins.first = False
-        skins.second = False
-        skins.third = True
+        if (purchase != 3) and (purchase != 5):
+            if score_panel.balance >= 100:
+                score_panel.update_money('buy2')
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
+                with open('purchases.json', 'w') as file:
+                    json.dump(purchase + 3, file)
+                skins.changed = True
+                skins.first = False
+                skins.second = False
+                skins.third = True
+            else:
+                print('не хватает денег')
+        else:
+            skins.changed = True
+            skins.first = False
+            skins.second = False
+            skins.third = True
 
     start_menu = Menu(screen)
     start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_to_menu, (start_menu.cur_x - 280, 100)))
-    start_menu.add_item(MenuItem('скин 1', skin_1, (start_menu.cur_x - 450, 400)))
-    start_menu.add_item(MenuItem('скин 2', skin_2, (start_menu.cur_x - 450, 700)))
-    start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 1000)))
+    start_menu.add_item(MenuItem('скин 1', skin_1, (start_menu.cur_x - 450, 250)))
+    start_menu.add_item(MenuItem('скин 2', skin_2, (start_menu.cur_x - 450, 550)))
+    start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 850)))
     runing = True
     while runing:
         if not checker.skins:
@@ -249,9 +298,10 @@ def skins_menu():
                 start_menu.check_click(event.pos)
 
         screen.fill((100, 100, 100))
-        screen.blit(skin,(500,300))
-        screen.blit(skin,(500,600))
-        screen.blit(skin,(500,900))
+        screen.blit(skin, (500, 300))
+        screen.blit(skin, (500, 600))
+        screen.blit(skin, (500, 900))
+        score_panel.draw_balance()
         start_menu.draw()
         pygame.display.flip()
 
@@ -296,11 +346,28 @@ def run():
     runing = True
     speedup = Speedup()
     while runing:
+        if (score_panel.new_score == 51) and speedup.rocket_shot:
+            enemy.speed += 0.3
+            submarine.speed += 0.3
+            can.speed += 0.3
+            island.speed += 0.3
+            sub_gun.speed += 0.3
+            enemy_gun.speed += 0.3
+            score_panel.update_money('score')
+            speedup.check = True
+            speedup.rocket_shot = False
+
         if not checker.run:
             submarine.death()
             can.death()
             enemy.death()
             island.y = -500
+            enemy.speed = 0.3
+            submarine.speed = 0.35
+            can.speed = 0.5
+            island.speed = 0.25
+            sub_gun.speed = 0.75
+            enemy_gun.speed = 1.25
             runing = False
             checker.run = True
 
@@ -317,7 +384,7 @@ def run():
         player_ship.move()
         blow.draw("nothing")
         score_panel.draw_score()
-        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu)
+        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup)
         keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
                            blow, start_menu)
@@ -366,6 +433,12 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
+                enemy.speed = 0.3
+                submarine.speed = 0.35
+                can.speed = 0.5
+                island.speed = 0.25
+                sub_gun.speed = 0.75
+                enemy_gun.speed = 1.25
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -389,6 +462,12 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
+                enemy.speed = 0.3
+                submarine.speed = 0.35
+                can.speed = 0.5
+                island.speed = 0.25
+                sub_gun.speed = 0.75
+                enemy_gun.speed = 1.25
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -426,6 +505,12 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
+                enemy.speed = 0.3
+                submarine.speed = 0.35
+                can.speed = 0.5
+                island.speed = 0.25
+                sub_gun.speed = 0.75
+                enemy_gun.speed = 1.25
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -449,6 +534,12 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
+                enemy.speed = 0.3
+                submarine.speed = 0.35
+                can.speed = 0.5
+                island.speed = 0.25
+                sub_gun.speed = 0.75
+                enemy_gun.speed = 1.25
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -488,15 +579,6 @@ def run():
                     can.death()
                     can.broke = False
                     can.broke_rocket = False
-                    if score_panel.new_score == 49:
-                        enemy.speed += 0.3
-                        submarine.speed += 0.3
-                        can.speed += 0.3
-                        island.speed += 0.3
-                        sub_gun.speed += 0.3
-                        enemy_gun.speed += 0.3
-                        score_panel.update_money('score')
-                        speedup.check = True
                 # can.image = imge_for_can
                 else:
                     if hit:
@@ -526,6 +608,12 @@ def run():
                         can.death()
                         enemy.death()
                         island.y = -500
+                        enemy.speed = 0.3
+                        submarine.speed = 0.35
+                        can.speed = 0.5
+                        island.speed = 0.25
+                        sub_gun.speed = 0.75
+                        enemy_gun.speed = 1.25
                         switch(deadi)
                         enemy_gun.death(enemy)
                         sub_gun.death(submarine)
@@ -563,6 +651,12 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
+                enemy.speed = 0.3
+                submarine.speed = 0.35
+                can.speed = 0.5
+                island.speed = 0.25
+                sub_gun.speed = 0.75
+                enemy_gun.speed = 1.25
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)

@@ -10,6 +10,9 @@ class Score_panel():
         self.record = score
         self.balance = money
         self.img = pygame.image.load("imgs/score.svg").convert_alpha()
+        '''картинка монеты'''
+        self.monet = pygame.image.load('work_images/money.png').convert_alpha()
+        '''картинка монеты'''
         self.img_menu = pygame.transform.scale(self.img, (65, 65))
         self.image = pygame.transform.scale(self.img, (50, 50))
         self.new_score = 48
@@ -30,6 +33,10 @@ class Score_panel():
             self.balance += 10
         elif type == 'can':
             self.balance += 5
+        elif type == 'buy1':
+            self.balance -= 75
+        elif type == 'buy2':
+            self.balance -= 100
         self.balance_img = self.font1.render(f'{str(self.balance)}', True, (255, 255, 255))
 
     def zeroing(self):
@@ -62,4 +69,5 @@ class Score_panel():
             self.screen.blit(self.image, ((self.screen.get_rect().width // 2) - self.image.get_rect().width - 60, 10))
 
     def draw_balance(self):
-        self.screen.blit(self.balance_img, (0, 0))
+        self.screen.blit(self.monet, (5, 5))
+        self.screen.blit(self.balance_img, (self.screen.get_rect().width - 900, 10))

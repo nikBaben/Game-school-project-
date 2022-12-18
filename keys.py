@@ -3,7 +3,7 @@ from gun import Gun
 import json
 
 
-def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu):
+def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             if score_panel.new_score > score_panel.record:
@@ -30,6 +30,7 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
                     submarine.death()
                     score_panel.update()
                     score_panel.update()
+                    speedup.rocket_shot = True
                     player_ship.have_rocket = False
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
                 new_bullet = Gun(screen, player_ship)
