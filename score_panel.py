@@ -2,7 +2,7 @@ import pygame
 
 
 class Score_panel():
-    def __init__(self, screen, score, money, purchase, num, bought):
+    def __init__(self, screen, score, money, purchase, num, bought, last_skin):
         self.screen = screen
         self.font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 100)
         self.font1 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 30)
@@ -23,11 +23,7 @@ class Score_panel():
         self.balance_img = self.font1.render(f'{str(self.balance)}', True, (255, 255, 255))
         self.menu = False
 
-        if purchase == 0:
-            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
-            self.status2 = self.font3.render('Не куплено: цена - 75', True, (255, 255, 255))
-            self.status3 = self.font3.render('Не куплено: цена - 100', True, (255, 255, 255))
-        elif purchase == 2:
+        if purchase == 2:
             self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
             self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
             self.status3 = self.font3.render('Не куплено: цена - 100', True, (255, 255, 255))
@@ -39,6 +35,10 @@ class Score_panel():
             self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
             self.status2 = self.font3.render('Доступно', True, (255, 255, 255))
             self.status3 = self.font3.render('Доступно', True, (255, 255, 255))
+        else:
+            self.status1 = self.font3.render('Доступно', True, (255, 255, 255))
+            self.status2 = self.font3.render('Не куплено: цена - 75', True, (255, 255, 255))
+            self.status3 = self.font3.render('Не куплено: цена - 100', True, (255, 255, 255))
 
         self.no_money1 = self.font3.render('Не хватает денег', True, (255, 0, 0))
         self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
@@ -63,6 +63,19 @@ class Score_panel():
         if bought >= 5:
             self.no_money1 = self.font3.render('', True, (255, 255, 255))
             self.no_money2 = self.font3.render('', True, (255, 255, 255))
+
+        if last_skin == 2:
+            self.chosen1 = self.font3.render('', True, (0, 255, 0))
+            self.chosen2 = self.font3.render('Скин выбран', True, (0, 255, 0))
+            self.chosen3 = self.font3.render('', True, (0, 255, 0))
+        if last_skin == 3:
+            self.chosen1 = self.font3.render('', True, (0, 255, 0))
+            self.chosen2 = self.font3.render('', True, (0, 255, 0))
+            self.chosen3 = self.font3.render('Скин выбран', True, (0, 255, 0))
+        else:
+            self.chosen1 = self.font3.render('Скин выбран', True, (0, 255, 0))
+            self.chosen2 = self.font3.render('', True, (0, 255, 0))
+            self.chosen3 = self.font3.render('', True, (0, 255, 0))
 
     def update(self):
         self.new_score += 1
@@ -114,6 +127,20 @@ class Score_panel():
             self.no_money1 = self.font3.render('', True, (255, 255, 255))
             self.no_money2 = self.font3.render('', True, (255, 255, 255))
 
+    def update_choose(self, skin_num):
+        if skin_num == 2:
+            self.chosen1 = self.font3.render('', True, (0, 255, 0))
+            self.chosen2 = self.font3.render('Скин выбран', True, (0, 255, 0))
+            self.chosen3 = self.font3.render('', True, (0, 255, 0))
+        elif skin_num == 3:
+            self.chosen1 = self.font3.render('', True, (0, 255, 0))
+            self.chosen2 = self.font3.render('', True, (0, 255, 0))
+            self.chosen3 = self.font3.render('Скин выбран', True, (0, 255, 0))
+        else:
+            self.chosen1 = self.font3.render('Скин выбран', True, (0, 255, 0))
+            self.chosen2 = self.font3.render('', True, (0, 255, 0))
+            self.chosen3 = self.font3.render('', True, (0, 255, 0))
+
     def zeroing(self):
         self.record = 0
         self.new_score = 0
@@ -155,3 +182,8 @@ class Score_panel():
     def draw_no_money(self):
         self.screen.blit(self.no_money1, (30, 620))
         self.screen.blit(self.no_money2, (30, 920))
+
+    def draw_choice(self):
+        self.screen.blit(self.chosen1, (30, 320))
+        self.screen.blit(self.chosen2, (30, 640))
+        self.screen.blit(self.chosen3, (30, 940))

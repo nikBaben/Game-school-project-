@@ -28,6 +28,7 @@ from vid import Video
 from styles import vidi, back_for_vidi, back_for_dye, menu1, skins_1
 from skins import Skins_changer
 from speeduper import Speedup
+
 clock = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((960, 1050))
@@ -47,7 +48,7 @@ video = Video(vidi)
 skins = Skins_changer()
 current = None
 
-#particles = []
+# particles = []
 backi = back_for_vidi.convert_alpha()
 back_for_dye2 = back_for_dye.convert_alpha()
 backi.set_alpha(225)
@@ -57,23 +58,24 @@ font_lose = pygame.font.Font("imgs/tetx.ttf", 40)
 text_logo = font_logo.render('SHIP WARS', False, (0, 255, 255))
 text_lose = font_lose.render('ВЫ ПРОИГРАЛИ!', False, (0, 255, 255))
 
-#part = []
-#def emit_particle(x, y, x_vel, y_vel, radius):
- #   particles.append([[x, y], [x_vel, y_vel], radius])
+
+# part = []
+# def emit_particle(x, y, x_vel, y_vel, radius):
+#   particles.append([[x, y], [x_vel, y_vel], radius])
 
 
-#def update_particle():
-  #  for i, particle in reversed(list(enumerate(particles))):
-     #   particle[1][1] += particle[1][0]
-      #  particle[1][1] += particle[1][0]
+# def update_particle():
+#  for i, particle in reversed(list(enumerate(particles))):
+#   particle[1][1] += particle[1][0]
+#  particle[1][1] += particle[1][0]
 
-      #  particle[2] -= 0.05
+#  particle[2] -= 0.05
 
-      # # reversed_particle = particles[len(particles) - i - 1]
-       # pygame.draw.circle(screen, (132,209,225), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
-       #                    reversed_particle[2])
-       # if particle[2] <= 0:
-       ##     particles.pop(i)
+# # reversed_particle = particles[len(particles) - i - 1]
+# pygame.draw.circle(screen, (132,209,225), (int(reversed_particle[0][0]), int(reversed_particle[0][1])),
+#                    reversed_particle[2])
+# if particle[2] <= 0:
+##     particles.pop(i)
 
 
 def switch(scene):
@@ -102,8 +104,14 @@ def menu():
     except:
         purchase = 0
 
+    try:
+        file = open('last_skin.json')
+        last_skin = (json.load(file))
+    except:
+        last_skin = 1
+
     COUNT2 = [purchase]
-    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0], last_skin)
     score_panel.menu = True
 
     def start_game():
@@ -153,8 +161,7 @@ def menu():
                 start_menu.check_click(event.pos)
 
         video.draw_to(screen, (0, 0))
-       # mouse_x,mouse_y = pygame.mouse.get_pos()
-       
+        # mouse_x,mouse_y = pygame.mouse.get_pos()
 
         # screen.fill((255, 0, 0))
         t = video.current_time.format("%h:%m:%s")
@@ -242,7 +249,7 @@ def skins_menu():
         last_skin = 1
 
     COUNT2 = [purchase]
-    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0], last_skin)
     score_panel.menu = True
 
     COUNT = [purchase]
@@ -258,6 +265,7 @@ def skins_menu():
         skins.second = False
         skins.third = False
         last_skin = 1
+        score_panel.update_choose(last_skin)
         with open('last_skin.json', 'w') as file:
             json.dump(last_skin, file)
 
@@ -279,6 +287,7 @@ def skins_menu():
                 COUNT2[0] += 2
                 score_panel.update_no_money(money - 75, COUNT2[0])
                 last_skin = 2
+                score_panel.update_choose(last_skin)
                 with open('last_skin.json', 'w') as file:
                     json.dump(last_skin, file)
             else:
@@ -289,6 +298,7 @@ def skins_menu():
             skins.second = True
             skins.third = False
             last_skin = 2
+            score_panel.update_choose(last_skin)
             with open('last_skin.json', 'w') as file:
                 json.dump(last_skin, file)
 
@@ -310,6 +320,7 @@ def skins_menu():
                 COUNT2[0] += 3
                 score_panel.update_no_money(money - 100, COUNT2[0])
                 last_skin = 3
+                score_panel.update_choose(last_skin)
                 with open('last_skin.json', 'w') as file:
                     json.dump(last_skin, file)
             else:
@@ -320,6 +331,7 @@ def skins_menu():
             skins.second = False
             skins.third = True
             last_skin = 3
+            score_panel.update_choose(last_skin)
             with open('last_skin.json', 'w') as file:
                 json.dump(last_skin, file)
 
@@ -336,6 +348,12 @@ def skins_menu():
             runing = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                with open('money.json', 'w') as file:
+                    json.dump(score_panel.balance, file)
+                with open('purchases.json', 'w') as file:
+                    json.dump(purchase, file)
+                with open('last_skin.json', 'w') as file:
+                    json.dump(LST[0], file)
                 runing = False
                 switch(None)
             elif event.type == pygame.MOUSEMOTION:
@@ -347,6 +365,7 @@ def skins_menu():
         screen.blit(skin, (500, 200))
         screen.blit(skin, (500, 500))
         screen.blit(skin, (500, 800))
+        score_panel.draw_choice()
         score_panel.draw_balance()
         score_panel.draw_status()
         score_panel.draw_no_money()
@@ -380,7 +399,7 @@ def run():
         purchase = 0
 
     COUNT2 = [purchase]
-    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0], last_skin)
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
 
@@ -464,7 +483,7 @@ def run():
         keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
                            blow, start_menu)
-        #pygame.display.flip()
+        # pygame.display.flip()
         if player_ship.changed == False:
             if skins.changed:
                 if skins.first:
@@ -656,7 +675,7 @@ def run():
                     can.broke = False
                     can.broke_rocket = False
                 # can.image = imge_for_can
-                else:
+                if img == 2:
                     if hit:
                         hit = False
                         player_ship.speed = 1
@@ -664,39 +683,38 @@ def run():
                         can.broke_heart = False
                     can.change = False
                     can.death()
+                if img == 3:
+                    score_panel.update_money('can')
 
                 #  can.image = imge_for_can
             else:
-                if img == 2:
-                    if not hit:
-                        hit = True
-                        player_ship.speed = 0.5
-                        can.change = False
-                        can.death()
-                    else:
-                        if score_panel.new_score > score_panel.record:
-                            score_panel.record = score_panel.new_score
-                        with open('save.json', 'w') as file:
-                            json.dump(score_panel.record, file)
-                        with open('money.json', 'w') as file:
-                            json.dump(score_panel.balance, file)
-                        submarine.death()
-                        can.death()
-                        enemy.death()
-                        island.y = -500
-                        enemy.speed = 0.3
-                        submarine.speed = 0.35
-                        can.speed = 0.5
-                        island.speed = 0.25
-                        sub_gun.speed = 0.75
-                        enemy_gun.speed = 1.25
-                        switch(deadi)
-                        enemy_gun.death(enemy)
-                        sub_gun.death(submarine)
-                        hit = False
-                        runing = False
-                if img == 3:
-                    score_panel.update_money('can')
+                if not hit:
+                    hit = True
+                    player_ship.speed = 0.5
+                    can.change = False
+                    can.death()
+                else:
+                    if score_panel.new_score > score_panel.record:
+                        score_panel.record = score_panel.new_score
+                    with open('save.json', 'w') as file:
+                        json.dump(score_panel.record, file)
+                    with open('money.json', 'w') as file:
+                        json.dump(score_panel.balance, file)
+                    submarine.death()
+                    can.death()
+                    enemy.death()
+                    island.y = -500
+                    enemy.speed = 0.3
+                    submarine.speed = 0.35
+                    can.speed = 0.5
+                    island.speed = 0.25
+                    sub_gun.speed = 0.75
+                    enemy_gun.speed = 1.25
+                    switch(deadi)
+                    enemy_gun.death(enemy)
+                    sub_gun.death(submarine)
+                    hit = False
+                    runing = False
 
             #  can.image =imge_for_can
             broke = False
@@ -745,7 +763,9 @@ def run():
         if pygame.Rect.colliderect(island.hitbox, can.hitbox):
             can.death()
 
-      #  clock.tick(60)
+    #  clock.tick(60)
+
+
 switch(menu)
 while current is not None:
     current()
