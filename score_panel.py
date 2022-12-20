@@ -1,8 +1,9 @@
 import pygame
+from skins import Skins_changer
 
 
 class Score_panel():
-    def __init__(self, screen, score, money, purchase, num, bought, last_skin):
+    def __init__(self, screen, score, money, purchase, num, bought):
         self.screen = screen
         self.font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 100)
         self.font1 = pygame.font.Font("imgs/retro-land-mayhem.ttf", 30)
@@ -16,7 +17,7 @@ class Score_panel():
         '''картинка монеты'''
         self.img_menu = pygame.transform.scale(self.img, (65, 65))
         self.image = pygame.transform.scale(self.img, (50, 50))
-        self.new_score = 48
+        self.new_score = 0
         self.record_img = self.font1.render(f'{str(self.record)}', True, (255, 255, 255))
         self.record_img2 = self.font2.render(f'{str(self.record)}', True, (255, 255, 255))
         self.new_score_img = self.font.render(f'{str(self.new_score)}', True, (255, 255, 255))
@@ -64,11 +65,13 @@ class Score_panel():
             self.no_money1 = self.font3.render('', True, (255, 255, 255))
             self.no_money2 = self.font3.render('', True, (255, 255, 255))
 
-        if last_skin == 2:
+        skins = Skins_changer()
+
+        if skins.second:
             self.chosen1 = self.font3.render('', True, (0, 255, 0))
             self.chosen2 = self.font3.render('Скин выбран', True, (0, 255, 0))
             self.chosen3 = self.font3.render('', True, (0, 255, 0))
-        if last_skin == 3:
+        if skins.third:
             self.chosen1 = self.font3.render('', True, (0, 255, 0))
             self.chosen2 = self.font3.render('', True, (0, 255, 0))
             self.chosen3 = self.font3.render('Скин выбран', True, (0, 255, 0))

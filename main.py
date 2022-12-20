@@ -111,7 +111,7 @@ def menu():
         last_skin = 1
 
     COUNT2 = [purchase]
-    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0], last_skin)
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
     score_panel.menu = True
 
     def start_game():
@@ -249,7 +249,7 @@ def skins_menu():
         last_skin = 1
 
     COUNT2 = [purchase]
-    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0], last_skin)
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
     score_panel.menu = True
 
     COUNT = [purchase]
@@ -265,7 +265,6 @@ def skins_menu():
         skins.second = False
         skins.third = False
         last_skin = 1
-        score_panel.update_choose(last_skin)
         with open('last_skin.json', 'w') as file:
             json.dump(last_skin, file)
 
@@ -279,7 +278,7 @@ def skins_menu():
                     json.dump(score_panel.balance, file)
                 with open('purchases.json', 'w') as file:
                     json.dump(purchase + COUNT[0], file)
-                score_panel.update_status(COUNT[0])
+                # score_panel.update_status(COUNT[0])
                 skins.changed = True
                 skins.first = False
                 skins.second = True
@@ -287,7 +286,6 @@ def skins_menu():
                 COUNT2[0] += 2
                 score_panel.update_no_money(money - 75, COUNT2[0])
                 last_skin = 2
-                score_panel.update_choose(last_skin)
                 with open('last_skin.json', 'w') as file:
                     json.dump(last_skin, file)
             else:
@@ -298,7 +296,6 @@ def skins_menu():
             skins.second = True
             skins.third = False
             last_skin = 2
-            score_panel.update_choose(last_skin)
             with open('last_skin.json', 'w') as file:
                 json.dump(last_skin, file)
 
@@ -312,7 +309,7 @@ def skins_menu():
                     json.dump(score_panel.balance, file)
                 with open('purchases.json', 'w') as file:
                     json.dump(purchase + COUNT[0], file)
-                score_panel.update_status(COUNT[0])
+                # score_panel.update_status(COUNT[0])
                 skins.changed = True
                 skins.first = False
                 skins.second = False
@@ -320,7 +317,6 @@ def skins_menu():
                 COUNT2[0] += 3
                 score_panel.update_no_money(money - 100, COUNT2[0])
                 last_skin = 3
-                score_panel.update_choose(last_skin)
                 with open('last_skin.json', 'w') as file:
                     json.dump(last_skin, file)
             else:
@@ -331,7 +327,6 @@ def skins_menu():
             skins.second = False
             skins.third = True
             last_skin = 3
-            score_panel.update_choose(last_skin)
             with open('last_skin.json', 'w') as file:
                 json.dump(last_skin, file)
 
@@ -342,6 +337,19 @@ def skins_menu():
     start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 850)))
     runing = True
     while runing:
+        try:
+            file = open('last_skin.json')
+            last_skin = (json.load(file))
+        except:
+            last_skin = 1
+        score_panel.update_choose(last_skin)
+
+        try:
+            file = open('purchases.json')
+            purchase = (json.load(file))
+        except:
+            purchase = 0
+        score_panel.update_status(purchase)
         # score_panel.update_no_money(money, COUNT2[0])
         if not checker.skins:
             checker.skins = True
@@ -353,7 +361,13 @@ def skins_menu():
                 with open('purchases.json', 'w') as file:
                     json.dump(purchase, file)
                 with open('last_skin.json', 'w') as file:
-                    json.dump(LST[0], file)
+                    if skins.first == True:
+                        json.dump(1, file)
+                    elif skins.second == True:
+                        json.dump(2, file)
+                    elif skins.third == True:
+                        json.dump(3, file)
+
                 runing = False
                 switch(None)
             elif event.type == pygame.MOUSEMOTION:
@@ -399,7 +413,7 @@ def run():
         purchase = 0
 
     COUNT2 = [purchase]
-    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0], last_skin)
+    score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
     player_ship = Player_Ship(screen)
     gun = Gun(screen, player_ship)
 
@@ -685,6 +699,8 @@ def run():
                     can.death()
                 if img == 3:
                     score_panel.update_money('can')
+                    can.death()
+                    can.broke = False
 
                 #  can.image = imge_for_can
             else:
