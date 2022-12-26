@@ -123,7 +123,7 @@ for y in range(1,7):
 
 
 """Анимация для передвижения корабля вперед"""
-for moveup in range(1,17):
+for moveup in range(1,61):
     player_moveup_file = "imgs/player/player_move_up{}.svg".format(moveup)
     player_moveup =pygame.image.load(player_moveup_file)
     player_move_up.append(player_moveup)

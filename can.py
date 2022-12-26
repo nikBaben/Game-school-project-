@@ -13,7 +13,7 @@ class Can():
         #self.image = pygame.image.load('work_images/can.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 0.5
+        self.speed = 8
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  #

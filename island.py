@@ -12,7 +12,7 @@ class Island():
         self.image = (anim_island[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 0.25
+        self.speed = 4
         sp = spawn_x()
         sp1, sp2, sp3, sp4 = sp - 1, sp + 1, sp - 2, sp + 2
         cords[sp1] = False

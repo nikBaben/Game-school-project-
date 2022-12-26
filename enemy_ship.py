@@ -14,7 +14,7 @@ class Enemy(Sprite):
         self.image = (anim_enemy[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 0.3
+        self.speed = 4.8
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         # Номер кадра в списке anim, изначально равне 0

@@ -39,8 +39,8 @@ class Player_Ship():
         self.sht = False  # Для выстрелов
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
-        self.frame_rate = 70  # Количесво кадров в игре
-        self.speed = 1
+        self.frame_rate = 60  # Количесво кадров в игре
+        self.speed = 7
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
         self.have_rocket = False
 

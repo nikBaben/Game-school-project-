@@ -57,13 +57,14 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
             start_menu.check_click(event.pos)
 
 
-def update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun, submarine,
+def update_screen(clock,color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun, submarine,
                   sub_gun, blow, start_menu):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
+    
     def particle (x,y): 
         part.append([[x,y], [random.randint(0,20) / 10 - 1,-2],random.randint(4,6)])
         for p in part: 
@@ -109,7 +110,8 @@ def update_screen(color, back, screen, score_panel, bullets, island, player_ship
     ###
     for bullet in bullets.sprites():
         bullet.output_bullet()
-
+    clock.tick(60)
+    pygame.display.set_caption(str(clock.get_fps()))
     pygame.display.flip()
    # clock.tick(60)
 

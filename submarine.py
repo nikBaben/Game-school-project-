@@ -14,7 +14,7 @@ class Submarine():
         self.image = (anim_submarine[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 0.35
+        self.speed = 5.6
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0

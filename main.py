@@ -31,13 +31,15 @@ from speeduper import Speedup
 from skin import Skin_1
 
 
-clock = pygame.time.Clock()
+
 pygame.init()
 #screen = pygame.display.set_mode((960, 1050))
 pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
 res = Resolution()
 infoObject = pygame.display.Info()
 screen = pygame.display.set_mode((infoObject.current_w//2, infoObject.current_h-30))
+
+
 #screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 #if res.resol == 1080: 
  #   screen = pygame.display.set_mode((960, 1050))
@@ -401,6 +403,7 @@ def skins_menu():
 
 
 def run():
+    clock = pygame.time.Clock()
     try:
         file = open('save.json')
         score = (json.load(file))
@@ -507,7 +510,7 @@ def run():
         blow.draw("nothing")
         score_panel.draw_score()
         keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup)
-        keys.update_screen(color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
+        keys.update_screen(clock,color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
                            blow, start_menu)
         # pygame.display.flip()
@@ -792,7 +795,7 @@ def run():
         if pygame.Rect.colliderect(island.hitbox, can.hitbox):
             can.death()
 
-    #  clock.tick(60)
+        
 
 
 switch(menu)
