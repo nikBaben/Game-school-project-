@@ -1,5 +1,5 @@
 import json
-
+from resolution_cheker import Resolution
 import pygame, sys
 from player_ship import Player_Ship
 from gun import Gun
@@ -30,10 +30,20 @@ from skins import Skins_changer
 from speeduper import Speedup
 from skin import Skin_1
 
+
 clock = pygame.time.Clock()
 pygame.init()
-screen = pygame.display.set_mode((960, 1050))
+#screen = pygame.display.set_mode((960, 1050))
 pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
+res = Resolution()
+infoObject = pygame.display.Info()
+screen = pygame.display.set_mode((infoObject.current_w//2, infoObject.current_h-30))
+#screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+#if res.resol == 1080: 
+ #   screen = pygame.display.set_mode((960, 1050))
+#if res.resol == 720:
+ #   screen = pygame.display.set_mode((800, 690))
+    
 color = (95, 205, 228)
 
 enemy = Enemy(screen)
