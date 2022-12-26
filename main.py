@@ -225,7 +225,7 @@ def deadi():
 def skins_menu():
     #skin1 = skins_1.convert_alpha()
     #skin = pygame.transform.scale(skin1, (250, 250))
-    skins = Skin_1(screen)
+    skins1 = Skin_1(screen)
     try:
         file = open('save.json')
         score = (json.load(file))
@@ -378,7 +378,7 @@ def skins_menu():
                 start_menu.check_click(event.pos)
 
         screen.fill((100, 100, 100))
-        skins.output()
+        skins1.output()
        # screen.blit(skin, (500, 200))
         #screen.blit(skin, (500, 500))
         #screen.blit(skin, (500, 800))
