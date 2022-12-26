@@ -19,6 +19,7 @@ player_move_up = []
 blow_ship_anim = []
 blow_sub_anim = []
 anim_skin1 = []
+skin_1_anim = []
 skin4 = pygame.image.load("work_images/skin_1.png")
 skin2 = pygame.image.load("work_images/skin_2.png")
 skin3 = pygame.image.load("work_images/skin_3.png")
@@ -28,7 +29,8 @@ back_for_vidi = pygame.image.load("imgs/for_vid.png")
 back_for_dy = pygame.image.load("imgs/back_for_dye.png")
 back_for_dye = pygame.transform.scale(back_for_dy, (960, 1050)) 
 menu1 = pygame.image.load("imgs/menu2.png")
-skins_1 = pygame.image.load("imgs/skins1.png")
+#skins_1 = pygame.image.load("imgs/skin s1.png")
+
 
 
 
@@ -56,7 +58,14 @@ for submarine in range(1,18):
     anim_submarine.append(sub)
 """"""
 
-
+"""скин 1"""
+for skin_1 in range(1,20):
+    skin_1_file = "imgs/first_skin{}.png".format(skin_1)
+    skin_1 = pygame.image.load(skin_1_file)
+    skin_1_anim.append(skin_1)
+    
+    
+    
 """Анимация взрыва бочки"""
 for blow_can in range(1,6):
     blow_can_file = "imgs/blow_can{}.svg".format(blow_can)

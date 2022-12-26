@@ -78,7 +78,61 @@ class Player_Ship():
             self.frame += 1  # Надо переделать, для чистоты анимаци
             if self.changed:
                 if self.skin1:
-                    self.image = (ainm_player_stand[0]).convert_alpha()
+                    
+                    if self.moveup:
+                    # self.frame +=1
+                        if self.frame >= len(player_move_up):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (player_move_up[self.frame]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.sht:
+                        if self.frame >= len(anim_fire):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (anim_fire[self.frame]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.moveright:
+                        if self.frame >= len(anim_fire):
+                         self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (player_move_up[1]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.moveleft:
+                        if self.frame >= len(anim_shipplayer_moveup):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (player_move_up[1]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False and self.movedown == False:
+                        if self.frame >= len(ainm_player_stand):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (ainm_player_stand[self.frame]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    #self.image = (ainm_player_stand[0]).convert_alpha()
                 if self.skin2:
                     self.image = skin2.convert_alpha()
                 if self.skin3:
@@ -93,7 +147,6 @@ class Player_Ship():
             #  self.rect.center = center
 
             else:
-
                 if self.moveup:
                     # self.frame +=1
                     if self.frame >= len(player_move_up):
