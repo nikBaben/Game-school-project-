@@ -6,13 +6,18 @@ from spawn import spawn_check, first
 
 
 class Island():
-    def __init__(self, screen):
+    def __init__(self, screen, freq):
         global sp, sp1, sp2, sp3, sp4
         self.screen = screen
         self.image = (anim_island[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 4
+        if freq == 60:
+            self.speed = 4
+        if freq == 144:
+            self.speed = 2
+        else:
+            self.speed = 3
         sp = spawn_x()
         sp1, sp2, sp3, sp4 = sp - 1, sp + 1, sp - 2, sp + 2
         cords[sp1] = False

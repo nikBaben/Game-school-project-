@@ -4,9 +4,11 @@ import json
 import random
 import time
 
-part= [ ]
+part = []
 part1 = []
-def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup):
+
+
+def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup, freq):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             if score_panel.new_score > score_panel.record:
@@ -36,7 +38,7 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
                     speedup.rocket_shot = True
                     player_ship.have_rocket = False
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
-                new_bullet = Gun(screen, player_ship)
+                new_bullet = Gun(screen, player_ship , freq)
                 bullets.add(new_bullet)
 
         elif event.type == pygame.KEYUP:
@@ -57,23 +59,24 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
             start_menu.check_click(event.pos)
 
 
-def update_screen(clock,color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun, submarine,
-                  sub_gun, blow, start_menu):
+def update_screen(clock, color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
+                  submarine,
+                  sub_gun, blow, start_menu, freq):
     # ЗАПОЛЕНЕНИЯ ЗАДЕНГО ЭКРАНА, ПРИДУМАТЬ СПОСОБ!
     # screen.blit(bg_color,(0,0))
     # screen.blit(bg_color,(0,0))
     #  screen.fill(bg_color) Заполенение экрана белым цветом, сопоставим с  main() bg_color
     # dead.output()
-    
-    def particle (x,y): 
-        part.append([[x,y], [random.randint(0,20) / 10 - 1,-2],random.randint(4,6)])
-        for p in part: 
+
+    def particle(x, y):
+        part.append([[x, y], [random.randint(0, 20) / 10 - 1, -2], random.randint(4, 6)])
+        for p in part:
             p[0][0] += p[1][0]
             p[0][1] += p[1][1]
             p[2] -= 0.1
-            #p[1][1] +=0.1
-            pygame.draw.circle(screen,(132,209,225),[int(p[0][0]),int(p[0][1])] , int(p[2]))
-            if p[2] <= 0: 
+            # p[1][1] +=0.1
+            pygame.draw.circle(screen, (132, 209, 225), [int(p[0][0]), int(p[0][1])], int(p[2]))
+            if p[2] <= 0:
                 part.remove(p)
 
     screen.fill(color)
@@ -85,8 +88,8 @@ def update_screen(clock,color, back, screen, score_panel, bullets, island, playe
     player_ship.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
-    particle(enemy.rect.centerx,enemy.y+8)
-    particle(submarine.rect.centerx,submarine.y)
+    particle(enemy.rect.centerx, enemy.y + 8)
+    particle(submarine.rect.centerx, submarine.y)
     score_panel.draw_score()
     # player_ship.output()
 
@@ -110,10 +113,9 @@ def update_screen(clock,color, back, screen, score_panel, bullets, island, playe
     ###
     for bullet in bullets.sprites():
         bullet.output_bullet()
-    clock.tick(60)
+    clock.tick(freq)
     pygame.display.set_caption(str(clock.get_fps()))
     pygame.display.flip()
-   # clock.tick(60)
 
 
 def update_bullet(bullets):

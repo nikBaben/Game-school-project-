@@ -3,17 +3,23 @@ from styles import anim_can
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
 from random import choice
-from styles import blow_can_anim 
+from styles import blow_can_anim
+
 
 class Can():
-    def __init__(self, screen):
+    def __init__(self, screen, freq):
         global sp
         self.screen = screen
-        self.image = (anim_can[0]).convert_alpha() #ДЛЯ РАЗРАБОТКИ ПОКА УБЕРУ, ВЕРНЕШЬ ПОТОМ
-        #self.image = pygame.image.load('work_images/can.png')
+        self.image = (anim_can[0]).convert_alpha()  # ДЛЯ РАЗРАБОТКИ ПОКА УБЕРУ, ВЕРНЕШЬ ПОТОМ
+        # self.image = pygame.image.load('work_images/can.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 8
+        if freq == 60:
+            self.speed = 8
+        if freq == 144:
+            self.speed = 5
+        else:
+            self.speed = 7
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 70  #
@@ -46,7 +52,7 @@ class Can():
 
         if self.y >= 1100:
             self.image = (anim_can[0]).convert_alpha()
-           # self.image = pygame.image.load('work_images/can.png')
+            # self.image = pygame.image.load('work_images/can.png')
             self.y = -50
             cords[sp] = True
             sp = spawn_x()
@@ -61,7 +67,7 @@ class Can():
 
     def output(self):
         now = pygame.time.get_ticks()
-    
+
         # Анимация бочки
         if now - self.last_update > self.frame_rate:
             self.last_update = now
@@ -73,29 +79,27 @@ class Can():
                 self.image = (anim_can[self.frame]).convert_alpha()
                 self.rect = self.image.get_rect()
                 self.rect.center = center
-           
+
             # Анимация взрыва
-            if self.broke == True: 
-                if self.blow == True: 
+            if self.broke == True:
+                if self.blow == True:
                     if self.frame >= len(blow_can_anim):
                         self.frame = 0
-                        self.blow  = False
-                        self.y_True  = True
+                        self.blow = False
+                        self.y_True = True
                     else:
                         center = self.rect.center
                         self.image = (blow_can_anim[self.frame]).convert_alpha()
                         self.rect = self.image.get_rect()
                         self.rect.center = center
                         self.y_True = False
-             
-            #Картинка сердца или ракеты
-                if self.blow == False: 
+
+                # Картинка сердца или ракеты
+                if self.blow == False:
                     if self.broke_rocket == True:
                         self.image = pygame.image.load("imgs/rocket.svg").convert_alpha()
                     if self.broke_heart == True:
                         self.image = pygame.image.load("imgs/heart.svg").convert_alpha()
-        
 
-        
         self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20, 20)
         self.screen.blit(self.image, self.rect)

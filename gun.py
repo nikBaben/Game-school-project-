@@ -2,14 +2,19 @@ import pygame
 
 
 class Gun(pygame.sprite.Sprite):
-    def __init__(self, screen, player_ship):
+    def __init__(self, screen, player_ship, freq):
         global rect
         super(Gun, self).__init__()
         self.screen = screen
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
         self.image = pygame.image.load("imgs/bullet.svg").convert_alpha()
-        self.speed = 25
+        if freq == 60:
+            self.speed = 25
+        if freq == 144:
+            self.speed = 15
+        else:
+            self.speed = 20
         self.rect.centerx = player_ship.rect.centerx
         self.rect.top = player_ship.rect.top + 25
         self.y = float(self.rect.y)

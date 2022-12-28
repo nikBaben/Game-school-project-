@@ -28,12 +28,17 @@ from styles import vidi, back_for_vidi, back_for_dye, menu1
 from skins import Skins_changer
 from speeduper import Speedup
 from skin import Skin_1
+from frequence_checker import printInfo
+import win32api
 
 pygame.init()
+freq = printInfo(win32api.EnumDisplayDevices())
+print(freq)
+Clock = pygame.time.Clock()
 # screen = pygame.display.set_mode((960, 1050))
 pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
 infoObject = pygame.display.Info()
-screen = pygame.display.set_mode((infoObject.current_w // 2, infoObject.current_h - 30))
+screen = pygame.display.set_mode((960, infoObject.current_h - 30), pygame.DOUBLEBUF)
 
 # screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 # if res.resol == 1080:
@@ -43,14 +48,14 @@ screen = pygame.display.set_mode((infoObject.current_w // 2, infoObject.current_
 
 color = (95, 205, 228)
 
-enemy = Enemy(screen)
-submarine = Submarine(screen)
-enemy_gun = Enemy_gun(screen, enemy)
-sub_gun = Sub_gun(screen, submarine)
-can = Can(screen)
-island = Island(screen)
+enemy = Enemy(screen, freq)
+submarine = Submarine(screen, freq)
+enemy_gun = Enemy_gun(screen, enemy, freq)
+sub_gun = Sub_gun(screen, submarine, freq)
+can = Can(screen, freq)
+island = Island(screen, freq)
 bullets = Group()
-back = Back(screen)
+back = Back(screen, freq)
 checker = Checker()
 video = Video(vidi)
 skins = Skins_changer()
@@ -398,7 +403,6 @@ def skins_menu():
 
 
 def run():
-    clock = pygame.time.Clock()
     try:
         file = open('save.json')
         score = (json.load(file))
@@ -425,8 +429,8 @@ def run():
 
     COUNT2 = [purchase]
     score_panel = Score_panel(screen, score, money, purchase, money, COUNT2[0])
-    player_ship = Player_Ship(screen)
-    gun = Gun(screen, player_ship)
+    player_ship = Player_Ship(screen, freq)
+    gun = Gun(screen, player_ship, freq)
 
     blow = Blow(screen)
 
@@ -504,10 +508,10 @@ def run():
         player_ship.move()
         blow.draw("nothing")
         score_panel.draw_score()
-        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup)
-        keys.update_screen(clock, color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
+        keys.update_screen(Clock, color, back, screen, score_panel, bullets, island, player_ship, can, enemy, enemy_gun,
                            submarine, sub_gun,
-                           blow, start_menu)
+                           blow, start_menu, freq)
+        keys.movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup, freq)
         # pygame.display.flip()
         if player_ship.changed == False:
             if skins.changed:

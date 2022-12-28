@@ -3,14 +3,19 @@ from enemy_ship import Enemy
 
 
 class Enemy_gun(pygame.sprite.Sprite):
-    def __init__(self, screen, enemy_ship):
+    def __init__(self, screen, enemy_ship, freq):
         super(Enemy_gun, self).__init__()
         self.screen = screen
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
         self.image = pygame.image.load("imgs/bullet.svg")
-        self.speed = 20
+        if freq == 60:
+            self.speed = 20
+        if freq == 144:
+            self.speed = 13
+        else:
+            self.speed = 16
         self.rect.centerx = enemy_ship.rect.centerx
         self.rect.top = enemy_ship.rect.top + 125
         self.y = float(self.rect.y)

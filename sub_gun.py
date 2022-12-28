@@ -2,14 +2,20 @@ import pygame
 
 
 class Sub_gun(pygame.sprite.Sprite):
-    def __init__(self, screen, submarine):
+    def __init__(self, screen, submarine, freq):
         super(Sub_gun, self).__init__()
         self.screen = screen
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
         self.image = pygame.image.load("work_images/bulet_for_sub.svg").convert_alpha()
-        self.speed = 12
+        if freq == 60:
+            self.speed = 12
+        if freq == 144:
+            self.speed = 9
+        else:
+            self.speed = 11
+
         self.rect.centerx = submarine.rect.centerx
         self.rect.top = submarine.rect.top + 125
         self.y = float(self.rect.y)

@@ -19,7 +19,7 @@ skins = Skins_changer()
 
 
 class Player_Ship():
-    def __init__(self, screen):
+    def __init__(self, screen, freq):
         self.screen = screen
         self.skin1 = False
         self.skin2 = False
@@ -40,7 +40,12 @@ class Player_Ship():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 60  # Количесво кадров в игре
-        self.speed = 7
+        if freq == 60:
+            self.speed = 7
+        if freq == 144:
+            self.speed = 4
+        else:
+            self.speed = 6
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)
         self.have_rocket = False
 
@@ -78,9 +83,9 @@ class Player_Ship():
             self.frame += 1  # Надо переделать, для чистоты анимаци
             if self.changed:
                 if self.skin1:
-                    
+
                     if self.moveup:
-                    # self.frame +=1
+                        # self.frame +=1
                         if self.frame >= len(player_move_up):
                             self.frame = 0
                         else:
@@ -100,7 +105,7 @@ class Player_Ship():
 
                     if self.moveright:
                         if self.frame >= len(anim_fire):
-                         self.frame = 0
+                            self.frame = 0
                         else:
                             center = self.rect.center
                             self.image = (player_move_up[1]).convert_alpha()
@@ -124,15 +129,8 @@ class Player_Ship():
                             self.image = (ainm_player_stand[self.frame]).convert_alpha()
                             self.rect = self.image.get_rect()
                             self.rect.center = center
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    #self.image = (ainm_player_stand[0]).convert_alpha()
+
+                    # self.image = (ainm_player_stand[0]).convert_alpha()
                 if self.skin2:
                     self.image = skin2.convert_alpha()
                 if self.skin3:

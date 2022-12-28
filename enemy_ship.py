@@ -7,14 +7,19 @@ from styles import blow_ship_anim
 
 
 class Enemy(Sprite):
-    def __init__(self, screen):
+    def __init__(self, screen, freq):
         super().__init__()
         global sp
         self.screen = screen
         self.image = (anim_enemy[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 4.8
+        if freq == 60:
+            self.speed = 4.8
+        if freq == 144:
+            self.speed = 3
+        else:
+            self.speed = 4.5
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         # Номер кадра в списке anim, изначально равне 0

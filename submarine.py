@@ -7,14 +7,19 @@ from styles import blow_sub_anim
 
 
 class Submarine():
-    def __init__(self, screen):
+    def __init__(self, screen, freq):
         global sp
         self.screen = screen
         # self.image = (anim_enemy[0]).convert_alpha()
         self.image = (anim_submarine[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.speed = 5.6
+        if freq == 60:
+            self.speed = 5.6
+        if freq == 144:
+            self.speed = 4
+        else:
+            self.speed = 5
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
