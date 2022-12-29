@@ -513,7 +513,7 @@ def run():
                 can.speed = 3.3
                 island.speed = 1.8
                 sub_gun.speed = 4.3
-                enemy_gun.speed = 20
+                enemy_gun.speed = 8
             else:
                 enemy.speed = 4.5
                 submarine.speed = 5
