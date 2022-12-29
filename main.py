@@ -388,7 +388,7 @@ def skins_menu():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
 
-        screen.fill((100, 100, 100))
+        screen.blit(pygame.image.load('work_images/skins_back.png'), (0, 0))
         skins1.output()
         # screen.blit(skin, (500, 200))
         # screen.blit(skin, (500, 500))
