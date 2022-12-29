@@ -33,7 +33,6 @@ import win32api
 
 pygame.init()
 freq = printInfo(win32api.EnumDisplayDevices())
-print(freq)
 Clock = pygame.time.Clock()
 # screen = pygame.display.set_mode((960, 1050))
 pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
@@ -471,12 +470,27 @@ def run():
             player_ship.skin3 = True
             player_ship.changed = True
         if ((score_panel.new_score % 50) == 1) and speedup.rocket_shot:
-            enemy.speed += 0.3
-            submarine.speed += 0.3
-            can.speed += 0.3
-            island.speed += 0.3
-            sub_gun.speed += 0.3
-            enemy_gun.speed += 0.3
+            if freq <= 60:
+                enemy.speed += 0.3
+                submarine.speed += 0.3
+                can.speed += 0.3
+                island.speed += 0.3
+                sub_gun.speed += 0.3
+                enemy_gun.speed += 0.3
+            if freq >= 120:
+                enemy.speed += 1
+                submarine.speed += 1
+                can.speed += 1
+                island.speed += 1
+                sub_gun.speed += 1
+                enemy_gun.speed += 1
+            else:
+                enemy.speed += 0.6
+                submarine.speed += 0.6
+                can.speed += 0.6
+                island.speed += 0.6
+                sub_gun.speed += 0.6
+                enemy_gun.speed += 0.6
             score_panel.update_money('score')
             speedup.check = True
             speedup.rocket_shot = False
@@ -486,12 +500,27 @@ def run():
             can.death()
             enemy.death()
             island.y = -500
-            enemy.speed = 4.8
-            submarine.speed = 5.6
-            can.speed = 8
-            island.speed = 4
-            sub_gun.speed = 12
-            enemy_gun.speed = 20
+            if freq <= 60:
+                enemy.speed = 4.8
+                submarine.speed = 5.6
+                can.speed = 8
+                island.speed = 4
+                sub_gun.speed = 12
+                enemy_gun.speed = 20
+            if freq >= 120:
+                enemy.speed = 2.3
+                submarine.speed = 2
+                can.speed = 3.3
+                island.speed = 1.8
+                sub_gun.speed = 4.3
+                enemy_gun.speed = 20
+            else:
+                enemy.speed = 4.5
+                submarine.speed = 5
+                can.speed = 7
+                island.speed = 3
+                sub_gun.speed = 11
+                enemy_gun.speed = 16
             runing = False
             checker.run = True
 
@@ -527,12 +556,27 @@ def run():
 
         if (score_panel.new_score > 0) and score_panel.new_score % 50 == 0:
             if not speedup.check:
-                enemy.speed += 0.3
-                submarine.speed += 0.3
-                can.speed += 0.3
-                island.speed += 0.3
-                sub_gun.speed += 0.3
-                enemy_gun.speed += 0.3
+                if freq <= 60:
+                    enemy.speed += 0.3
+                    submarine.speed += 0.3
+                    can.speed += 0.3
+                    island.speed += 0.3
+                    sub_gun.speed += 0.3
+                    enemy_gun.speed += 0.3
+                if freq >= 120:
+                    enemy.speed += 1
+                    submarine.speed += 1
+                    can.speed += 1
+                    island.speed += 1
+                    sub_gun.speed += 1
+                    enemy_gun.speed += 1
+                else:
+                    enemy.speed += 0.6
+                    submarine.speed += 0.6
+                    can.speed += 0.6
+                    island.speed += 0.6
+                    sub_gun.speed += 0.6
+                    enemy_gun.speed += 0.6
                 score_panel.update_money('score')
                 speedup.check = True
         if (score_panel.new_score > 0) and (score_panel.new_score % 50 != 0):
@@ -547,7 +591,12 @@ def run():
             # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
-                player_ship.speed = 3.5
+                if freq <= 60:
+                    player_ship.speed = 3.5
+                if freq >= 120:
+                    player_ship.speed = 1.8
+                else:
+                    player_ship.speed = 2.8
             else:
                 if score_panel.new_score > score_panel.record:
                     score_panel.record = score_panel.new_score
@@ -557,12 +606,27 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
-                enemy.speed = 4.8
-                submarine.speed = 5.6
-                can.speed = 8
-                island.speed = 4
-                sub_gun.speed = 12
-                enemy_gun.speed = 20
+                if freq <= 60:
+                    enemy.speed = 4.8
+                    submarine.speed = 5.6
+                    can.speed = 8
+                    island.speed = 4
+                    sub_gun.speed = 12
+                    enemy_gun.speed = 20
+                if freq >= 120:
+                    enemy.speed = 2.3
+                    submarine.speed = 2
+                    can.speed = 3.3
+                    island.speed = 1.8
+                    sub_gun.speed = 4.3
+                    enemy_gun.speed = 8
+                else:
+                    enemy.speed = 4.5
+                    submarine.speed = 5
+                    can.speed = 7
+                    island.speed = 3
+                    sub_gun.speed = 11
+                    enemy_gun.speed = 16
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -574,7 +638,12 @@ def run():
             enemy_gun.shot(enemy)
             if not hit:
                 hit = True
-                player_ship.speed = 3.5
+                if freq <= 60:
+                    player_ship.speed = 3.5
+                if freq >= 120:
+                    player_ship.speed = 1.8
+                else:
+                    player_ship.speed = 2.8
             else:
                 if score_panel.new_score > score_panel.record:
                     score_panel.record = score_panel.new_score
@@ -586,12 +655,27 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
-                enemy.speed = 4.8
-                submarine.speed = 5.6
-                can.speed = 8
-                island.speed = 4
-                sub_gun.speed = 12
-                enemy_gun.speed = 20
+                if freq <= 60:
+                    enemy.speed = 4.8
+                    submarine.speed = 5.6
+                    can.speed = 8
+                    island.speed = 4
+                    sub_gun.speed = 12
+                    enemy_gun.speed = 20
+                if freq >= 120:
+                    enemy.speed = 2.3
+                    submarine.speed = 2
+                    can.speed = 3.3
+                    island.speed = 1.8
+                    sub_gun.speed = 4.3
+                    enemy_gun.speed = 8
+                else:
+                    enemy.speed = 4.5
+                    submarine.speed = 5
+                    can.speed = 7
+                    island.speed = 3
+                    sub_gun.speed = 11
+                    enemy_gun.speed = 16
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -617,7 +701,12 @@ def run():
             # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
-                player_ship.speed = 3.5
+                if freq <= 60:
+                    player_ship.speed = 3.5
+                if freq >= 120:
+                    player_ship.speed = 1.8
+                else:
+                    player_ship.speed = 2.8
             else:
                 if score_panel.new_score > score_panel.record:
                     score_panel.record = score_panel.new_score
@@ -629,12 +718,27 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
-                enemy.speed = 4.8
-                submarine.speed = 5.6
-                can.speed = 8
-                island.speed = 4
-                sub_gun.speed = 12
-                enemy_gun.speed = 20
+                if freq <= 60:
+                    enemy.speed = 4.8
+                    submarine.speed = 5.6
+                    can.speed = 8
+                    island.speed = 4
+                    sub_gun.speed = 12
+                    enemy_gun.speed = 20
+                if freq >= 120:
+                    enemy.speed = 2.3
+                    submarine.speed = 2
+                    can.speed = 3.3
+                    island.speed = 1.8
+                    sub_gun.speed = 4.3
+                    enemy_gun.speed = 8
+                else:
+                    enemy.speed = 4.5
+                    submarine.speed = 5
+                    can.speed = 7
+                    island.speed = 3
+                    sub_gun.speed = 11
+                    enemy_gun.speed = 16
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -646,7 +750,12 @@ def run():
             sub_gun.shot(submarine)
             if not hit:
                 hit = True
-                player_ship.speed = 3.5
+                if freq <= 60:
+                    player_ship.speed = 3.5
+                if freq >= 120:
+                    player_ship.speed = 1.8
+                else:
+                    player_ship.speed = 2.8
             else:
                 if score_panel.new_score > score_panel.record:
                     score_panel.record = score_panel.new_score
@@ -658,12 +767,27 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
-                enemy.speed = 4.8
-                submarine.speed = 5.6
-                can.speed = 8
-                island.speed = 4
-                sub_gun.speed = 12
-                enemy_gun.speed = 20
+                if freq <= 60:
+                    enemy.speed = 4.8
+                    submarine.speed = 5.6
+                    can.speed = 8
+                    island.speed = 4
+                    sub_gun.speed = 12
+                    enemy_gun.speed = 20
+                if freq >= 120:
+                    enemy.speed = 2.3
+                    submarine.speed = 2
+                    can.speed = 3.3
+                    island.speed = 1.8
+                    sub_gun.speed = 4.3
+                    enemy_gun.speed = 8
+                else:
+                    enemy.speed = 4.5
+                    submarine.speed = 5
+                    can.speed = 7
+                    island.speed = 3
+                    sub_gun.speed = 11
+                    enemy_gun.speed = 16
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
@@ -707,7 +831,12 @@ def run():
                 if img == 2:
                     if hit:
                         hit = False
-                        player_ship.speed = 1
+                        if freq <= 60:
+                            player_ship.speed = 8
+                        if freq >= 120:
+                            player_ship.speed = 3.5
+                        else:
+                            player_ship.speed = 6
                         can.broke = False
                         can.broke_heart = False
                     can.change = False
@@ -721,7 +850,12 @@ def run():
             else:
                 if not hit:
                     hit = True
-                    player_ship.speed = 3.5
+                    if freq <= 60:
+                        player_ship.speed = 3.5
+                    if freq >= 120:
+                        player_ship.speed = 1.8
+                    else:
+                        player_ship.speed = 2.8
                     can.change = False
                     can.death()
                 else:
@@ -735,12 +869,27 @@ def run():
                     can.death()
                     enemy.death()
                     island.y = -500
-                    enemy.speed = 4.8
-                    submarine.speed = 5.6
-                    can.speed = 8
-                    island.speed = 4
-                    sub_gun.speed = 12
-                    enemy_gun.speed = 20
+                    if freq <= 60:
+                        enemy.speed = 4.8
+                        submarine.speed = 5.6
+                        can.speed = 8
+                        island.speed = 4
+                        sub_gun.speed = 12
+                        enemy_gun.speed = 20
+                    if freq >= 120:
+                        enemy.speed = 2.3
+                        submarine.speed = 2
+                        can.speed = 3.3
+                        island.speed = 1.8
+                        sub_gun.speed = 4.3
+                        enemy_gun.speed = 8
+                    else:
+                        enemy.speed = 4.5
+                        submarine.speed = 5
+                        can.speed = 7
+                        island.speed = 3
+                        sub_gun.speed = 11
+                        enemy_gun.speed = 16
                     switch(deadi)
                     enemy_gun.death(enemy)
                     sub_gun.death(submarine)
@@ -764,7 +913,12 @@ def run():
             #  player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
             if not hit:
                 hit = True
-                player_ship.speed = 3.5
+                if freq <= 60:
+                    player_ship.speed = 3.5
+                if freq >= 120:
+                    player_ship.speed = 1.8
+                else:
+                    player_ship.speed = 2.8
             else:
                 if score_panel.new_score > score_panel.record:
                     score_panel.record = score_panel.new_score
@@ -776,12 +930,27 @@ def run():
                 can.death()
                 enemy.death()
                 island.y = -500
-                enemy.speed = 4.8
-                submarine.speed = 5.6
-                can.speed = 8
-                island.speed = 4
-                sub_gun.speed = 12
-                enemy_gun.speed = 20
+                if freq <= 60:
+                    enemy.speed = 4.8
+                    submarine.speed = 5.6
+                    can.speed = 8
+                    island.speed = 4
+                    sub_gun.speed = 12
+                    enemy_gun.speed = 20
+                if freq >= 120:
+                    enemy.speed = 2.3
+                    submarine.speed = 2
+                    can.speed = 3.3
+                    island.speed = 1.8
+                    sub_gun.speed = 4.3
+                    enemy_gun.speed = 8
+                else:
+                    enemy.speed = 4.5
+                    submarine.speed = 5
+                    can.speed = 7
+                    island.speed = 3
+                    sub_gun.speed = 11
+                    enemy_gun.speed = 16
                 switch(deadi)
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)

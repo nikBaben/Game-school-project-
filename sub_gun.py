@@ -9,10 +9,10 @@ class Sub_gun(pygame.sprite.Sprite):
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
         self.image = pygame.image.load("work_images/bulet_for_sub.svg").convert_alpha()
-        if freq == 60:
+        if freq <= 60:
             self.speed = 12
-        if freq == 144:
-            self.speed = 9
+        if freq >= 120:
+            self.speed = 4.3
         else:
             self.speed = 11
 

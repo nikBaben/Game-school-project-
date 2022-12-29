@@ -14,10 +14,10 @@ class Can():
         # self.image = pygame.image.load('work_images/can.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        if freq == 60:
+        if freq <= 60:
             self.speed = 8
-        if freq == 144:
-            self.speed = 5
+        if freq >= 120:
+            self.speed = 3.3
         else:
             self.speed = 7
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0

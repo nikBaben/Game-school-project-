@@ -38,7 +38,7 @@ def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_
                     speedup.rocket_shot = True
                     player_ship.have_rocket = False
                 player_ship.sht = True  # Добавил поле sht для проверки стреляет корабль или нет
-                new_bullet = Gun(screen, player_ship , freq)
+                new_bullet = Gun(screen, player_ship, freq)
                 bullets.add(new_bullet)
 
         elif event.type == pygame.KEYUP:

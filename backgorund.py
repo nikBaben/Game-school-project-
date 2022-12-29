@@ -7,9 +7,9 @@ class Back():
         self.image = back.convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        if freq == 60:
+        if freq <= 60:
             self.speed = 1.6
-        if freq == 144:
+        if freq >= 120:
             self.speed = 1
         else:
             self.speed = 1.4

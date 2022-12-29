@@ -14,10 +14,10 @@ class Enemy(Sprite):
         self.image = (anim_enemy[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        if freq == 60:
+        if freq <= 60:
             self.speed = 4.8
-        if freq == 144:
-            self.speed = 3
+        if freq >= 120:
+            self.speed = 2.3
         else:
             self.speed = 4.5
         self.rect = self.image.get_rect()

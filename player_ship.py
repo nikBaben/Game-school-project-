@@ -40,10 +40,10 @@ class Player_Ship():
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
         self.last_update = pygame.time.get_ticks()  # Получаем последний кадр игры
         self.frame_rate = 60  # Количесво кадров в игре
-        if freq == 60:
-            self.speed = 7
-        if freq == 144:
-            self.speed = 4
+        if freq <= 60:
+            self.speed = 8
+        if freq >= 120:
+            self.speed = 3.5
         else:
             self.speed = 6
         self.hitbox = pygame.Rect((self.rect.centerx) - 30, (self.rect.bottom) - 145, 60, 130)

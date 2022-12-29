@@ -14,10 +14,10 @@ class Submarine():
         self.image = (anim_submarine[0]).convert_alpha()
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        if freq == 60:
+        if freq <= 60:
             self.speed = 5.6
-        if freq == 144:
-            self.speed = 4
+        if freq >= 120:
+            self.speed = 2
         else:
             self.speed = 5
         self.rect = self.image.get_rect()
