@@ -7,7 +7,7 @@ from styles import anim_shipplayer_moveup
 from enemy_ship import Enemy
 from submarine import Submarine
 from styles import ainm_player_stand
-from styles import player_move_up, anim_skin1, skin4, skin2, skin3
+from styles import player_move_up, anim_skin1, skin4, skin2, skin3,image_big,image_small
 from skins import Skins_changer
 
 # pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
@@ -132,9 +132,9 @@ class Player_Ship():
 
                     # self.image = (ainm_player_stand[0]).convert_alpha()
                 if self.skin2:
-                    self.image = skin2.convert_alpha()
+                    self.image = image_small.convert_alpha()
                 if self.skin3:
-                    self.image = skin3.convert_alpha()
+                    self.image = image_big.convert_alpha()
 
             # if self.frame >= len(anim_skin1):
             #    self.frame = 0

@@ -24,10 +24,10 @@ from menu import Menu, MenuItem
 from checker import Checker
 import random
 from vid import Video
-from styles import vidi, back_for_vidi, back_for_dye, menu1
+from styles import vidi, back_for_vidi, back_for_dye, menu1,back_skins
 from skins import Skins_changer
 from speeduper import Speedup
-from skin import Skin_1
+from skin import Skin_1,Skin_2
 from frequence_checker import printInfo
 import win32api
 
@@ -237,6 +237,8 @@ def skins_menu():
     # skin1 = skins_1.convert_alpha()
     # skin = pygame.transform.scale(skin1, (250, 250))
     skins1 = Skin_1(screen)
+    skin2 = Skin_2(screen)
+    deep = back_skins.convert_alpha()
     try:
         file = open('save.json')
         score = (json.load(file))
@@ -388,8 +390,9 @@ def skins_menu():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
 
-        screen.blit(pygame.image.load('work_images/skins_back.png'), (0, 0))
+        screen.blit(deep,(0,0))
         skins1.output()
+        skin2.output()
         # screen.blit(skin, (500, 200))
         # screen.blit(skin, (500, 500))
         # screen.blit(skin, (500, 800))
