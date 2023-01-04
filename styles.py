@@ -35,6 +35,7 @@ skin3 = pygame.image.load("imgs/skin3.svg")
 image_big = pygame.transform.scale(skin3, (150, 200))
 skin2 = pygame.image.load("imgs/скин2.png")
 image_small = pygame.transform.scale(skin2, (120, 150))
+back_dead = pygame.image.load("imgs/фон для смерти.png")
 
 #skins_1 = pygame.image.load("imgs/skin s1.png")
 

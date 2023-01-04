@@ -24,7 +24,7 @@ from menu import Menu, MenuItem
 from checker import Checker
 import random
 from vid import Video
-from styles import vidi, back_for_vidi, back_for_dye, menu1,back_skins
+from styles import vidi, back_for_vidi, back_for_dye, menu1,back_skins,back_dead
 from skins import Skins_changer
 from speeduper import Speedup
 from skin import Skin_1,Skin_2
@@ -63,7 +63,7 @@ current = None
 # particles = []
 backi = back_for_vidi.convert_alpha()
 back_for_dye2 = back_for_dye.convert_alpha()
-backi.set_alpha(225)
+#backi.set_alpha(225)
 
 font_logo = pygame.font.Font("imgs/tetx.ttf", 70)
 font_lose = pygame.font.Font("imgs/tetx.ttf", 40)
@@ -218,12 +218,12 @@ def deadi():
                 start_menu.update(event.pos)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 start_menu.check_click(event.pos)
+        back = back_dead.convert_alpha()
 
         # font = pygame.font.Font("imgs/retro-land-mayhem.ttf", 25)
         # new_score_img = font.render(f'{str("TEXTTEXTTEXTTEXT")}', True, (255, 255, 255))
-        a = back_for_dye2
-        screen.blit(a, (0, 0))
-        screen.blit(backi, (0, 0))
+        screen.blit(back, (0, 0))
+        #screen.blit(backi, (0, 0))
         screen.blit(text_lose, (240, 200))
         start_menu.draw()
         # mx, my = pygame.mouse.get_pos()
