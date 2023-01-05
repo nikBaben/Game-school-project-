@@ -114,7 +114,7 @@ def update_screen(clock, color, back, screen, score_panel, bullets, island, play
     for bullet in bullets.sprites():
         bullet.output_bullet()
     clock.tick(freq)
-    pygame.display.set_caption(str(clock.get_fps()))
+    # pygame.display.set_caption(str(clock.get_fps()))
     pygame.display.flip()
 
 
