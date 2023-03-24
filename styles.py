@@ -41,7 +41,7 @@ anim_second_ship1 = [ ]
 rocket_img = pygame.image.load("imgs/rocket.svg")
 money_img = pygame.image.load("imgs/money.svg")
 heart_img = pygame.image.load("imgs/heart.svg")
-img_skin3 = pygame.image.load("imgs/soon.png")
+img_skin3 = pygame.image.load("imgs/soon_menu.png")
 
 #skins_1 = pygame.image.load("imgs/skin s1.png")
 
@@ -60,7 +60,7 @@ for island in range(1,17):
     anim_island.append(img)
 """"""
 for second_ship in range(1,17):
-    file_second_ship = "imgs/ship_formenu{}.svg".format(second_ship)
+    file_second_ship = "imgs/skin2_menu{}.png".format(second_ship)
     img_second_ship = pygame.image.load(file_second_ship)
     anim_second_ship.append(img_second_ship)
 
@@ -89,8 +89,8 @@ for submarine in range(1,18):
 """"""
 
 """скин 1"""
-for skin_1 in range(1,20):
-    skin_1_file = "imgs/first_skin{}.png".format(skin_1)
+for skin_1 in range(1,16):
+    skin_1_file = "imgs/skin1_menu{}.png".format(skin_1)
     skin_1 = pygame.image.load(skin_1_file)
     skin_1_anim.append(skin_1)
     
