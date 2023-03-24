@@ -45,7 +45,7 @@ class Score_panel():
         self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
 
         if bought == 0:
-            if (num > 75) and (num < 100):
+            if (num >= 75) and (num < 100):
                 self.no_money1 = self.font3.render('', True, (255, 255, 255))
                 self.no_money2 = self.font3.render('Не хватает денег', True, (255, 0, 0))
             if num >= 100:
