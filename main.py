@@ -181,7 +181,10 @@ def menu():
             video.restart()
         # screen.blit(backi, (0, 0))
         a = menu1.convert_alpha()
+        b = pygame.image.load("imgs/tutorial.png")
+        b1 = b.convert_alpha()
         screen.blit(a, (150, 100))
+        screen.blit(b1, (250, 650))
         # screen.blit(text_logo, (200, 200))
         start_menu.draw()
         score_panel.draw_record()
@@ -586,9 +589,16 @@ def run():
             speedup.check = False
         '''КОРАБЛЬ ВРАГ'''
         if pygame.sprite.spritecollideany(enemy, bullets):
-            enemy.death()
-            score_panel.update()
+            enemy.blow = True
+
+        if enemy.hit == True:
+            if enemy.dead == True:
+                    enemy.death()
+                    score_panel.update()
+            #enemy.death()
+            #score_panel.update()
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
+            #enemy.blow = True
             enemy.death()
             score_panel.update()
             # player_ship.image = pygame.image.load('work_images/health_pl.png')  # ТУТ МЕНЯТЬ АНИМАЦИЮ
@@ -819,7 +829,7 @@ def run():
                     can.broke_heart = False
                     can.broke_rocket = False
                     can.broke_money = True
-                    can.image = pygame.image.load('work_images/money.png')
+                    #can.image = pygame.image.load('imgs/money.svg')
                 # can.blow = False
 
             #   can.image = pygame.image.load('imgs/rocket.svg')

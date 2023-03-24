@@ -94,12 +94,16 @@ class Can():
                         self.rect.center = center
                         self.y_True = False
 
+
                 # Картинка сердца или ракеты
                 if self.blow == False:
                     if self.broke_rocket == True:
                         self.image = pygame.image.load("imgs/rocket.svg").convert_alpha()
                     if self.broke_heart == True:
                         self.image = pygame.image.load("imgs/heart.svg").convert_alpha()
+                    if self.broke_money: 
+                        self.image = pygame.image.load("imgs/money.svg").convert_alpha()
+                        
 
         self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20, 20)
         self.screen.blit(self.image, self.rect)

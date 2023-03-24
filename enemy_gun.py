@@ -9,7 +9,7 @@ class Enemy_gun(pygame.sprite.Sprite):
         self.rect = pygame.Rect(0, 0, 10, 10)
         '''ПУЛЯ'''
         # self.image = pygame.image.load("imgs/bullet.svg")
-        self.image = pygame.image.load("imgs/bullet.svg")
+        self.image = pygame.image.load("imgs/bullet.svg").convert_alpha()
         if freq <= 60:
             self.speed = 20
         if freq >= 120:

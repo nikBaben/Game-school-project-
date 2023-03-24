@@ -1,5 +1,5 @@
 import pygame
-from styles import skin_1_anim,anim_skin2
+from styles import skin_1_anim,anim_skin2,anim_second_ship
 
 
 class Skin_1():
@@ -7,7 +7,7 @@ class Skin_1():
         self.screen = screen 
        # self.y = 200
         #self.x = 500
-        self.img = pygame.transform.scale((skin_1_anim[0]),(250,250))
+        self.img = pygame.transform.scale((skin_1_anim[0]),(220,250))
         self.rect = self.img.get_rect()
         self.screen_rect = screen.get_rect()
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
@@ -30,7 +30,7 @@ class Skin_1():
                 self.frame = 0
             else:
                 center = self.rect.center
-                self.img = pygame.transform.scale(skin_1_anim[self.frame],(250, 250)).convert_alpha()
+                self.img = pygame.transform.scale(skin_1_anim[self.frame],(220, 250)).convert_alpha()
                 self.rect = self.img.get_rect()
                 self.rect.center = center
         
@@ -45,7 +45,7 @@ class Skin_2():
         self.screen = screen 
        # self.y = 200
         #self.x = 500
-        self.img = pygame.transform.scale((anim_skin2[0]),(250,250))
+        self.img = pygame.transform.scale((anim_second_ship[0]),(220,250))
         self.rect = self.img.get_rect()
         self.screen_rect = screen.get_rect()
         self.frame = 0  # Номер кадра в списке anim, изначально равне 0
@@ -64,11 +64,11 @@ class Skin_2():
             self.frame += 1  # Надо переделать, для чистоты анимаци
                     
                     
-            if self.frame >= len(anim_skin2):
+            if self.frame >= len(anim_second_ship):
                 self.frame = 0
             else:
                 center = self.rect.center
-                self.img = pygame.transform.scale(anim_skin2[self.frame],(250, 250)).convert_alpha()
+                self.img = pygame.transform.scale(anim_second_ship[self.frame],(220, 250)).convert_alpha()
                 self.rect = self.img.get_rect()
                 self.rect.center = center
         

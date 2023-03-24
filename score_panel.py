@@ -13,7 +13,7 @@ class Score_panel():
         self.balance = money
         self.img = pygame.image.load("imgs/score.svg").convert_alpha()
         '''картинка монеты'''
-        self.monet = pygame.image.load('work_images/money.png').convert_alpha()
+        self.monet = pygame.image.load('imgs/money.svg').convert_alpha()
         '''картинка монеты'''
         self.img_menu = pygame.transform.scale(self.img, (65, 65))
         self.image = pygame.transform.scale(self.img, (50, 50))

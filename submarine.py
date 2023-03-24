@@ -93,13 +93,15 @@ class Submarine():
                         self.frame_blow = 0
                         self.blow = False
                         self.dead = True
+                        self.image =  pygame.transform.scale(blow_sub_anim[-1],(75, 75)).convert_alpha()
                         self.hit = True
                         self.y_True = True
                     # self.speed = 0.35
 
                     else:
                         center = self.rect.center
-                        self.image = (blow_sub_anim[self.frame_blow]).convert_alpha()
+                       # image = pygame.transform.scale(blow_sub_anim[self.frame],(50, 50)).convert_alpha()
+                        self.image =  pygame.transform.scale(blow_sub_anim[self.frame_blow],(75, 75)).convert_alpha()
                         self.rect = self.image.get_rect()
                         self.rect.center = center
                         self.y_True = False

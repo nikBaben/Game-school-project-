@@ -7,7 +7,7 @@ from styles import anim_shipplayer_moveup
 from enemy_ship import Enemy
 from submarine import Submarine
 from styles import ainm_player_stand
-from styles import player_move_up, anim_skin1, skin4, skin2, skin3,image_big,image_small
+from styles import player_move_up, anim_skin1, skin4, skin2, skin3,image_big,image_small,anim_second_ship1 
 from skins import Skins_changer
 
 # pic = pygame.image.load("imgs/ship_frame1.svg").convert_alpha()
@@ -132,7 +132,53 @@ class Player_Ship():
 
                     # self.image = (ainm_player_stand[0]).convert_alpha()
                 if self.skin2:
-                    self.image = image_small.convert_alpha()
+                    if self.moveup:
+                        # self.frame +=1
+                        if self.frame >= len(anim_second_ship1):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (anim_second_ship1[self.frame]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.sht:
+                        if self.frame >= len(anim_second_ship1):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (anim_second_ship1[self.frame]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.moveright:
+                        if self.frame >= len(anim_second_ship1):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (anim_second_ship1[1]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.moveleft:
+                        if self.frame >= len(anim_second_ship1):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (anim_second_ship1[1]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False and self.movedown == False:
+                        if self.frame >= len(anim_second_ship1):
+                            self.frame = 0
+                        else:
+                            center = self.rect.center
+                            self.image = (anim_second_ship1[self.frame]).convert_alpha()
+                            self.rect = self.image.get_rect()
+                            self.rect.center = center
+
+                    #self.image = (anim_second_ship1[0]).convert_alpha()
                 if self.skin3:
                     self.image = image_big.convert_alpha()
 

@@ -32,7 +32,8 @@ class Blow():
                     self.frame = 0
                     #Enemy.death(Enemy)
                 else:
-                    self.image = (blow_ship_anim[self.frame])
+                    blow_ship_anim1 = pygame.transform.scale(blow_ship_anim[self.frame],(50, 50)).convert_alpha()
+                    self.image = (blow_ship_anim1)
                     self.screen.blit(self.image, self.rect)
                    
             if image == 'sub':
@@ -40,7 +41,8 @@ class Blow():
                     self.frame = 0
                     #Submarine.death(Submarine)
                 else:
-                    self.image = (blow_sub_anim[self.frame])
+                    blow_sub_anim1 =  pygame.transform.scale(blow_sub_anim[self.frame],(50, 50)).convert_alpha()
+                    self.image = blow_sub_anim1
                     self.screen.blit(self.image, self.rect)
             else: 
                 pass

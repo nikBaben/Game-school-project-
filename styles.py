@@ -36,6 +36,8 @@ image_big = pygame.transform.scale(skin3, (150, 200))
 skin2 = pygame.image.load("imgs/скин2.png")
 image_small = pygame.transform.scale(skin2, (120, 150))
 back_dead = pygame.image.load("imgs/фон для смерти.png")
+anim_second_ship = [ ]
+anim_second_ship1 = [ ]
 
 #skins_1 = pygame.image.load("imgs/skin s1.png")
 
@@ -53,6 +55,15 @@ for island in range(1,17):
     img = pygame.image.load(file)
     anim_island.append(img)
 """"""
+for second_ship in range(1,17):
+    file_second_ship = "imgs/ship_formenu{}.svg".format(second_ship)
+    img_second_ship = pygame.image.load(file_second_ship)
+    anim_second_ship.append(img_second_ship)
+
+for second_ship1 in range(1,16):
+    file_second_ship1 = "imgs/ship{}.svg".format(second_ship1)
+    img_second_ship1 = pygame.image.load(file_second_ship1)
+    anim_second_ship1.append(img_second_ship1)
 
 for skin1 in range(1,18): 
     sub_file1 = "imgs/submarine/submarine{}.svg".format(skin1)
