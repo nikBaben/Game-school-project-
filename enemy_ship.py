@@ -3,7 +3,7 @@ from styles import anim_ship, anim_enemy
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
 from pygame.sprite import Sprite
-from styles import blow_ship_anim
+from styles import blow_ship_anim,blow_sub_anim
 
 
 class Enemy(Sprite):
@@ -57,7 +57,10 @@ class Enemy(Sprite):
             self.rect.centerx = 60 * sp
 
     def death(self):
+        
         global sp
+        #self.image = pygame.transform.scale(blow_sub_anim[self.frame_blow],(75, 75)).convert_alpha()
+       
         self.y = -350
         cords[sp] = True
         sp = spawn_x()
@@ -65,6 +68,8 @@ class Enemy(Sprite):
         self.hit = False
         self.dead = False
         self.blow = False
+        #self.blow = False
+        #self.image = pygame.transform.scale(blow_sub_anim[self.frame_blow],(75, 75)).convert_alpha()
 
     def output(self):
         now = pygame.time.get_ticks()
@@ -83,22 +88,24 @@ class Enemy(Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.center = center
 
-            if self.blow == True and self.dead == False:
+            if self.blow == True and self.dead == False and self.y != -350:
 
                 if now1 - self.last_update1 > self.frame_rate1:
                     self.last_update1 = now1
                     self.frame_blow += 1
 
-                    if self.frame_blow >= len(blow_ship_anim):
+                    if self.frame_blow >= len(blow_sub_anim):
                         self.frame_blow = 0
                         self.blow = False
                         self.dead = True
+                        self.image =  pygame.transform.scale(blow_sub_anim[-1],(75, 75)).convert_alpha()
                         self.hit = True
                         self.y_True = True
 
                     else:
                         center = self.rect.center
-                        self.image = (blow_ship_anim[self.frame_blow]).convert_alpha()
+                        self.image =  pygame.transform.scale(blow_sub_anim[self.frame_blow],(75, 75)).convert_alpha()
+                   
                         self.rect = self.image.get_rect()
                         self.rect.center = center
                         self.y_True = False
