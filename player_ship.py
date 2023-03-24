@@ -85,41 +85,45 @@ class Player_Ship():
                 if self.skin1:
 
                     if self.moveup:
+                        self.image = (ainm_player_stand[0]).convert_alpha()
                         # self.frame +=1
-                        if self.frame >= len(player_move_up):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (player_move_up[self.frame]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        # if self.frame >= len(player_move_up):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (player_move_up[self.frame]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.sht:
-                        if self.frame >= len(anim_fire):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (anim_fire[self.frame]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (ainm_player_stand[0]).convert_alpha()
+                        # if self.frame >= len(anim_fire):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (anim_fire[self.frame]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.moveright:
-                        if self.frame >= len(anim_fire):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (player_move_up[1]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (ainm_player_stand[0]).convert_alpha()
+                        # if self.frame >= len(anim_fire):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (player_move_up[1]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.moveleft:
-                        if self.frame >= len(anim_shipplayer_moveup):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (player_move_up[1]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (ainm_player_stand[0]).convert_alpha()
+                        # if self.frame >= len(anim_shipplayer_moveup):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (player_move_up[1]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False and self.movedown == False:
                         if self.frame >= len(ainm_player_stand):
@@ -133,41 +137,45 @@ class Player_Ship():
                     # self.image = (ainm_player_stand[0]).convert_alpha()
                 if self.skin2:
                     if self.moveup:
-                        # self.frame +=1
-                        if self.frame >= len(anim_second_ship1):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (anim_second_ship1[self.frame]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (anim_second_ship1[0]).convert_alpha()
+                        # # self.frame +=1
+                        # if self.frame >= len(anim_second_ship1):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (anim_second_ship1[self.frame]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.sht:
-                        if self.frame >= len(anim_second_ship1):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (anim_second_ship1[self.frame]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (anim_second_ship1[0]).convert_alpha()
+                        # if self.frame >= len(anim_second_ship1):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (anim_second_ship1[self.frame]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.moveright:
-                        if self.frame >= len(anim_second_ship1):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (anim_second_ship1[1]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (anim_second_ship1[0]).convert_alpha()
+                        # if self.frame >= len(anim_second_ship1):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (anim_second_ship1[1]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.moveleft:
-                        if self.frame >= len(anim_second_ship1):
-                            self.frame = 0
-                        else:
-                            center = self.rect.center
-                            self.image = (anim_second_ship1[1]).convert_alpha()
-                            self.rect = self.image.get_rect()
-                            self.rect.center = center
+                        self.image = (anim_second_ship1[0]).convert_alpha()
+                        # if self.frame >= len(anim_second_ship1):
+                        #     self.frame = 0
+                        # else:
+                        #     center = self.rect.center
+                        #     self.image = (anim_second_ship1[1]).convert_alpha()
+                        #     self.rect = self.image.get_rect()
+                        #     self.rect.center = center
 
                     if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False and self.movedown == False:
                         if self.frame >= len(anim_second_ship1):
@@ -192,41 +200,44 @@ class Player_Ship():
 
             else:
                 if self.moveup:
+                    self.image = (ainm_player_stand[0]).convert_alpha()
                     # self.frame +=1
-                    if self.frame >= len(player_move_up):
-                        self.frame = 0
-                    else:
-                        center = self.rect.center
-                        self.image = (player_move_up[self.frame]).convert_alpha()
-                        self.rect = self.image.get_rect()
-                        self.rect.center = center
+                    # if self.frame >= len(player_move_up):
+                    #     self.frame = 0
+                    # else:
+                    #     center = self.rect.center
+                    #     self.image = (player_move_up[self.frame]).convert_alpha()
+                    #     self.rect = self.image.get_rect()
+                    #     self.rect.center = center
 
-                if self.sht:
-                    if self.frame >= len(anim_fire):
-                        self.frame = 0
-                    else:
-                        center = self.rect.center
-                        self.image = (anim_fire[self.frame]).convert_alpha()
-                        self.rect = self.image.get_rect()
-                        self.rect.center = center
+                # if self.sht:
+                #     # if self.frame >= len(anim_fire):
+                #     #     self.frame = 0
+                #     # else:
+                #     #     center = self.rect.center
+                #     #     self.image = (anim_fire[self.frame]).convert_alpha()
+                #     #     self.rect = self.image.get_rect()
+                #     #     self.rect.center = center
 
                 if self.moveright:
-                    if self.frame >= len(anim_fire):
-                        self.frame = 0
-                    else:
-                        center = self.rect.center
-                        self.image = (player_move_up[1]).convert_alpha()
-                        self.rect = self.image.get_rect()
-                        self.rect.center = center
+                    self.image = (ainm_player_stand[0]).convert_alpha()
+                    # if self.frame >= len(anim_fire):
+                    #     self.frame = 0
+                    # else:
+                    #     center = self.rect.center
+                    #     self.image = (player_move_up[1]).convert_alpha()
+                    #     self.rect = self.image.get_rect()
+                    #     self.rect.center = center
 
                 if self.moveleft:
-                    if self.frame >= len(anim_shipplayer_moveup):
-                        self.frame = 0
-                    else:
-                        center = self.rect.center
-                        self.image = (player_move_up[1]).convert_alpha()
-                        self.rect = self.image.get_rect()
-                        self.rect.center = center
+                    self.image = (ainm_player_stand[0]).convert_alpha()
+                    # if self.frame >= len(anim_shipplayer_moveup):
+                    #     self.frame = 0
+                    # else:
+                    #     center = self.rect.center
+                    #     self.image = (player_move_up[1]).convert_alpha()
+                    #     self.rect = self.image.get_rect()
+                    #     self.rect.center = center
 
                 if self.moveleft == False and self.moveright == False and self.sht == False and self.moveup == False and self.movedown == False:
                     if self.frame >= len(ainm_player_stand):

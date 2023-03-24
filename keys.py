@@ -6,7 +6,8 @@ import time
 
 part = []
 part1 = []
-
+part2 = []
+part3 = []
 
 def movement(screen, player_ship, bullets, enemy, submarine, score_panel, start_menu, speedup, freq):
     for event in pygame.event.get():
@@ -78,19 +79,60 @@ def update_screen(clock, color, back, screen, score_panel, bullets, island, play
             pygame.draw.circle(screen, (132, 209, 225), [int(p[0][0]), int(p[0][1])], int(p[2]))
             if p[2] <= 0:
                 part.remove(p)
-
+    
+    def particle1(x, y):
+        part1.append([[x, y], [random.randint(0, 10) / 5 - 1, -2], random.randint(4, 6)])
+        for p in part1:
+            p[0][0] += p[1][0]
+            p[0][1] += p[1][1]
+            p[2] -= 0.1
+            # p[1][1] +=0.1
+            pygame.draw.circle(screen, (78,87,84), [int(p[0][0]), int(p[0][1])], int(p[2]))
+            if p[2] <= 0:
+                part1.remove(p)
+    
+    def particle2(x, y):
+        part2.append([[x, y+15], [random.randint(0, 25) / 10 - 1, -2], random.randint(4, 12)])
+        for p in part2:
+            p[0][0] += p[1][0]
+            p[0][1] += p[1][1]
+            p[2] -= 0.1
+            # p[1][1] +=0.1
+            pygame.draw.circle(screen, (132, 209, 225), [int(p[0][0]), int(p[0][-1])], int(p[2]))
+            if p[2] <= 0:
+                part2.remove(p)
+                
+    def particle3(x, y):
+        part3.append([[x, y-10], [random.randint(0, 25) / 10 - 1, -2], random.randint(4, 10)])
+        for p in part3:
+            p[0][0] += p[1][0]
+            p[0][1] += p[1][1]
+            p[2] -= 0.1
+            # p[1][1] +=0.1
+            pygame.draw.circle(screen, (132, 209, 225), [int(p[0][0]), int(p[0][1])], int(p[2]))
+            if p[2] <= 0:
+                part3.remove(p)
+                
     screen.fill(color)
     back.output_back()
     island.output()
     enemy_gun.output_enemy_bullet()
-    enemy.output()
+   #enemy.output()
     can.output()
-    player_ship.output()
+    #player_ship.output()
     submarine.output()
     sub_gun.output_enemy_bullet()
-    particle(enemy.rect.centerx, enemy.y + 8)
+    particle3(enemy.rect.centerx, enemy.y + 150)
     particle(submarine.rect.centerx, submarine.y)
+    particle1(sub_gun.rect.centerx, sub_gun.y)
+    particle1(enemy_gun.rect.centerx, enemy_gun.y)
+    if player_ship.moveup: 
+        particle2(player_ship.rect.centerx, player_ship.y)
+    else: 
+        part2.clear()
+    enemy.output()
     score_panel.draw_score()
+    player_ship.output()
     # player_ship.output()
 
     start_menu.draw()
@@ -113,9 +155,11 @@ def update_screen(clock, color, back, screen, score_panel, bullets, island, play
     ###
     for bullet in bullets.sprites():
         bullet.output_bullet()
+        particle1(bullet.rect.centerx, bullet.y)
     clock.tick(freq)
     # pygame.display.set_caption(str(clock.get_fps()))
     pygame.display.flip()
+ 
 
 
 def update_bullet(bullets):
@@ -123,3 +167,4 @@ def update_bullet(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+            

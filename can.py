@@ -3,7 +3,7 @@ from styles import anim_can
 from spawn import spawn_x, cords
 from spawn import spawn_check, first
 from random import choice
-from styles import blow_can_anim
+from styles import blow_can_anim,rocket_img,money_img,heart_img
 
 
 class Can():
@@ -98,11 +98,11 @@ class Can():
                 # Картинка сердца или ракеты
                 if self.blow == False:
                     if self.broke_rocket == True:
-                        self.image = pygame.image.load("imgs/rocket.svg").convert_alpha()
+                        self.image = pygame.transform.scale((rocket_img),(25,25)).convert_alpha()
                     if self.broke_heart == True:
-                        self.image = pygame.image.load("imgs/heart.svg").convert_alpha()
+                        self.image =  pygame.transform.scale((heart_img),(25,25)).convert_alpha()
                     if self.broke_money: 
-                        self.image = pygame.image.load("imgs/money.svg").convert_alpha()
+                        self.image =  pygame.transform.scale((money_img),(25,25)).convert_alpha()
                         
 
         self.hitbox = ((self.rect.centerx) - 10, (self.rect.bottom) - 20, 20, 20)

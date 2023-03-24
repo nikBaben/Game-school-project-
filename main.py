@@ -27,7 +27,7 @@ from vid import Video
 from styles import vidi, back_for_vidi, back_for_dye, menu1,back_skins,back_dead
 from skins import Skins_changer
 from speeduper import Speedup
-from skin import Skin_1,Skin_2
+from skin import Skin_1,Skin_2,Skin_3
 from frequence_checker import printInfo
 import win32api
 
@@ -193,7 +193,9 @@ def menu():
         # emit_particle(mx, my, 12, random.uniform(-12, 12), random.uniform(-12, 12))
         # update_particle()
         pygame.display.flip()
-
+        enemy.y = -350
+        submarine.y = -250
+        can.y = -450
 
 def deadi():
     def go_menu():
@@ -234,6 +236,9 @@ def deadi():
         #  update_particle()
         # screen.blit(new_score_img, (230, 500))
         pygame.display.flip()
+        enemy.y = -350
+        submarine.y = -250
+        can.y = -450
 
 
 def skins_menu():
@@ -241,6 +246,7 @@ def skins_menu():
     # skin = pygame.transform.scale(skin1, (250, 250))
     skins1 = Skin_1(screen)
     skin2 = Skin_2(screen)
+    skin3 = Skin_3(screen)
     deep = back_skins.convert_alpha()
     try:
         file = open('save.json')
@@ -396,6 +402,7 @@ def skins_menu():
         screen.blit(deep,(0,0))
         skins1.output()
         skin2.output()
+        skin3.output()
         # screen.blit(skin, (500, 200))
         # screen.blit(skin, (500, 500))
         # screen.blit(skin, (500, 800))
@@ -588,15 +595,18 @@ def run():
         if (score_panel.new_score > 0) and (score_panel.new_score % 50 != 0):
             speedup.check = False
         '''КОРАБЛЬ ВРАГ'''
+        
         if pygame.sprite.spritecollideany(enemy, bullets):
             enemy.blow = True
 
         if enemy.hit == True:
             if enemy.dead == True:
+               
                     enemy.death()
                     score_panel.update()
             #enemy.death()
             #score_panel.update()
+        
         if pygame.Rect.colliderect(player_ship.hitbox, enemy.hitbox):
             #enemy.blow = True
             enemy.death()
@@ -727,7 +737,7 @@ def run():
                     json.dump(score_panel.record, file)
                 with open('money.json', 'w') as file:
                     json.dump(score_panel.balance, file)
-                submarine.death()
+                submarine.death() 
                 can.death()
                 enemy.death()
                 island.y = -500

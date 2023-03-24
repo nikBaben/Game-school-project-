@@ -30,6 +30,7 @@ class Enemy(Sprite):
         self.hit = False
         self.frame_blow = 0
         self.y_True = True
+        self.again = True
 
         sp = spawn_x()
         self.rect.centerx = 60 * sp
@@ -68,6 +69,7 @@ class Enemy(Sprite):
         self.hit = False
         self.dead = False
         self.blow = False
+        self.again = True
         #self.blow = False
         #self.image = pygame.transform.scale(blow_sub_anim[self.frame_blow],(75, 75)).convert_alpha()
 

@@ -38,6 +38,10 @@ image_small = pygame.transform.scale(skin2, (120, 150))
 back_dead = pygame.image.load("imgs/фон для смерти.png")
 anim_second_ship = [ ]
 anim_second_ship1 = [ ]
+rocket_img = pygame.image.load("imgs/rocket.svg")
+money_img = pygame.image.load("imgs/money.svg")
+heart_img = pygame.image.load("imgs/heart.svg")
+img_skin3 = pygame.image.load("imgs/soon.png")
 
 #skins_1 = pygame.image.load("imgs/skin s1.png")
 
@@ -133,8 +137,8 @@ for j in range(1,13):
 
 
 """Анимация Коробля при бездействии"""
-for player_stand in range(1,18):
-    player_stand = "imgs/player/player_stand{}.svg".format(player_stand)
+for player_stand in range(1,15):
+    player_stand = "imgs/player_stand{}.svg".format(player_stand)
     player_stand_file = pygame.image.load(player_stand)
     ainm_player_stand.append(player_stand_file)
 """"""
