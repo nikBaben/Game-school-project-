@@ -44,9 +44,9 @@ class Submarine():
 
     def moving_sub(self):
         global sp
-        if self.y_True == True:
-            self.y += self.speed
-            self.rect.y = self.y
+        #if self.y_True == True:
+        self.y += self.speed
+        self.rect.y = self.y
 
         if self.y >= 1050:
             self.y = -220

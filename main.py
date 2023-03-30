@@ -35,7 +35,10 @@ pygame.init()
 freq = printInfo(win32api.EnumDisplayDevices())
 Clock = pygame.time.Clock()
 # screen = pygame.display.set_mode((960, 1050))
-pygame.display.set_caption("SHIP WARS")  # Надо придумать!!!
+pygame.display.set_caption("SHIP WARS") 
+programIcon = pygame.image.load('imgs/иконка.ico')
+
+pygame.display.set_icon(programIcon)# Надо придумать!!!
 infoObject = pygame.display.Info()
 screen = pygame.display.set_mode((960, infoObject.current_h - 30), pygame.DOUBLEBUF)
 
@@ -323,42 +326,14 @@ def skins_menu():
             with open('last_skin.json', 'w') as file:
                 json.dump(last_skin, file)
 
-    def skin_3():
-        global last_skin
-        if (purchase != 3) and (purchase != 5) and (purchase < 6) and (COUNT[0] < 5):
-            if score_panel.balance >= 100:
-                COUNT[0] += 3
-                score_panel.update_money('buy2')
-                with open('money.json', 'w') as file:
-                    json.dump(score_panel.balance, file)
-                with open('purchases.json', 'w') as file:
-                    json.dump(purchase + COUNT[0], file)
-                # score_panel.update_status(COUNT[0])
-                skins.changed = True
-                skins.first = False
-                skins.second = False
-                skins.third = True
-                COUNT2[0] += 3
-                score_panel.update_no_money(money - 100, COUNT2[0])
-                last_skin = 3
-                with open('last_skin.json', 'w') as file:
-                    json.dump(last_skin, file)
-            else:
-                pass
-        else:
-            skins.changed = True
-            skins.first = False
-            skins.second = False
-            skins.third = True
-            last_skin = 3
-            with open('last_skin.json', 'w') as file:
-                json.dump(last_skin, file)
+    # def skin_3():
+    #     pass
 
     start_menu = Menu(screen)
     start_menu.add_item(MenuItem('ВЕРНУТЬСЯ В МЕНЮ', go_to_menu, (start_menu.cur_x - 280, 100)))
     start_menu.add_item(MenuItem('скин 1', skin_1, (start_menu.cur_x - 450, 250)))
     start_menu.add_item(MenuItem('скин 2', skin_2, (start_menu.cur_x - 450, 550)))
-    start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 850)))
+  #  start_menu.add_item(MenuItem('скин 3', skin_3, (start_menu.cur_x - 450, 850)))
     runing = True
     while runing:
         try:
@@ -699,12 +674,13 @@ def run():
                     island.speed = 3
                     sub_gun.speed = 11
                     enemy_gun.speed = 16
-                switch(deadi)
+                
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
                 hit = False
+                
+                switch(deadi)
                 runing = False
-
         '''ПОДВОДНАЯ ЛОДКА'''
         if pygame.sprite.spritecollideany(submarine, bullets):
             # blow.draw("sub")
@@ -762,10 +738,11 @@ def run():
                     island.speed = 3
                     sub_gun.speed = 11
                     enemy_gun.speed = 16
-                switch(deadi)
+                
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
                 hit = False
+                switch(deadi)
                 runing = False
 
         if pygame.Rect.colliderect(player_ship.hitbox, sub_gun.rect):
@@ -811,10 +788,11 @@ def run():
                     island.speed = 3
                     sub_gun.speed = 11
                     enemy_gun.speed = 16
-                switch(deadi)
+                
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
                 hit = False
+                switch(deadi)
                 runing = False
 
         '''БОЧКА'''
@@ -913,10 +891,12 @@ def run():
                         island.speed = 3
                         sub_gun.speed = 11
                         enemy_gun.speed = 16
-                    switch(deadi)
+                   
                     enemy_gun.death(enemy)
                     sub_gun.death(submarine)
                     hit = False
+                    
+                    switch(deadi)
                     runing = False
 
             #  can.image =imge_for_can
@@ -974,10 +954,12 @@ def run():
                     island.speed = 3
                     sub_gun.speed = 11
                     enemy_gun.speed = 16
-                switch(deadi)
+         
                 enemy_gun.death(enemy)
                 sub_gun.death(submarine)
                 hit = False
+ 
+                switch(deadi)
                 runing = False
         if pygame.Rect.colliderect(enemy.hitbox, island.hitbox):
             enemy.death()
