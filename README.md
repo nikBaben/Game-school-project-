@@ -3,5 +3,5 @@
 Игра для школьного проекта Ship Wars 
 
 Website: http://shipwars.pythonanywhere.com/
-видео: https://vk.com/video284445042_456243711
+видео создания игры: https://vk.com/video284445042_456243711
 
